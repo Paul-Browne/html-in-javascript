@@ -67,7 +67,7 @@ html({lang: "en"},
         meta({charset:"UTF-8"}),
         meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
         title("HTJS"),
-        link({rel:"stylesheet", href:"/css/style.css"}),
+        link({rel:"stylesheet", href:"css/style.css"}),
     ),
     body(
         h1({class:'big-text'}, "HTJS"),
@@ -366,7 +366,7 @@ html({lang: "en"},
 &lt;/html&gt;`
         ),            
 
-        script({src:"/js/prism.js"})
+        script({src:"js/prism.js"})
     )
 )
 
