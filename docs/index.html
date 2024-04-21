@@ -1,0 +1,211 @@
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HTJS</title><link rel="stylesheet" href="/css/style.css"></head><body><h1 class="big-text">HTJS</h1><p>html in js made simple, done right.</p><h1><code>Build / Server</code></h1><pre class="language-javascript"><code>import { writeFile } from "node:fs/promises";
+import htjs from "html-in-javascript";
+
+const { html, head, body, meta, link, title, h1, p } = htjs
+
+const page = 
+html({lang: "en"},
+    head(
+        meta({charset:"UTF-8"}),
+        meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
+        title("HTJS"),
+        link({rel:"stylesheet", href:"/css/style.css"}),
+    ),
+    body({class:"home-page"},
+        h1("HTJS"),
+        p("html in js made simple, done right."),
+    )
+)
+
+await writeFile("index.html", page);
+</code></pre><h1><code>Browser</code></h1><pre class="language-html"><code>&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/html-in-javascript/htjs.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        const { fragment, meta, title, link } = htjs
+        document.currentScript.outerHTML = 
+        fragment(
+            meta({charset:"UTF-8"}),
+            meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
+            title("HTJS"),
+            link({rel:"stylesheet", href:"/css/style.css"})
+        )
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;script&gt;
+        const { body, h1, p } = htjs
+        document.body.outerHTML = 
+        body({class:"home-page"}
+            h1("HTJS"),
+            p("html in js made simple, done right.")
+        )
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>HTJS is really best used in the build process or on the server, but if you really want to use it in the browser, go ahead :)<br>The browser version is just 1kb</p><h1><code>Docs</code></h1><code><b>Code</b></code><pre class="language-javascript"><code>div(
+    {
+        // Objects are the element's attributes
+        // in a key:value relationship eg.
+        class: "class names",
+        // becomes: class="class names" 
+        id: "some-id",
+        "data-test-id": 123,
+        onclick: () => this.style.color = 'blue',
+        style: "color:red;padding:10px;border:1px solid black"
+    },
+    h2("hello world!"),
+    p(
+        "Any strings are treated as content, ",
+        ins("All 'element functions' return strings of HTML"),
+        " ",
+        em("and can be nested exactly like html")
+    ),
+    p("you can have as many, or as few as you wish"),
+    {
+        // you can have more than one object for the attributes
+        "data-foo": "bar"
+        // and they will be combined, but probably better to
+        // just have one attribute object, and to put it first
+    }
+)</code></pre><code><b>HTML</b></code><pre class="language-html"><code>&lt;div 
+  class="class names" 
+  id="some-id" 
+  data-test-id="123" 
+  onclick="(() => this.style.color = 'blue'" 
+  style="color:red;padding:10px;border:1px solid black"
+  data-foo="bar"&gt;
+    &lt;h2&gt;hello world!&lt;/h2&gt;
+    &lt;p&gt;Any strings are treated as content, &lt;ins&gt;All 'element functions' return strings of HTML&lt;/ins&gt; &lt;em&gt;and can be nested exactly like html&lt;/em&gt;&lt;/p&gt;
+    &lt;p&gt;you can have as many, or as few as you wish&lt;/p&gt;
+&lt;/div&gt;</code></pre><code><b>Example</b></code><div class="class names" id="some-id" data-test-id="123" onclick="(() => this.style.color = 'blue')()" style="color:red;padding:0 10px;border:1px solid black" data-foo="bar"><h2>hello world!</h2><p>Any strings are treated as content, <ins>All 'element functions' return strings of HTML</ins> <em>and can be nested exactly like html</em></p><p>you can have as many, or as few as you wish</p></div><h2><code>fragment</code></h2><p>similar to React's <code>&lt;&gt;{content}&lt;/&gt;</code></p><p>Used when you can't, or don't want a container &lt;div&gt;</p><code><b>Code</b></code><pre class="language-javascript"><code>head(
+    meta({charset:"UTF-8"}),
+    meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),    
+    fragment(
+        title("HTJS"),
+        link({rel:"stylesheet", href:"/css/style.css"})
+    )
+)</code></pre><code><b>HTML</b></code><pre class="language-html"><code>&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;HTJS&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/css/style.css" &gt;
+&lt;/head&gt;</code></pre><h2><code>Scripts</code></h2><p>It's possible to include scripts in your html.<br>Of course, it's better to keep your scripts separate, but sometimes it's just easier to include them in the html.</p><p>Function declerations are treated as content and will be converted to strings</p><pre class="language-javascript"><code>function increaseTextSize(el){
+    const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);
+    el.style.fontSize = (computedFontSize * 1.1) + "px"
+}
+
+script(increaseTextSize),
+button({
+    onclick: () => increaseTextSize(this),
+}, "Increase Text Size")
+</code></pre><script>function increaseTextSize(el){
+    const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);
+    el.style.fontSize = (computedFontSize * 1.1) + "px"
+}</script><button onclick="(() => increaseTextSize(this))()">Increase Text Size</button><h1><code>Extensible</code></h1><p>At it's core, HTJS is just a collection of functions, so you can easily add your own, to create reusable components.</p><pre class="language-javascript"><code>// pageHead.js
+import htjs from "html-in-javascript";
+const { head, meta, link, title, fragment } = htjs;
+
+const deviceMeta = fragment(
+    meta({
+        charset: "UTF-8"
+    }),
+    meta({
+        name: "viewport", 
+        content: "width=device-width, initial-scale=1.0"
+    })
+)
+
+const favicons = fragment(
+    link({
+        rel: "apple-touch-icon", 
+        sizes: "180x180", 
+        href: "/apple-touch-icon.png" 
+    }),
+    link({
+        rel: "icon", 
+        type: "image/png", 
+        sizes: "32x32", 
+        href: "/favicon-32x32.png" 
+    }),
+    link({
+        rel: "icon", 
+        type:"image/png", 
+        sizes: "16x16", 
+        href:"/favicon-16x16.png"
+    }),
+    link({
+        rel: "manifest", 
+        href: "/site.webmanifest" 
+    }),
+    link({
+        rel: "mask-icon", 
+        href: "/safari-pinned-tab.svg", 
+        color: "#5bbad5"
+    }),
+    meta({
+        name: "msapplication-TileColor", 
+        content: "#2d89ef" 
+    }),
+    meta({
+        name: "theme-color", 
+        content: "#ffffff" 
+    })
+)
+
+export default ({
+        pageTitle = "example.com", 
+        description = "Placeholder description",
+    } = {}, 
+    ...rest
+) => 
+head(
+    deviceMeta,
+    favicons,
+    title(pageTitle),
+    link({
+        rel: "stylesheet", 
+        href: "/css/style.css"
+    }),
+    meta({
+        name: "description", 
+        content: description
+    }),
+    ...rest
+)</code></pre><pre class="language-javascript"><code>// index.js
+import htjs from "html-in-javascript";
+import pageHead from "./pageHead.js";
+const { html, body, h1, p, script } = htjs
+
+const page =
+html({lang: "en"},
+    pageHead({
+            title: "example.com | My Page", 
+            description: "My page description"
+        },
+        script({src:"/js/someScript.js"})
+    ),
+    body(
+        h1("My Page"),
+        p("This is my page")
+    )
+)</code></pre><code><b>HTML</b></code><pre class="language-html"><code>&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;
+    &lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
+    &lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;
+    &lt;link rel="manifest" href="/site.webmanifest"&gt;
+    &lt;link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"&gt;
+    &lt;meta name="msapplication-TileColor" content="#2d89ef"&gt;
+    &lt;meta name="theme-color" content="#ffffff"&gt;
+    &lt;title&gt;example.com | My Page&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/css/style.css"&gt;
+    &lt;meta name="description" content="My page description"&gt;
+    &lt;script src="/js/someScript.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;My Page&lt;/h1&gt;
+    &lt;p&gt;This is my page&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><script src="/js/prism.js"></script></body></html>

@@ -1,0 +1,18 @@
+{
+    "html": {
+        "attributes": {
+            "lang": "en"
+        },
+        "head": {
+
+        },
+        "body": {
+            "button": {
+                "attributes": {
+                    "onClick": "() => console.log('you clicked me!')"
+                },
+                "text": "click"
+            }
+        }
+    }
+}
