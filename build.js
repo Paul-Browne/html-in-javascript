@@ -59,7 +59,7 @@ html({lang: "en"},
         link({rel:"preconnect", href:"https://fonts.gstatic.com", crossorigin:""}),
         link({href:"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;600&display=swap", rel:"stylesheet"}),
         title("HT.JS - HTML in JavaScript"),
-        meta({name:"description", content:"HT.JS is a library for easily creating HTML in JavaScript, for both the browser and the server."}),
+        meta({name:"description", content:"HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."}),
 
         link({rel:"apple-touch-icon", sizes:"180x180", href:"/apple-touch-icon.png"}),
         link({rel:"icon", type:"image/png", sizes:"32x32", href:"/favicon-32x32.png"}),
