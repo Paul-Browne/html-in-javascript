@@ -8,23 +8,23 @@ import htjs from "html-in-javascript"
 const { html, head, meta, link, title, body, h1, p, a, img, button } = htjs;
 
 const page = 
-html({lang: "en"},
+html({ lang: "en" },
     head(
-        meta({charset:"UTF-8"}),
-        meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
+        meta({ charset:"UTF-8" }),
+        meta({ name:"viewport", content:"width=device-width, initial-scale=1.0" }),
         title("Hello World"),
-        link({rel:"stylesheet", href:"style.css"})
+        link({ rel:"stylesheet", href:"style.css" })
     ),
     body(
         h1("Hello World"),
         p("This is a paragraph ",
-            a({href:"https://google.com"}, "Google")
+            a({ href:"https://google.com" }, "Google")
         ),       
         img({
             src: "https://via.placeholder.com/150",
             alt: "Placeholder Image"
         }),
-        button({onClick: () => console.log("you clicked me!")},
+        button({ onClick: () => console.log("you clicked me!")},
             "click me!!"
         )
     )
