@@ -58,7 +58,7 @@ html({lang: "en"},
         link({rel:"preconnect", href:"https://fonts.googleapis.com"}),
         link({rel:"preconnect", href:"https://fonts.gstatic.com", crossorigin:""}),
         link({href:"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;600&display=swap", rel:"stylesheet"}),
-        title("HT.JS - HTML in JS"),
+        title("HT.JS - HTML in JavaScript"),
         link({rel:"stylesheet", href:"css/style.css"}),
     ),
     body(
@@ -66,6 +66,7 @@ html({lang: "en"},
         h3("html-in-javascript, made simple, done right."),
         h2("Build Process & Server"),
         p("HT.JS is best used in the backend: in the build process or on the server."),
+        prism.html("npm install html-in-javascript"),
         prism.js( 
 `import { writeFile } from "node:fs/promises";
 import htjs from "html-in-javascript";
