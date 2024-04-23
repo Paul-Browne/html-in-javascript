@@ -1,6 +1,7 @@
 {
     "name": "HTJS",
     "short_name": "HTJS",
+    "start_url": "https://ht.js.org",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
