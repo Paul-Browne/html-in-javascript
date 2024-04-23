@@ -69,7 +69,7 @@ await writeFile("index.html", page);
   onclick="(() => this.style.color = 'blue')()" 
   style="color:red; padding:10px; border:1px solid black"
   data-foo="bar"&gt;
-  &lt;h2&gt;hello world!&lt;/h2&gt;
+    &lt;h2&gt;hello world!&lt;/h2&gt;
     &lt;p&gt;All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML&lt;br&gt;&lt;em&gt;and can be nested exactly like html&lt;/em&gt;&lt;/p&gt;
 &lt;/div&gt;</code></pre><h5>Example</h5><div class="class names" id="some-id" data-test-id="123" onclick="(() => this.style.color = 'blue')()" style="color:red; padding:0 10px; border:1px solid black" data-foo="bar"><h2>hello world!</h2><p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML<br><em>and can be nested exactly like html</em></p></div><h3><b>fragment</b></h3><p>similar to React's <b>&lt;&gt;{content}&lt;/&gt;</b></p><p>Used when you can't, or don't want a container <b>&lt;div&gt;</b></p><h5>Code</h5><pre class="language-javascript"><code>const titleAndStyle = fragment(
     title("HT.JS"),

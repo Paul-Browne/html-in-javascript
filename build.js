@@ -161,7 +161,7 @@ await writeFile("index.html", page);
   onclick="(() => this.style.color = 'blue')()" 
   style="color:red; padding:10px; border:1px solid black"
   data-foo="bar"&gt;
-  &lt;h2&gt;hello world!&lt;/h2&gt;
+    &lt;h2&gt;hello world!&lt;/h2&gt;
     &lt;p&gt;All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML&lt;br&gt;&lt;em&gt;and can be nested exactly like html&lt;/em&gt;&lt;/p&gt;
 &lt;/div&gt;`
         ),        
