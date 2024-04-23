@@ -1,6 +1,6 @@
-# html-in-javascript
+# HT.JS
 
-If you are going to write HTML in JavaScript, then you may as well do it properly.
+HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend.
 
 ```js
 import htjs from "html-in-javascript"
@@ -49,3 +49,5 @@ console.log(page)
     </body>
 </html>
 ```
+
+(check out)[https://ht.js.org]
