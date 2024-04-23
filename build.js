@@ -256,7 +256,7 @@ $.div(
 ),
 
         h2("Extensible"),
-        p("At it's core, HT.JS is just a collection of functions, so you can easily add your own, to create reusable components."),
+        p("At it's core HT.JS is just a collection of functions, so you can easily add your own to create reusable components."),
         prism.js(
 `// pageHead.js
 import htjs from "html-in-javascript";
