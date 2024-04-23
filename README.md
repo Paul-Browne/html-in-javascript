@@ -50,4 +50,4 @@ console.log(page)
 </html>
 ```
 
-(check out)[https://ht.js.org]
+[DOCS](https://ht.js.org)
