@@ -195,13 +195,15 @@ await writeFile("index.html", page);
         p("Used when you can't, or don't want a container ", b("&lt;div&gt;")),
         h5("Code"),
         prism.js(
-`head(
-    meta({charset:"UTF-8"}),
-    meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),    
-    fragment(
-        title("HT.JS"),
-        link({rel:"stylesheet", href:"/css/style.css"})
-    )
+`const titleAndStyle = fragment(
+    title("HT.JS"),
+    link({ rel:"stylesheet", href:"/css/style.css" })
+)
+
+head(
+    meta({ charset:"UTF-8" }),
+    meta({ name:"viewport", content:"width=device-width, initial-scale=1.0" }),
+    titleAndStyle
 )`
         ),
         h5("HTML"),
