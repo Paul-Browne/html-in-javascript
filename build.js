@@ -1,43 +1,32 @@
-import { cp, readFile, stat, mkdir, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname } from "node:path";
+import { minify } from 'html-minifier'
+import htjs from "./htjs.js"
+
+const minifyHTML = html => minify(html, {
+    removeAttributeQuotes: true,
+    collapseWhitespace: true,
+    minifyCSS: true,
+    minifyJS: true,
+    removeComments: true,
+    decodeEntities: true
+})
 
 export const writeFileTo = async (content, path) => {
     await mkdir(dirname(path), { recursive: true });
     await writeFile(path, content);
 }
 
-import htjs from "./htjs.js"
-
-const { html, head, meta, link, style, script, div, b, hr, em, ins, title, body, header, h1, h2, h3, p, img, button, input, nav, a, pre, code, fragment, br} = htjs;
-
-// const frontEndScript = function plus(a, b) {
-//     console.log(a + b)
-// }
+const { html, head, meta, link, style, script, div, b, hr, h5, em, ins, title, body, header, h1, h2, h3, p, img, button, input, nav, a, pre, code, fragment, br} = htjs;
 
 const prism = {
     js: content => pre({class:"language-javascript"}, code(content)),
     html: content => pre({class:"language-html"}, code(content))
 }
 
-const frontEndScript = function plus(a, b, c, d){
-    console.log(a + b + c + d)
-}
-
-function changeToBlue(htmlElement){
-    htmlElement.style.color = "blue"
-}
-
-function plus(a, b) {
-    console.log(a + b)
-}
-
 function increaseTextSize(el){
     const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);
     el.style.fontSize = (computedFontSize * 1.1) + "px"
-}
-
-function log(a) {
-    console.log(a)
 }
 
 const links = [
@@ -66,37 +55,47 @@ html({lang: "en"},
     head(
         meta({charset:"UTF-8"}),
         meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
-        title("HTJS"),
+        link({rel:"preconnect", href:"https://fonts.googleapis.com"}),
+        link({rel:"preconnect", href:"https://fonts.gstatic.com", crossorigin:""}),
+        link({href:"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;600&display=swap", rel:"stylesheet"}),
+        title("HT.JS - HTML in JS"),
         link({rel:"stylesheet", href:"css/style.css"}),
     ),
     body(
-        h1({class:'big-text'}, "HTJS"),
-        p("html in js made simple, done right."),
-        h1(code("Build / Server")),
+        h1({class:'big-text'}, "HT.JS"),
+        h3("html-in-javascript, made simple, done right."),
+        h2("Build Process & Server"),
+        p("HT.JS is best used in the backend: in the build process or on the server."),
         prism.js( 
 `import { writeFile } from "node:fs/promises";
 import htjs from "html-in-javascript";
 
-const { html, head, body, meta, link, title, h1, p } = htjs
+const { html, head, body, meta, title, link, h1 } = htjs
 
 const page = 
-html({lang: "en"},
+html({ lang: "en" },
     head(
-        meta({charset:"UTF-8"}),
-        meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
-        title("HTJS"),
-        link({rel:"stylesheet", href:"/css/style.css"}),
+        meta({ charset: "UTF-8" }),
+        meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+        title("Welcome!"),
+        link({ rel: "stylesheet", href: "/css/style.css" }),
     ),
-    body({class:"home-page"},
-        h1("HTJS"),
-        p("html in js made simple, done right."),
+    body({ class: "home-page" },
+        h1("Hello World!"),
     )
 )
 
 await writeFile("index.html", page);
 `
         ),
-        h1(code("Browser")),
+        h2("Browser"),
+        p(
+            "HT.JS is best used in the backend",
+            br(),
+            "But, if you really want to use it in the frontend, it can be used in the browser too.",
+            br(),
+            "The browser version is just 1kb"
+        ),
         prism.html( 
 `&lt;html lang="en"&gt;
 &lt;head&gt;
@@ -105,10 +104,10 @@ await writeFile("index.html", page);
         const { fragment, meta, title, link } = htjs
         document.currentScript.outerHTML = 
         fragment(
-            meta({charset:"UTF-8"}),
-            meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
-            title("HTJS"),
-            link({rel:"stylesheet", href:"/css/style.css"})
+            meta({ charset: "UTF-8" }),
+            meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+            title("Welcome!"),
+            link({ rel: "stylesheet", href: "/css/style.css" })
         )
     &lt;/script&gt;
 &lt;/head&gt;
@@ -116,26 +115,20 @@ await writeFile("index.html", page);
     &lt;script&gt;
         const { body, h1, p } = htjs
         document.body.outerHTML = 
-        body({class:"home-page"}
-            h1("HTJS"),
-            p("html in js made simple, done right.")
+        body({ class: "home-page" }
+            h1("Hello World!"),
         )
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;`
         ),
-        p(
-            "HTJS is really best used in the build process or on the server, but if you really want to use it in the browser, go ahead :)", 
-            br(), 
-            "The browser version is just 1kb"
-        ),        
-        h1(code("Docs")),
+        
+        
+        h2("Docs"),
 
-
-        code(b("Code")),
+        h5("Code"),
         prism.js( 
-`div(
-    {
+`div({
         // Objects are the element's attributes
         // in a key:value relationship eg.
         class: "class names",
@@ -143,16 +136,14 @@ await writeFile("index.html", page);
         id: "some-id",
         "data-test-id": 123,
         onclick: () => this.style.color = 'blue',
-        style: "color:red;padding:10px;border:1px solid black"
+        style: "color:red; padding:10px; border:1px solid black"
     },
     h2("hello world!"),
     p(
-        "Any strings are treated as content, ",
-        ins("All 'element functions' return strings of HTML"),
-        " ",
+        "All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML",
+        br(),
         em("and can be nested exactly like html")
     ),
-    p("you can have as many, or as few as you wish"),
     {
         // you can have more than one object for the attributes
         "data-foo": "bar"
@@ -161,21 +152,20 @@ await writeFile("index.html", page);
     }
 )`
         ),
-        code(b("HTML")),
+        h5("HTML"),
         prism.html( 
 `&lt;div 
-  class="class names" 
+  class="class names"
   id="some-id" 
   data-test-id="123" 
-  onclick="(() => this.style.color = 'blue'" 
-  style="color:red;padding:10px;border:1px solid black"
+  onclick="(() => this.style.color = 'blue')()" 
+  style="color:red; padding:10px; border:1px solid black"
   data-foo="bar"&gt;
-    &lt;h2&gt;hello world!&lt;/h2&gt;
-    &lt;p&gt;Any strings are treated as content, &lt;ins&gt;All 'element functions' return strings of HTML&lt;/ins&gt; &lt;em&gt;and can be nested exactly like html&lt;/em&gt;&lt;/p&gt;
-    &lt;p&gt;you can have as many, or as few as you wish&lt;/p&gt;
+  &lt;h2&gt;hello world!&lt;/h2&gt;
+    &lt;p&gt;All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML&lt;br&gt;&lt;em&gt;and can be nested exactly like html&lt;/em&gt;&lt;/p&gt;
 &lt;/div&gt;`
         ),        
-        code(b("Example")),
+        h5("Example"),
         div({
             // objects are the elements attributes 
             // in a key:value relationship eg.
@@ -185,16 +175,14 @@ await writeFile("index.html", page);
             "data-test-id": 123,
             // onclick: () => console.log(this),
             onclick: () => this.style.color = 'blue',
-            style: "color:red;padding:0 10px;border:1px solid black"
+            style: "color:red; padding:0 10px; border:1px solid black"
         },
             h2("hello world!"),
             p(
-                "Any strings are treated as content, ",
-                ins("All 'element functions' return strings of HTML"),
-                " ",
+                "All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML",
+                br(),
                 em("and can be nested exactly like html")
             ),
-            p("you can have as many, or as few as you wish"),
             {
                 // you can have more than one object for the attributes
                 "data-foo": "bar"
@@ -202,34 +190,34 @@ await writeFile("index.html", page);
                 // just have one attribute object, and to put it first
             }                    
         ),
-        h2(code("fragment")),
-        p("similar to React's ", code("&lt;&gt;{content}&lt;/&gt;")),
-        p("Used when you can't, or don't want a container &lt;div&gt;"),
-        code(b("Code")),
+        h3(b("fragment")),
+        p("similar to React's ", b("&lt;&gt;{content}&lt;/&gt;")),
+        p("Used when you can't, or don't want a container ", b("&lt;div&gt;")),
+        h5("Code"),
         prism.js(
 `head(
     meta({charset:"UTF-8"}),
     meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),    
     fragment(
-        title("HTJS"),
+        title("HT.JS"),
         link({rel:"stylesheet", href:"/css/style.css"})
     )
 )`
         ),
-        code(b("HTML")),
+        h5("HTML"),
         prism.html(
 `&lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;HTJS&lt;/title&gt;
-    &lt;link rel="stylesheet" href="/css/style.css" &gt;
+    &lt;title&gt;HT.JS&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/css/style.css"&gt;
 &lt;/head&gt;`
         ),                    
 
-
-        h2(code("Scripts")),
+        h3(b("Scripts")),
         p("It's possible to include scripts in your html.", br(), "Of course, it's better to keep your scripts separate, but sometimes it's just easier to include them in the html."),
         p("Function declerations are treated as content and will be converted to strings"),
+        h5("Code"),
         prism.js(
 `function increaseTextSize(el){
     const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);
@@ -242,12 +230,31 @@ button({
 }, "Increase Text Size")
 `
         ),
+        h5("Example"),
         script(increaseTextSize),
         button({
             onclick: () => increaseTextSize(this),
         }, "Increase Text Size"),
-        h1(code("Extensible")),
-        p("At it's core, HTJS is just a collection of functions, so you can easily add your own, to create reusable components."),
+
+        h3(b("non-destructured")),
+        p("If you don't want to destructure the functions, you can use them directly from the module."),
+        h5("Code"),
+        prism.js(
+`import $ from "html-in-javascript";
+
+$.div(
+    $.h1("hello world!")
+)`
+        ),
+        h5("HTML"),
+        prism.html(
+`&lt;div&gt;
+    &lt;h1&gt;hello world!&lt;/h1&gt;
+&lt;/div&gt;`
+),
+
+        h2("Extensible"),
+        p("At it's core, HT.JS is just a collection of functions, so you can easily add your own, to create reusable components."),
         prism.js(
 `// pageHead.js
 import htjs from "html-in-javascript";
@@ -325,15 +332,16 @@ head(
 `// index.js
 import htjs from "html-in-javascript";
 import pageHead from "./pageHead.js";
+
 const { html, body, h1, p, script } = htjs
 
 const page =
-html({lang: "en"},
+html({ lang: "en" },
     pageHead({
             title: "example.com | My Page", 
             description: "My page description"
         },
-        script({src:"/js/someScript.js"})
+        script({ src:"/js/someScript.js" })
     ),
     body(
         h1("My Page"),
@@ -341,7 +349,7 @@ html({lang: "en"},
     )
 )`
         ),
-        code(b("HTML")),
+        h5("HTML"),
         prism.html(
 `&lt;html lang="en"&gt;
 &lt;head&gt;
@@ -370,4 +378,4 @@ html({lang: "en"},
     )
 )
 
-writeFileTo(page, "docs/index.html")
+writeFileTo((page), "docs/index.html")
