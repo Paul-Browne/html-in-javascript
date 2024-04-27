@@ -513,7 +513,7 @@ await esbuild.build({
     treeShaking: false,
     format: "esm",
     target: "esnext",
-    outfile: 'index.js'
+    outfile: 'esm.js'
 })
 
 cp("src/CNAME", "docs/CNAME", { recursive: true })
@@ -522,7 +522,7 @@ cp("src/favicons", "docs/", { recursive: true })
 cp("src/js/prism.js", "docs/js/prism.js", { recursive: true })
 cp("src/css/style.css", "docs/css/style.css", { recursive: true })
 
-cp("src/js/index.js", "docs/js/index.js", { recursive: true })
+cp("src/js/index.js", "docs/js/esm.js", { recursive: true })
 cp("src/js/mumble.js", "docs/js/mumble.js", { recursive: true })
 
 writeFileTo(minifyHTML(page), "docs/index.html")

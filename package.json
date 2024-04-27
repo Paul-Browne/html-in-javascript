@@ -1,11 +1,11 @@
 {
   "name": "html-in-javascript",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "esm.js",
   "type": "module",
   "files": [
-    "index.js",
+    "esm.js",
     "ht.min.js"
   ],
   "scripts": {
