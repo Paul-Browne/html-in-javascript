@@ -79,7 +79,10 @@ html({lang: "en"},
         h3("html-in-javascript, made simple, done right."),
 
         div({class:"container"},
-            div({class:"cell"},
+            div({
+                    class:"cell",
+                    onclick: () => zoom(this),
+                },
                 h2("Static Site Generator"),
                 prism.js( 
 `import { writeFile } from "node:fs/promises";
@@ -104,7 +107,10 @@ await writeFile("public/index.html", page);
 `
                 ),
             ),
-            div({class:"cell"},
+            div({
+                    class:"cell",
+                    onclick: () => zoom(this),
+                },
                 h2("Server Side Rendered"),
                 prism.js( 
 `import express from 'express';
@@ -136,7 +142,10 @@ app.listen(3000, () => console.log("http://localhost:3000"));
                 ),                    
             ),
 
-            div({class:"cell"},
+            div({
+                    class:"cell",
+                    onclick: () => zoom(this),
+                },
                 h2("Bundled for Browser"),
                 prism.js( 
 `// bundle.js
@@ -184,7 +193,10 @@ document.documentElement.innerHTML = page;
 `               ),  
             ),
             
-            div({class:"cell"},
+            div({
+                    class:"cell",
+                    onclick: () => zoom(this),
+                },
                 h2("Directly in Browser"),
 
                 prism.js( 
@@ -472,16 +484,20 @@ html({ lang: "en" },
 
         script({src:"/js/prism.js"}),
 
-        div({id:"app"}),
-
         // script({src:"/js/bundle.js", type:"module"}),
         
         // div({id:"cont"}),
         // script({src: "https://cdn.jsdelivr.net/npm/html-in-javascript/htjs.min.js"}),
         // script(frontendScript),
         // button({onclick: () => frontendScript()}, "click me!"),
+
+        script(zoom),
     )
 )
+
+function zoom(el){
+    el.classList.toggle("active")
+}
 
 function frontendScript(){
     const { fragment, h1, p } = htjs
@@ -514,6 +530,17 @@ await esbuild.build({
     format: "esm",
     target: "esnext",
     outfile: 'esm.js'
+})
+
+await esbuild.build({
+    entryPoints: ['src/js/index.js'],
+    bundle: false,
+    minify: true,
+    sourcemap: false,
+    format: "iife",
+    target: "esnext",
+    globalName: "htjs",
+    outfile: 'iife.js'
 })
 
 cp("src/CNAME", "docs/CNAME", { recursive: true })
