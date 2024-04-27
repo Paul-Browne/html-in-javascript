@@ -1,21 +1,24 @@
 {
   "name": "html-in-javascript",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
-  "main": "htjs.js",
+  "main": "ht.js",
   "type": "module",
   "files": [
-    "htjs.js",
-    "standalone/htjs.js",
-    "htjs.min.js"
+    "ht.js",
+    "ht.min.js"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon build.js",
+    "serve": "node serve.js" 
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "esbuild": "^0.20.2",
     "express": "^4.19.2",
-    "html-minifier": "^4.0.0"
+    "html-minifier": "^4.0.0",
+    "nodemon": "^3.1.0"
   }
 }

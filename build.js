@@ -1,13 +1,14 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { cp, mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { minify } from 'html-minifier'
-import htjs from "./htjs.js"
+import htjs from "./src/js/ht.js"
+import * as esbuild from 'esbuild'
 
 const minifyHTML = html => minify(html, {
-    removeAttributeQuotes: true,
+    removeAttributeQuotes: false,
+    minifyJS: false,
     collapseWhitespace: true,
     minifyCSS: true,
-    minifyJS: true,
     removeComments: true,
     decodeEntities: true
 })
@@ -17,7 +18,7 @@ export const writeFileTo = async (content, path) => {
     await writeFile(path, content);
 }
 
-const { html, head, meta, link, style, script, div, b, hr, h5, em, ins, title, body, header, h1, h2, h3, p, img, button, input, nav, a, pre, code, fragment, br} = htjs;
+const { html, head, meta, link, style, script, div, b, hr, h5, h6, em, ins, title, body, header, h1, h2, h3, p, img, button, input, nav, a, pre, code, fragment, br} = htjs;
 
 const prism = {
     js: content => pre({class:"language-javascript"}, code(content)),
@@ -55,9 +56,11 @@ html({lang: "en"},
     head(
         meta({charset:"UTF-8"}),
         meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
-        link({rel:"preconnect", href:"https://fonts.googleapis.com"}),
-        link({rel:"preconnect", href:"https://fonts.gstatic.com", crossorigin:""}),
-        link({href:"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;600&display=swap", rel:"stylesheet"}),
+        
+        // link({rel:"preconnect", href:"https://fonts.googleapis.com"}),
+        // link({rel:"preconnect", href:"https://fonts.gstatic.com", crossorigin:""}),
+        // link({href:"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;600&display=swap", rel:"stylesheet"}),
+
         title("HT.JS - HTML in JavaScript"),
         meta({name:"description", content:"HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."}),
 
@@ -69,16 +72,16 @@ html({lang: "en"},
         meta({name:"msapplication-TileColor", content:"#2d89ef"}),
         meta({name:"theme-color", content:"#ffff00"}),
 
-        link({rel:"stylesheet", href:"css/style.css"}),
+        link({rel:"stylesheet", href:"/css/style.css"}),
     ),
     body(
         h1({class:'big-text'}, "HT.JS"),
         h3("html-in-javascript, made simple, done right."),
-        h2("Build Process & Server"),
-        p("HT.JS is best used in the backend: in the build process or on the server."),
-        prism.html("npm install html-in-javascript"),
-        br(),
-        prism.js( 
+
+        div({class:"container"},
+            div({class:"cell"},
+                h2("Static Site Generator"),
+                prism.js( 
 `import { writeFile } from "node:fs/promises";
 import htjs from "html-in-javascript";
 
@@ -97,44 +100,123 @@ html({ lang: "en" },
     )
 )
 
-await writeFile("index.html", page);
+await writeFile("public/index.html", page);
 `
-        ),
-        h2("Browser"),
-        p(
-            "HT.JS is best used in the backend",
-            br(),
-            "But, if you really want to use it in the frontend, it can be used in the browser too.",
-            br(),
-            "The browser version is just 1kb"
-        ),
-        prism.html( 
-`&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;script src="https://cdn.jsdelivr.net/npm/html-in-javascript/htjs.min.js"&gt;&lt;/script&gt;
-    &lt;script&gt;
-        const { fragment, meta, title, link } = htjs
-        document.currentScript.outerHTML = 
-        fragment(
-            meta({ charset: "UTF-8" }),
-            meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
-            title("Welcome!"),
-            link({ rel: "stylesheet", href: "/css/style.css" })
-        )
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;script&gt;
-        const { body, h1, p } = htjs
-        document.body.outerHTML = 
-        body({ class: "home-page" }
-            h1("Hello World!"),
-        )
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;`
-        ),
-        
+                ),
+            ),
+            div({class:"cell"},
+                h2("Server Side Rendered"),
+                prism.js( 
+`import express from 'express';
+import htjs from "html-in-javascript";
+
+const { html, head, body, meta, title, link, h1 } = htjs
+
+const page = 
+html({ lang: "en" },
+    head(
+        meta({ charset: "UTF-8" }),
+        meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+        title("Welcome!"),
+        link({ rel: "stylesheet", href: "/css/style.css" }),
+    ),
+    body({ class: "home-page" },
+        h1("Hello World!"),
+    )
+)
+
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send(page);
+})
+
+app.listen(3000, () => console.log("http://localhost:3000"));
+`
+                ),                    
+            ),
+
+            div({class:"cell"},
+                h2("Bundled for Browser"),
+                prism.js( 
+`// bundle.js
+import * as esbuild from 'esbuild'
+
+await esbuild.build({
+    entryPoints: ['src/js/foo.js', 'src/js/bar.js', 'src/js/buff.js'],
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    splitting: true,
+    format: "esm",
+    target: "esnext",
+    outdir: 'dist/js'
+})
+`               ),
+                br(),
+                prism.js( 
+`// foo.js
+import htjs from "html-in-javascript";
+
+const { fragment, head, body, meta, title, link, h1 } = htjs
+
+const page = 
+fragment(
+    head(
+        meta({ charset: "UTF-8" }),
+        meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+        title("Welcome!"),
+        link({ rel: "stylesheet", href: "/css/style.css" }),
+    ),
+    body({ class: "home-page" },
+        h1("Hello World!"),
+    )
+)
+
+document.documentElement.innerHTML = page;
+`               ),
+                br(),
+                prism.html( 
+`&lt;!-- index.html --&gt;
+&lt;html lang="en"&gt;
+    &lt;script src="/js/bundle.js" type="module"&gt;&lt;/script&gt;
+&lt;/html&gt;
+`               ),  
+            ),
+            
+            div({class:"cell"},
+                h2("Directly in Browser"),
+
+                prism.js( 
+`// foo.js
+import htjs from "https://cdn.jsdelivr.net/npm/html-in-javascript/ht.js";
+
+const { fragment, head, body, meta, title, link, h1 } = htjs
+
+const page = 
+fragment(
+    head(
+        meta({ charset: "UTF-8" }),
+        meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+        title("Welcome!"),
+        link({ rel: "stylesheet", href: "/css/style.css" }),
+    ),
+    body({ class: "home-page" },
+        h1("Hello World!"),
+    )
+)
+
+document.documentElement.innerHTML = page;
+`               ),
+                br(),
+                prism.html( 
+`&lt;!-- index.html --&gt;
+&lt;html lang="en"&gt;
+    &lt;script src="/js/foo.js" type="module"&gt;&lt;/script&gt;
+&lt;/html&gt;
+`               ),                    
+            )            
+        ),               
         
         h2("Docs"),
 
@@ -388,8 +470,67 @@ html({ lang: "en" },
 &lt;/html&gt;`
         ),            
 
-        script({src:"js/prism.js"})
+        script({src:"/js/prism.js"}),
+
+        div({id:"app"}),
+
+        // script({src:"/js/bundle.js", type:"module"}),
+        
+        // div({id:"cont"}),
+        // script({src: "https://cdn.jsdelivr.net/npm/html-in-javascript/htjs.min.js"}),
+        // script(frontendScript),
+        // button({onclick: () => frontendScript()}, "click me!"),
     )
 )
 
-writeFileTo((page), "docs/index.html")
+function frontendScript(){
+    const { fragment, h1, p } = htjs
+    document.getElementById("cont").innerHTML += 
+    fragment(
+        h1("Hello World!"),
+        p("This is a test")
+    )
+}
+
+await esbuild.build({
+    entryPoints: ['src/js/bundle.js', 'src/js/crumble.js'],
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    splitting: true,
+    treeShaking: true,
+    format: "esm",
+    target: "esnext",
+    outdir: 'docs/js'
+})
+
+await esbuild.build({
+    entryPoints: ['src/js/ht.js'],
+    bundle: false,
+    minify: true,
+    sourcemap: false,
+    splitting: false,
+    treeShaking: false,
+    format: "esm",
+    target: "esnext",
+    outfile: 'ht.js'
+})
+
+cp("src/CNAME", "docs/CNAME", { recursive: true })
+cp("src/fonts", "docs/fonts", { recursive: true })
+cp("src/favicons", "docs/", { recursive: true })
+cp("src/js/prism.js", "docs/js/prism.js", { recursive: true })
+cp("src/css/style.css", "docs/css/style.css", { recursive: true })
+
+cp("src/js/ht.js", "docs/js/ht.js", { recursive: true })
+cp("src/js/mumble.js", "docs/js/mumble.js", { recursive: true })
+
+writeFileTo(minifyHTML(page), "docs/index.html")
+
+const test = html(
+    head(
+        script({src:"/js/mumble.js", type:"module"})
+    ),
+    body("loading...")
+)
+writeFileTo(minifyHTML(test), "docs/test.html")

@@ -1,4 +1,4 @@
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;600&display=swap" rel="stylesheet"><title>HT.JS - HTML in JavaScript</title><meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="stylesheet" href="css/style.css"></head><body><h1 class="big-text">HT.JS</h1><h3>html-in-javascript, made simple, done right.</h3><h2>Build Process & Server</h2><p>HT.JS is best used in the backend: in the build process or on the server.</p><pre class="language-html"><code>npm install html-in-javascript</code></pre><br><pre class="language-javascript"><code>import { writeFile } from "node:fs/promises";
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HT.JS - HTML in JavaScript</title><meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="stylesheet" href="/css/style.css"></head><body><h1 class="big-text">HT.JS</h1><h3>html-in-javascript, made simple, done right.</h3><div class="container"><div class="cell"><h2>Static Site Generator</h2><pre class="language-javascript"><code>import { writeFile } from "node:fs/promises";
 import htjs from "html-in-javascript";
 
 const { html, head, body, meta, title, link, h1 } = htjs
@@ -16,31 +16,92 @@ html({ lang: "en" },
     )
 )
 
-await writeFile("index.html", page);
-</code></pre><h2>Browser</h2><p>HT.JS is best used in the backend<br>But, if you really want to use it in the frontend, it can be used in the browser too.<br>The browser version is just 1kb</p><pre class="language-html"><code>&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;script src="https://cdn.jsdelivr.net/npm/html-in-javascript/htjs.min.js"&gt;&lt;/script&gt;
-    &lt;script&gt;
-        const { fragment, meta, title, link } = htjs
-        document.currentScript.outerHTML = 
-        fragment(
-            meta({ charset: "UTF-8" }),
-            meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
-            title("Welcome!"),
-            link({ rel: "stylesheet", href: "/css/style.css" })
-        )
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;script&gt;
-        const { body, h1, p } = htjs
-        document.body.outerHTML = 
-        body({ class: "home-page" }
-            h1("Hello World!"),
-        )
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre><h2>Docs</h2><h5>Code</h5><pre class="language-javascript"><code>div({
+await writeFile("public/index.html", page);
+</code></pre></div><div class="cell"><h2>Server Side Rendered</h2><pre class="language-javascript"><code>import express from 'express';
+import htjs from "html-in-javascript";
+
+const { html, head, body, meta, title, link, h1 } = htjs
+
+const page = 
+html({ lang: "en" },
+    head(
+        meta({ charset: "UTF-8" }),
+        meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+        title("Welcome!"),
+        link({ rel: "stylesheet", href: "/css/style.css" }),
+    ),
+    body({ class: "home-page" },
+        h1("Hello World!"),
+    )
+)
+
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send(page);
+})
+
+app.listen(3000, () => console.log("http://localhost:3000"));
+</code></pre></div><div class="cell"><h2>Bundled for Browser</h2><pre class="language-javascript"><code>// bundle.js
+import * as esbuild from 'esbuild'
+
+await esbuild.build({
+    entryPoints: ['src/js/foo.js', 'src/js/bar.js', 'src/js/buff.js'],
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    splitting: true,
+    format: "esm",
+    target: "esnext",
+    outdir: 'dist/js'
+})
+</code></pre><br><pre class="language-javascript"><code>// foo.js
+import htjs from "html-in-javascript";
+
+const { fragment, head, body, meta, title, link, h1 } = htjs
+
+const page = 
+fragment(
+    head(
+        meta({ charset: "UTF-8" }),
+        meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+        title("Welcome!"),
+        link({ rel: "stylesheet", href: "/css/style.css" }),
+    ),
+    body({ class: "home-page" },
+        h1("Hello World!"),
+    )
+)
+
+document.documentElement.innerHTML = page;
+</code></pre><br><pre class="language-html"><code>&lt;!-- index.html -->
+&lt;html lang="en">
+    &lt;script src="/js/bundle.js" type="module">&lt;/script>
+&lt;/html>
+</code></pre></div><div class="cell"><h2>Directly in Browser</h2><pre class="language-javascript"><code>// foo.js
+import htjs from "https://cdn.jsdelivr.net/npm/html-in-javascript/ht.js";
+
+const { fragment, head, body, meta, title, link, h1 } = htjs
+
+const page = 
+fragment(
+    head(
+        meta({ charset: "UTF-8" }),
+        meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+        title("Welcome!"),
+        link({ rel: "stylesheet", href: "/css/style.css" }),
+    ),
+    body({ class: "home-page" },
+        h1("Hello World!"),
+    )
+)
+
+document.documentElement.innerHTML = page;
+</code></pre><br><pre class="language-html"><code>&lt;!-- index.html -->
+&lt;html lang="en">
+    &lt;script src="/js/foo.js" type="module">&lt;/script>
+&lt;/html>
+</code></pre></div></div><h2>Docs</h2><h5>Code</h5><pre class="language-javascript"><code>div({
         // Objects are the element's attributes
         // in a key:value relationship eg.
         class: "class names",
@@ -68,10 +129,10 @@ await writeFile("index.html", page);
   data-test-id="123" 
   onclick="(() => this.style.color = 'blue')()" 
   style="color:red; padding:10px; border:1px solid black"
-  data-foo="bar"&gt;
-    &lt;h2&gt;hello world!&lt;/h2&gt;
-    &lt;p&gt;All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML&lt;br&gt;&lt;em&gt;and can be nested exactly like html&lt;/em&gt;&lt;/p&gt;
-&lt;/div&gt;</code></pre><h5>Example</h5><div class="class names" id="some-id" data-test-id="123" onclick="(() => this.style.color = 'blue')()" style="color:red; padding:0 10px; border:1px solid black" data-foo="bar"><h2>hello world!</h2><p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML<br><em>and can be nested exactly like html</em></p></div><h3><b>fragment</b></h3><p>similar to React's <b>&lt;&gt;{content}&lt;/&gt;</b></p><p>Used when you can't, or don't want a container <b>&lt;div&gt;</b></p><h5>Code</h5><pre class="language-javascript"><code>const titleAndStyle = fragment(
+  data-foo="bar">
+    &lt;h2>hello world!&lt;/h2>
+    &lt;p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML&lt;br>&lt;em>and can be nested exactly like html&lt;/em>&lt;/p>
+&lt;/div></code></pre><h5>Example</h5><div class="class names" id="some-id" data-test-id="123" onclick="(() => this.style.color = 'blue')()" style="color:red;padding:0 10px;border:1px solid #000" data-foo="bar"><h2>hello world!</h2><p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML<br><em>and can be nested exactly like html</em></p></div><h3><b>fragment</b></h3><p>similar to React's <b>&lt;>{content}&lt;/></b></p><p>Used when you can't, or don't want a container <b>&lt;div></b></p><h5>Code</h5><pre class="language-javascript"><code>const titleAndStyle = fragment(
     title("HT.JS"),
     link({ rel:"stylesheet", href:"/css/style.css" })
 )
@@ -80,12 +141,12 @@ head(
     meta({ charset:"UTF-8" }),
     meta({ name:"viewport", content:"width=device-width, initial-scale=1.0" }),
     titleAndStyle
-)</code></pre><h5>HTML</h5><pre class="language-html"><code>&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;HT.JS&lt;/title&gt;
-    &lt;link rel="stylesheet" href="/css/style.css"&gt;
-&lt;/head&gt;</code></pre><h3><b>Scripts</b></h3><p>It's possible to include scripts in your html.<br>Of course, it's better to keep your scripts separate, but sometimes it's just easier to include them in the html.</p><p>Function declerations are treated as content and will be converted to strings</p><h5>Code</h5><pre class="language-javascript"><code>function increaseTextSize(el){
+)</code></pre><h5>HTML</h5><pre class="language-html"><code>&lt;head>
+    &lt;meta charset="UTF-8">
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+    &lt;title>HT.JS&lt;/title>
+    &lt;link rel="stylesheet" href="/css/style.css">
+&lt;/head></code></pre><h3><b>Scripts</b></h3><p>It's possible to include scripts in your html.<br>Of course, it's better to keep your scripts separate, but sometimes it's just easier to include them in the html.</p><p>Function declerations are treated as content and will be converted to strings</p><h5>Code</h5><pre class="language-javascript"><code>function increaseTextSize(el){
     const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);
     el.style.fontSize = (computedFontSize * 1.1) + "px"
 }
@@ -101,9 +162,9 @@ button({
 
 $.div(
     $.h1("hello world!")
-)</code></pre><h5>HTML</h5><pre class="language-html"><code>&lt;div&gt;
-    &lt;h1&gt;hello world!&lt;/h1&gt;
-&lt;/div&gt;</code></pre><h2>Extensible</h2><p>At it's core HT.JS is just a collection of functions, so you can easily add your own to create reusable components.</p><pre class="language-javascript"><code>// pageHead.js
+)</code></pre><h5>HTML</h5><pre class="language-html"><code>&lt;div>
+    &lt;h1>hello world!&lt;/h1>
+&lt;/div></code></pre><h2>Extensible</h2><p>At it's core HT.JS is just a collection of functions, so you can easily add your own to create reusable components.</p><pre class="language-javascript"><code>// pageHead.js
 import htjs from "html-in-javascript";
 const { head, meta, link, title, fragment } = htjs;
 
@@ -191,24 +252,24 @@ html({ lang: "en" },
         h1("My Page"),
         p("This is my page")
     )
-)</code></pre><h5>HTML</h5><pre class="language-html"><code>&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;
-    &lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
-    &lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;
-    &lt;link rel="manifest" href="/site.webmanifest"&gt;
-    &lt;link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"&gt;
-    &lt;meta name="msapplication-TileColor" content="#2d89ef"&gt;
-    &lt;meta name="theme-color" content="#ffffff"&gt;
-    &lt;title&gt;example.com | My Page&lt;/title&gt;
-    &lt;link rel="stylesheet" href="/css/style.css"&gt;
-    &lt;meta name="description" content="My page description"&gt;
-    &lt;script src="/js/someScript.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;My Page&lt;/h1&gt;
-    &lt;p&gt;This is my page&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre><script src="js/prism.js"></script></body></html>
+)</code></pre><h5>HTML</h5><pre class="language-html"><code>&lt;html lang="en">
+&lt;head>
+    &lt;meta charset="UTF-8">
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+    &lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    &lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    &lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    &lt;link rel="manifest" href="/site.webmanifest">
+    &lt;link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    &lt;meta name="msapplication-TileColor" content="#2d89ef">
+    &lt;meta name="theme-color" content="#ffffff">
+    &lt;title>example.com | My Page&lt;/title>
+    &lt;link rel="stylesheet" href="/css/style.css">
+    &lt;meta name="description" content="My page description">
+    &lt;script src="/js/someScript.js">&lt;/script>
+&lt;/head>
+&lt;body>
+    &lt;h1>My Page&lt;/h1>
+    &lt;p>This is my page&lt;/p>
+&lt;/body>
+&lt;/html></code></pre><script src="/js/prism.js"></script><div id="app"></div></body></html>

@@ -1,0 +1,2 @@
+import{a as e}from"./chunk-NAZKHSSW.js";var{fragment:i,head:o,body:n,meta:t,title:a,link:c,p:l,h1:r}=e,h=await(await fetch("https://api.ipify.org?format=json")).json(),m=s=>i(o(t({charset:"UTF-8"}),t({name:"viewport",content:"width=device-width, initial-scale=1.0"}),a("Welcome!"),c({rel:"stylesheet",href:"/css/style.css"})),n({class:"home-page"},r("Hello World!"),l(s)));document.documentElement.innerHTML=m(h.ip);
+//# sourceMappingURL=bundle.js.map
