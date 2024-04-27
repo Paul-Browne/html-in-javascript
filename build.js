@@ -189,7 +189,7 @@ document.documentElement.innerHTML = page;
 
                 prism.js( 
 `// foo.js
-import htjs from "https://cdn.jsdelivr.net/npm/html-in-javascript/ht.js";
+import htjs from "https://cdn.jsdelivr.net/npm/html-in-javascript/esm.js";
 
 const { fragment, head, body, meta, title, link, h1 } = htjs
 
