@@ -1,4 +1,4 @@
-// import htjs from './ht.js';
+// import htjs from './index.js';
 import htjs from 'https://cdn.jsdelivr.net/npm/html-in-javascript/ht.js';
 
 const { div, h1, p, a, img, ul, li, span, button, } = htjs;

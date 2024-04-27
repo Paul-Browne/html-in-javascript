@@ -1,7 +1,7 @@
 import { cp, mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { minify } from 'html-minifier'
-import htjs from "./src/js/ht.js"
+import htjs from "./src/js/index.js"
 import * as esbuild from 'esbuild'
 
 const minifyHTML = html => minify(html, {
@@ -505,7 +505,7 @@ await esbuild.build({
 })
 
 await esbuild.build({
-    entryPoints: ['src/js/ht.js'],
+    entryPoints: ['src/js/index.js'],
     bundle: false,
     minify: true,
     sourcemap: false,
@@ -513,7 +513,7 @@ await esbuild.build({
     treeShaking: false,
     format: "esm",
     target: "esnext",
-    outfile: 'ht.js'
+    outfile: 'index.js'
 })
 
 cp("src/CNAME", "docs/CNAME", { recursive: true })
@@ -522,7 +522,7 @@ cp("src/favicons", "docs/", { recursive: true })
 cp("src/js/prism.js", "docs/js/prism.js", { recursive: true })
 cp("src/css/style.css", "docs/css/style.css", { recursive: true })
 
-cp("src/js/ht.js", "docs/js/ht.js", { recursive: true })
+cp("src/js/index.js", "docs/js/index.js", { recursive: true })
 cp("src/js/mumble.js", "docs/js/mumble.js", { recursive: true })
 
 writeFileTo(minifyHTML(page), "docs/index.html")

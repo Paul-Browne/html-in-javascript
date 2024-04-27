@@ -1,4 +1,4 @@
-import htjs from './ht.js';
+import htjs from './index.js';
 
 const { fragment, head, body, meta, title, link, p, h1 } = htjs;
 

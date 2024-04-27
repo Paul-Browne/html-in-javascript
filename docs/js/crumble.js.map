@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../src/js/crumble.js"],
-  "sourcesContent": ["import htjs from './ht.js';\n\nconst { div, h1, p, a, img, ul, li, span, button, } = htjs;\n\nconst App =  \ndiv({ class: 'container' },\n    h1('Hello World'),\n    p('This is a paragraph'),\n    a({ href: 'https://google.com' }, 'Google'),\n    img({ src: 'https://via.placeholder.com/150' }),\n    ul(\n        li('Item 1'),\n        li('Item 2'),\n        li('Item 3')\n    ),\n    span('This is a span'),\n    button('Click me')\n)\n\ndocument.body.innerHTML = App;"],
+  "sourcesContent": ["import htjs from './index.js';\n\nconst { div, h1, p, a, img, ul, li, span, button, } = htjs;\n\nconst App =  \ndiv({ class: 'container' },\n    h1('Hello World'),\n    p('This is a paragraph'),\n    a({ href: 'https://google.com' }, 'Google'),\n    img({ src: 'https://via.placeholder.com/150' }),\n    ul(\n        li('Item 1'),\n        li('Item 2'),\n        li('Item 3')\n    ),\n    span('This is a span'),\n    button('Click me')\n)\n\ndocument.body.innerHTML = App;"],
   "mappings": "wCAEA,GAAM,CAAE,IAAAA,EAAK,GAAAC,EAAI,EAAAC,EAAG,EAAAC,EAAG,IAAAC,EAAK,GAAAC,EAAI,GAAAC,EAAI,KAAAC,EAAM,OAAAC,CAAQ,EAAIC,EAEhDC,EACNV,EAAI,CAAE,MAAO,WAAY,EACrBC,EAAG,aAAa,EAChBC,EAAE,qBAAqB,EACvBC,EAAE,CAAE,KAAM,oBAAqB,EAAG,QAAQ,EAC1CC,EAAI,CAAE,IAAK,iCAAkC,CAAC,EAC9CC,EACIC,EAAG,QAAQ,EACXA,EAAG,QAAQ,EACXA,EAAG,QAAQ,CACf,EACAC,EAAK,gBAAgB,EACrBC,EAAO,UAAU,CACrB,EAEA,SAAS,KAAK,UAAYE",
-  "names": ["div", "h1", "p", "a", "img", "ul", "li", "span", "button", "ht_default", "App"]
+  "names": ["div", "h1", "p", "a", "img", "ul", "li", "span", "button", "js_default", "App"]
 }

@@ -1,11 +1,11 @@
 {
   "name": "html-in-javascript",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "",
-  "main": "ht.js",
+  "main": "index.js",
   "type": "module",
   "files": [
-    "ht.js",
+    "index.js",
     "ht.min.js"
   ],
   "scripts": {

@@ -1,4 +1,4 @@
-import htjs from './ht.js';
+import htjs from './index.js';
 
 const { div, h1, p, a, img, ul, li, span, button, } = htjs;
 
