@@ -60,9 +60,14 @@ h5{
 }
 .container > .cell{
     flex: 1 0 calc(50% - 1em);
-    cursor: pointer;
     overflow: hidden;
     max-height: 300px;
+}
+
+.container .cell-inner{
+    cursor: pointer;
+    overflow: hidden;
+    background: #fff;
 }
 
 @media screen and (max-width: 600px){
@@ -72,40 +77,53 @@ h5{
 }
 
 .cell pre[class*=language-]{
+    transition-duration: 0.25s;
+    transition-property: all;
     font-size: 50%;
     filter: blur(1px);
 }
 
-.cell.active{
+.cell-inner.active{
     position: fixed;
-    top: 1em;
-    left: 1em;
-    width: calc(100% - 2em);
+    height: 300;
     z-index: 10;
-    height: calc(100% - 2em);
-    background: #fff;
-    z-index: 10;
-    overflow: auto;
-    max-height: none;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    animation: zoom 0.5s ease-in-out forwards;
 }
 
-.cell.active:before{
-    content: "";
+.cell-inner.deactive{
     position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    z-index: -1;
+    height: 300;
+    z-index: 10;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    animation: unzoom 0.5s ease-in-out forwards;
 }
 
-.cell.active pre[class*=language-]{
+@keyframes zoom{
+    to{
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@keyframes unzoom{
+    from{
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.cell-inner.active pre[class*=language-]{
     font-size: 100%;
     filter: blur(0);
 }
 
-html:has(.cell.active){
+html:has(.cell-inner.active),
+html:has(.cell-inner.deactive){
     overflow: hidden;
 }
 

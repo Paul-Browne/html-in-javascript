@@ -79,12 +79,13 @@ html({lang: "en"},
         h3("html-in-javascript, made simple, done right."),
 
         div({class:"container"},
-            div({
-                    class:"cell",
-                    onclick: () => zoom(this),
-                },
-                h2("Static Site Generator"),
-                prism.js( 
+            div({class: "cell"}, 
+                div({
+                        class:"cell-inner",
+                        onclick: () => zoom(this),
+                    },
+                    h2("Static Site Generator"),
+                    prism.js( 
 `import { writeFile } from "node:fs/promises";
 import htjs from "html-in-javascript";
 
@@ -105,14 +106,16 @@ html({ lang: "en" },
 
 await writeFile("public/index.html", page);
 `
+                    ),
                 ),
             ),
-            div({
-                    class:"cell",
-                    onclick: () => zoom(this),
-                },
-                h2("Server Side Rendered"),
-                prism.js( 
+            div({class: "cell"}, 
+                div({
+                        class:"cell-inner",
+                        onclick: () => zoom(this),
+                    },
+                    h2("Server Side Rendered"),
+                    prism.js( 
 `import express from 'express';
 import htjs from "html-in-javascript";
 
@@ -139,15 +142,16 @@ app.get('/', (req, res) => {
 
 app.listen(3000, () => console.log("http://localhost:3000"));
 `
-                ),                    
+                    ),                    
+                ),
             ),
-
-            div({
-                    class:"cell",
-                    onclick: () => zoom(this),
-                },
-                h2("Bundled for Browser"),
-                prism.js( 
+            div({class: "cell"}, 
+                div({
+                        class:"cell-inner",
+                        onclick: () => zoom(this),
+                    },
+                    h2("Bundled for Browser"),
+                    prism.js( 
 `// bundle.js
 import * as esbuild from 'esbuild'
 
@@ -161,9 +165,9 @@ await esbuild.build({
     target: "esnext",
     outdir: 'dist/js'
 })
-`               ),
-                br(),
-                prism.js( 
+    `               ),
+                    br(),
+                    prism.js( 
 `// foo.js
 import htjs from "html-in-javascript";
 
@@ -183,23 +187,24 @@ fragment(
 )
 
 document.documentElement.innerHTML = page;
-`               ),
-                br(),
-                prism.html( 
+`                   ),
+                    br(),
+                    prism.html( 
 `&lt;!-- index.html --&gt;
 &lt;html lang="en"&gt;
     &lt;script src="/js/bundle.js" type="module"&gt;&lt;/script&gt;
 &lt;/html&gt;
-`               ),  
+`                   ),  
+                ),
             ),
             
-            div({
-                    class:"cell",
-                    onclick: () => zoom(this),
-                },
-                h2("Directly in Browser"),
-
-                prism.js( 
+            div({class: "cell"}, 
+                div({
+                        class:"cell-inner",
+                        onclick: () => zoom(this),
+                    },
+                    h2("Directly in Browser"),
+                    prism.js( 
 `// foo.js
 import htjs from "https://cdn.jsdelivr.net/npm/html-in-javascript/esm.js";
 
@@ -219,16 +224,17 @@ fragment(
 )
 
 document.documentElement.innerHTML = page;
-`               ),
-                br(),
-                prism.html( 
+`                   ),
+                    br(),
+                    prism.html( 
 `&lt;!-- index.html --&gt;
 &lt;html lang="en"&gt;
     &lt;script src="/js/foo.js" type="module"&gt;&lt;/script&gt;
 &lt;/html&gt;
-`               ),                    
-            )            
-        ),               
+`                  ),                    
+                )            
+            )
+        ),
         
         h2("Docs"),
 
@@ -496,7 +502,35 @@ html({ lang: "en" },
 )
 
 function zoom(el){
-    el.classList.toggle("active")
+    const dims = el.getBoundingClientRect()
+    if(el.classList.contains("active")){
+        el.classList.add("deactive")
+        el.classList.remove("active")
+        setTimeout(() => {
+            el.classList.remove("deactive")
+        }, 500)
+    }else{
+        el.style.left = dims.x;
+        el.style.top = dims.y;
+        el.style.width = dims.width;        
+        el.classList.add("active")
+    }
+    // el.style.height = dims.height;
+
+    // const incrementLeft = 0 - dims.x/60
+    // const incrementTop = 0 - dims.y/60
+    // const incrementWidth = (window.innerWidth - dims.width)/60
+    // const incrementHeight = (window.innerHeight - 300)/60
+
+    // const id = setInterval(() => {
+    //     el.style.left = parseFloat(el.style.left) + incrementLeft
+    //     el.style.top = parseFloat(el.style.top) + incrementTop
+    //     el.style.width = parseFloat(el.style.width) + incrementWidth
+    //     el.style.height = parseFloat(el.style.height) + incrementHeight
+    //     if(Math.abs(parseFloat(el.style.left)) < 0.1 || Math.abs(parseFloat(el.style.top)) < 0.1){
+    //         clearInterval(id)
+    //     }
+    // }, 1000/240)
 }
 
 function frontendScript(){
@@ -509,7 +543,7 @@ function frontendScript(){
 }
 
 await esbuild.build({
-    entryPoints: ['src/js/bundle.js', 'src/js/crumble.js'],
+    entryPoints: ['src/js/bundle.js'],
     bundle: true,
     minify: true,
     sourcemap: true,
@@ -533,8 +567,11 @@ await esbuild.build({
 })
 
 await esbuild.build({
-    entryPoints: ['src/js/index.js'],
-    bundle: false,
+    stdin: {
+        contents: 'import a from "./src/js/index.js";module.exports = a;',
+        resolveDir: '.'
+    },
+    bundle: true,
     minify: true,
     sourcemap: false,
     format: "iife",
@@ -550,7 +587,6 @@ cp("src/js/prism.js", "docs/js/prism.js", { recursive: true })
 cp("src/css/style.css", "docs/css/style.css", { recursive: true })
 
 cp("src/js/index.js", "docs/js/esm.js", { recursive: true })
-cp("src/js/mumble.js", "docs/js/mumble.js", { recursive: true })
 
 writeFileTo(minifyHTML(page), "docs/index.html")
 
@@ -560,4 +596,5 @@ const test = html(
     ),
     body("loading...")
 )
+
 writeFileTo(minifyHTML(test), "docs/test.html")

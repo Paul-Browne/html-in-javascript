@@ -1,4 +1,4 @@
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HT.JS - HTML in JavaScript</title><meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="stylesheet" href="/css/style.css"></head><body><h1 class="big-text">HT.JS</h1><h3>html-in-javascript, made simple, done right.</h3><div class="container"><div class="cell" onclick="(() => zoom(this))()"><h2>Static Site Generator</h2><pre class="language-javascript"><code>import { writeFile } from "node:fs/promises";
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HT.JS - HTML in JavaScript</title><meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="stylesheet" href="/css/style.css"></head><body><h1 class="big-text">HT.JS</h1><h3>html-in-javascript, made simple, done right.</h3><div class="container"><div class="cell"><div class="cell-inner" onclick="(() => zoom(this))()"><h2>Static Site Generator</h2><pre class="language-javascript"><code>import { writeFile } from "node:fs/promises";
 import htjs from "html-in-javascript";
 
 const { html, head, body, meta, title, link, h1 } = htjs
@@ -17,7 +17,7 @@ html({ lang: "en" },
 )
 
 await writeFile("public/index.html", page);
-</code></pre></div><div class="cell" onclick="(() => zoom(this))()"><h2>Server Side Rendered</h2><pre class="language-javascript"><code>import express from 'express';
+</code></pre></div></div><div class="cell"><div class="cell-inner" onclick="(() => zoom(this))()"><h2>Server Side Rendered</h2><pre class="language-javascript"><code>import express from 'express';
 import htjs from "html-in-javascript";
 
 const { html, head, body, meta, title, link, h1 } = htjs
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 })
 
 app.listen(3000, () => console.log("http://localhost:3000"));
-</code></pre></div><div class="cell" onclick="(() => zoom(this))()"><h2>Bundled for Browser</h2><pre class="language-javascript"><code>// bundle.js
+</code></pre></div></div><div class="cell"><div class="cell-inner" onclick="(() => zoom(this))()"><h2>Bundled for Browser</h2><pre class="language-javascript"><code>// bundle.js
 import * as esbuild from 'esbuild'
 
 await esbuild.build({
@@ -55,7 +55,7 @@ await esbuild.build({
     target: "esnext",
     outdir: 'dist/js'
 })
-</code></pre><br><pre class="language-javascript"><code>// foo.js
+    </code></pre><br><pre class="language-javascript"><code>// foo.js
 import htjs from "html-in-javascript";
 
 const { fragment, head, body, meta, title, link, h1 } = htjs
@@ -78,7 +78,7 @@ document.documentElement.innerHTML = page;
 &lt;html lang="en">
     &lt;script src="/js/bundle.js" type="module">&lt;/script>
 &lt;/html>
-</code></pre></div><div class="cell" onclick="(() => zoom(this))()"><h2>Directly in Browser</h2><pre class="language-javascript"><code>// foo.js
+</code></pre></div></div><div class="cell"><div class="cell-inner" onclick="(() => zoom(this))()"><h2>Directly in Browser</h2><pre class="language-javascript"><code>// foo.js
 import htjs from "https://cdn.jsdelivr.net/npm/html-in-javascript/esm.js";
 
 const { fragment, head, body, meta, title, link, h1 } = htjs
@@ -101,7 +101,7 @@ document.documentElement.innerHTML = page;
 &lt;html lang="en">
     &lt;script src="/js/foo.js" type="module">&lt;/script>
 &lt;/html>
-</code></pre></div></div><h2>Docs</h2><h5>Code</h5><pre class="language-javascript"><code>div({
+</code></pre></div></div></div><h2>Docs</h2><h5>Code</h5><pre class="language-javascript"><code>div({
         // Objects are the element's attributes
         // in a key:value relationship eg.
         class: "class names",
@@ -273,5 +273,33 @@ html({ lang: "en" },
     &lt;p>This is my page&lt;/p>
 &lt;/body>
 &lt;/html></code></pre><script src="/js/prism.js"></script><script>function zoom(el){
-    el.classList.toggle("active")
+    const dims = el.getBoundingClientRect()
+    if(el.classList.contains("active")){
+        el.classList.add("deactive")
+        el.classList.remove("active")
+        setTimeout(() => {
+            el.classList.remove("deactive")
+        }, 500)
+    }else{
+        el.style.left = dims.x;
+        el.style.top = dims.y;
+        el.style.width = dims.width;        
+        el.classList.add("active")
+    }
+    // el.style.height = dims.height;
+
+    // const incrementLeft = 0 - dims.x/60
+    // const incrementTop = 0 - dims.y/60
+    // const incrementWidth = (window.innerWidth - dims.width)/60
+    // const incrementHeight = (window.innerHeight - 300)/60
+
+    // const id = setInterval(() => {
+    //     el.style.left = parseFloat(el.style.left) + incrementLeft
+    //     el.style.top = parseFloat(el.style.top) + incrementTop
+    //     el.style.width = parseFloat(el.style.width) + incrementWidth
+    //     el.style.height = parseFloat(el.style.height) + incrementHeight
+    //     if(Math.abs(parseFloat(el.style.left)) < 0.1 || Math.abs(parseFloat(el.style.top)) < 0.1){
+    //         clearInterval(id)
+    //     }
+    // }, 1000/240)
 }</script></body></html>

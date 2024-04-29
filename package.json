@@ -1,12 +1,12 @@
 {
   "name": "html-in-javascript",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "esm.js",
   "type": "module",
   "files": [
     "esm.js",
-    "ht.min.js"
+    "iife.js"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
