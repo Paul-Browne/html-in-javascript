@@ -100,11 +100,15 @@ h5{
 }
 
 @keyframes zoom{
+    from{
+        pointer-events: none;
+    }
     to{
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        pointer-events: all;
     }
 }
 
