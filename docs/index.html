@@ -273,7 +273,6 @@ html({ lang: "en" },
     &lt;p>This is my page&lt;/p>
 &lt;/body>
 &lt;/html></code></pre><script src="/js/prism.js"></script><script>function zoom(el){
-    const dims = el.getBoundingClientRect()
     if(el.classList.contains("active")){
         el.classList.add("deactive")
         setTimeout(() => {
@@ -283,6 +282,7 @@ html({ lang: "en" },
             el.style.removeProperty("width");
         }, 500)
     }else{
+        const dims = el.getBoundingClientRect()
         el.style.left = dims.x;
         el.style.top = dims.y;
         el.style.width = dims.width;        

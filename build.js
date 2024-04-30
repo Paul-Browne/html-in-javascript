@@ -502,7 +502,6 @@ html({ lang: "en" },
 )
 
 function zoom(el){
-    const dims = el.getBoundingClientRect()
     if(el.classList.contains("active")){
         el.classList.add("deactive")
         setTimeout(() => {
@@ -512,6 +511,7 @@ function zoom(el){
             el.style.removeProperty("width");
         }, 500)
     }else{
+        const dims = el.getBoundingClientRect()
         el.style.left = dims.x;
         el.style.top = dims.y;
         el.style.width = dims.width;        
@@ -530,7 +530,7 @@ function frontendScript(){
 }
 
 await esbuild.build({
-    entryPoints: ['src/js/bundle.js'],
+    entryPoints: ['src/js/spa.js'],
     bundle: true,
     minify: true,
     sourcemap: true,
@@ -577,11 +577,20 @@ cp("src/js/index.js", "docs/js/esm.js", { recursive: true })
 
 writeFileTo(minifyHTML(page), "docs/index.html")
 
-const test = html(
+// SINGLE PAGE APP
+
+const spa = html(
     head(
-        script({src:"/js/mumble.js", type:"module"})
+        meta({ charset: "UTF-8" }),
+        meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+        script({ src:"/js/spa.js", type:"module" })
     ),
-    body("loading...")
+    body(
+        { class:"page" },
+        "loading..."
+    )
 )
 
-writeFileTo(minifyHTML(test), "docs/test.html")
+writeFileTo(minifyHTML(spa), "docs/spa.html")
+writeFileTo(minifyHTML(spa), "docs/page2.html")
+writeFileTo(minifyHTML(spa), "docs/batman.html")
