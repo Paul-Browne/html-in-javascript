@@ -276,30 +276,17 @@ html({ lang: "en" },
     const dims = el.getBoundingClientRect()
     if(el.classList.contains("active")){
         el.classList.add("deactive")
-        el.classList.remove("active")
         setTimeout(() => {
             el.classList.remove("deactive")
+            el.style.removeProperty("left");
+            el.style.removeProperty("top");
+            el.style.removeProperty("width");
         }, 500)
     }else{
         el.style.left = dims.x;
         el.style.top = dims.y;
         el.style.width = dims.width;        
-        el.classList.add("active")
+
     }
-    // el.style.height = dims.height;
-
-    // const incrementLeft = 0 - dims.x/60
-    // const incrementTop = 0 - dims.y/60
-    // const incrementWidth = (window.innerWidth - dims.width)/60
-    // const incrementHeight = (window.innerHeight - 300)/60
-
-    // const id = setInterval(() => {
-    //     el.style.left = parseFloat(el.style.left) + incrementLeft
-    //     el.style.top = parseFloat(el.style.top) + incrementTop
-    //     el.style.width = parseFloat(el.style.width) + incrementWidth
-    //     el.style.height = parseFloat(el.style.height) + incrementHeight
-    //     if(Math.abs(parseFloat(el.style.left)) < 0.1 || Math.abs(parseFloat(el.style.top)) < 0.1){
-    //         clearInterval(id)
-    //     }
-    // }, 1000/240)
+    el.classList.toggle("active")
 }</script></body></html>
