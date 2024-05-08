@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/js/spa_router.js"],
+  "sourcesContent": ["window.state = {\n    foo: \"bar\"\n};\n\nconst router = async () => {\n    const path = window.location.pathname;\n    // eg await import('./js/spa.js');\n    let pageFunction;\n    try {\n        const parsePath = `/js/pages${path}.js`.replace(\"/.js\", \".js\");\n        pageFunction = (await import(parsePath)).default;\n        pageFunction({ state: window.state })\n    } catch (error) {\n        // if error, try to load the 404 page\n        console.error(`error loading /js/pages${path}.js`);\n    }\n}\n\n// fire once on initial load\ndocument.addEventListener(\"DOMContentLoaded\", () => router() );\n// fire on click\ndocument.addEventListener(\"click\", (e) => {\n    if (!e.target.matches(\"a\")) return;\n    e.preventDefault();\n    window.history.pushState({}, \"\", e.target.href);\n    router();\n});\n// fire on back/forward\nwindow.addEventListener(\"popstate\", () => router());"],
+  "mappings": "AAAA,OAAO,MAAQ,CACX,IAAK,KACT,EAEA,IAAMA,EAAS,SAAY,CACvB,IAAMC,EAAO,OAAO,SAAS,SAEzBC,EACJ,GAAI,CAEAA,GAAgB,MAAM,OADJ,YAAYD,CAAI,MAAM,QAAQ,OAAQ,KAAK,IACpB,QACzCC,EAAa,CAAE,MAAO,OAAO,KAAM,CAAC,CACxC,MAAgB,CAEZ,QAAQ,MAAM,0BAA0BD,CAAI,KAAK,CACrD,CACJ,EAGA,SAAS,iBAAiB,mBAAoB,IAAMD,EAAO,CAAE,EAE7D,SAAS,iBAAiB,QAAUG,GAAM,CACjCA,EAAE,OAAO,QAAQ,GAAG,IACzBA,EAAE,eAAe,EACjB,OAAO,QAAQ,UAAU,CAAC,EAAG,GAAIA,EAAE,OAAO,IAAI,EAC9CH,EAAO,EACX,CAAC,EAED,OAAO,iBAAiB,WAAY,IAAMA,EAAO,CAAC",
+  "names": ["router", "path", "pageFunction", "e"]
+}

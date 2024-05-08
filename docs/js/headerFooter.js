@@ -1,0 +1,2 @@
+var r=async()=>{let{header:e,nav:o,a}=(await import("./index.js")).default;return console.log("pageHeader"),e({class:"main-header"},o(a({href:"/spa"},"Home")," | ",a({href:"/spa/foo"},"Foo")," | ",a({href:"/spa/bar"},"Bar")," | ",a({href:"/spa/baz"},"Baz")))},t=async()=>{let{footer:e,p:o}=(await import("./index.js")).default;return e({class:"main-footer"},o("This is the footer"))};export{t as pageFooter,r as pageHeader};
+//# sourceMappingURL=headerFooter.js.map

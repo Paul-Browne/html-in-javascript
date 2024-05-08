@@ -9,7 +9,7 @@ const minifyHTML = html => minify(html, {
     minifyJS: false,
     collapseWhitespace: true,
     minifyCSS: true,
-    removeComments: true,
+    removeComments: false,
     decodeEntities: true
 })
 
@@ -18,7 +18,7 @@ export const writeFileTo = async (content, path) => {
     await writeFile(path, content);
 }
 
-const { html, head, meta, link, style, script, div, b, hr, h5, h6, em, ins, title, body, header, h1, h2, h3, p, img, button, input, nav, a, pre, code, fragment, br} = htjs;
+const { html, head, meta, link, style, script, div, b, hr, h5, h6, em, ins, title, body, header, h1, h2, h3, p, img, button, input, nav, a, pre, code, fragment, br, footer} = htjs;
 
 const prism = {
     js: content => pre({class:"language-javascript"}, code(content)),
@@ -30,26 +30,26 @@ function increaseTextSize(el){
     el.style.fontSize = (computedFontSize * 1.1) + "px"
 }
 
-const links = [
-    {href: '/about', text: 'About'},
-    {href: '/contact', text: 'Contact'},
-    {href: '/services', text: 'Services'},
-    {href: '/blog', text: 'Blog'}
-]
+// const links = [
+//     {href: '/about', text: 'About'},
+//     {href: '/contact', text: 'Contact'},
+//     {href: '/services', text: 'Services'},
+//     {href: '/blog', text: 'Blog'}
+// ]
 
-const pageHeader = header({class: 'main-header'},
-    nav(
-        a({href: '/'},
-            img({
-                src: '/images/logo.png',
-                alt: 'Logo'
-            }),
-        ),
-        div(
-            ...links.map(link => a({href: link.href}, link.text))
-        )
-    )
-)
+// const pageHeader = header({class: 'main-header'},
+//     nav(
+//         a({href: '/'},
+//             img({
+//                 src: '/images/logo.png',
+//                 alt: 'Logo'
+//             }),
+//         ),
+//         div(
+//             ...links.map(link => a({href: link.href}, link.text))
+//         )
+//     )
+// )
 
 const page = 
 html({lang: "en"},
@@ -529,17 +529,8 @@ function frontendScript(){
     )
 }
 
-await esbuild.build({
-    entryPoints: ['src/js/spa.js'],
-    bundle: true,
-    minify: true,
-    sourcemap: true,
-    splitting: true,
-    treeShaking: true,
-    format: "esm",
-    target: "esnext",
-    outdir: 'docs/js'
-})
+
+
 
 await esbuild.build({
     entryPoints: ['src/js/index.js'],
@@ -567,10 +558,23 @@ await esbuild.build({
     outfile: 'iife.js'
 })
 
+await esbuild.build({
+    entryPoints: ['src/js/**/*.js'],
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    splitting: true,
+    treeShaking: true,
+    format: "esm",
+    target: "esnext",
+    outdir: 'docs/js'
+})
+
+
 cp("src/CNAME", "docs/CNAME", { recursive: true })
 cp("src/fonts", "docs/fonts", { recursive: true })
 cp("src/favicons", "docs/", { recursive: true })
-cp("src/js/prism.js", "docs/js/prism.js", { recursive: true })
+cp("src/vendor/prism.js", "docs/js/prism.js", { recursive: true })
 cp("src/css/style.css", "docs/css/style.css", { recursive: true })
 
 cp("src/js/index.js", "docs/js/esm.js", { recursive: true })
@@ -579,18 +583,30 @@ writeFileTo(minifyHTML(page), "docs/index.html")
 
 // SINGLE PAGE APP
 
+const zone = (name, ...rest) => fragment(
+    `<!-- zone:${name}:start -->`,
+    ...rest,
+    `<!-- zone:${name}:end -->`
+)
+
 const spa = html(
     head(
         meta({ charset: "UTF-8" }),
         meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
-        script({ src:"/js/spa.js", type:"module" })
+        link({ rel:"stylesheet", href:"/css/style.css" }),
+        script({ src:"/js/spa_router.js", type:"module" }),
+        zone('head')
     ),
-    body(
-        { class:"page" },
-        "loading..."
+    body({ 
+            class: "page" 
+        },
+        zone('body', 'loading...'),
     )
 )
 
+
 writeFileTo(minifyHTML(spa), "docs/spa.html")
-writeFileTo(minifyHTML(spa), "docs/page2.html")
-writeFileTo(minifyHTML(spa), "docs/batman.html")
+writeFileTo(minifyHTML(spa), "docs/spa/index.html")
+writeFileTo(minifyHTML(spa), "docs/spa/foo.html")
+writeFileTo(minifyHTML(spa), "docs/spa/bar.html")
+writeFileTo(minifyHTML(spa), "docs/spa/baz.html")
