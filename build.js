@@ -604,7 +604,6 @@ const spa = html(
     )
 )
 
-
 writeFileTo(minifyHTML(spa), "docs/spa.html")
 writeFileTo(minifyHTML(spa), "docs/spa/index.html")
 writeFileTo(minifyHTML(spa), "docs/spa/foo.html")
