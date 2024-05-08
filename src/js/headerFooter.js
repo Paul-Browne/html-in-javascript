@@ -1,6 +1,5 @@
 export const pageHeader = async () => {
     const { header, nav, a } = (await import('./index.js')).default;
-    console.log('pageHeader');
     return header(
         {class: 'main-header'},
         nav(
