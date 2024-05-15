@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../src/js/pages/spa/foo.js"],
-  "sourcesContent": ["export default async ({state}) => {\n    const { default: updateZones } = await import('../../updateZones.js');\n    const { pageHeader, pageFooter } = await import('../../headerFooter.js');\n    const { default: { fragment, h1, title, p } } = await import('../../index.js');\n\n    const body = fragment(\n        await pageHeader(),\n        h1(\"Hello World! Foo page!\"),\n        p(state.foo),\n        await pageFooter()\n    )\n    \n    updateZones('head', title(\"Foo | SPA\"));\n    updateZones('body', body);\n}"],
-  "mappings": "AAAA,IAAOA,EAAQ,MAAO,CAAC,MAAAC,CAAK,IAAM,CAC9B,GAAM,CAAE,QAASC,CAAY,EAAI,KAAM,QAAO,sBAAsB,EAC9D,CAAE,WAAAC,EAAY,WAAAC,CAAW,EAAI,KAAM,QAAO,uBAAuB,EACjE,CAAE,QAAS,CAAE,SAAAC,EAAU,GAAAC,EAAI,MAAAC,EAAO,EAAAC,CAAE,CAAE,EAAI,KAAM,QAAO,gBAAgB,EAEvEC,EAAOJ,EACT,MAAMF,EAAW,EACjBG,EAAG,wBAAwB,EAC3BE,EAAEP,EAAM,GAAG,EACX,MAAMG,EAAW,CACrB,EAEAF,EAAY,OAAQK,EAAM,WAAW,CAAC,EACtCL,EAAY,OAAQO,CAAI,CAC5B",
-  "names": ["foo_default", "state", "updateZones", "pageHeader", "pageFooter", "fragment", "h1", "title", "p", "body"]
-}

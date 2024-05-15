@@ -1,7 +1,7 @@
-import { cp, mkdir, writeFile } from "node:fs/promises";
-import { dirname } from "node:path";
+import { cp, mkdir, writeFile, readdir } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import { minify } from 'html-minifier'
-import htjs from "./src/js/index.js"
+import htjs from "./src/js/ht.js"
 import * as esbuild from 'esbuild'
 
 const minifyHTML = html => minify(html, {
@@ -529,11 +529,8 @@ function frontendScript(){
     )
 }
 
-
-
-
 await esbuild.build({
-    entryPoints: ['src/js/index.js'],
+    entryPoints: ['src/js/ht.js'],
     bundle: false,
     minify: true,
     sourcemap: false,
@@ -546,7 +543,7 @@ await esbuild.build({
 
 await esbuild.build({
     stdin: {
-        contents: 'import a from "./src/js/index.js";module.exports = a;',
+        contents: 'import a from "./src/js/ht.js";module.exports = a;',
         resolveDir: '.'
     },
     bundle: true,
@@ -576,36 +573,144 @@ cp("src/fonts", "docs/fonts", { recursive: true })
 cp("src/favicons", "docs/", { recursive: true })
 cp("src/vendor/prism.js", "docs/js/prism.js", { recursive: true })
 cp("src/css/style.css", "docs/css/style.css", { recursive: true })
-
-cp("src/js/index.js", "docs/js/esm.js", { recursive: true })
+cp("src/js/ht.js", "docs/js/esm.js", { recursive: true })
 
 writeFileTo(minifyHTML(page), "docs/index.html")
 
-// SINGLE PAGE APP
 
-const zone = (name, ...rest) => fragment(
-    `<!-- zone:${name}:start -->`,
-    ...rest,
-    `<!-- zone:${name}:end -->`
-)
-
-const spa = html(
+// SPA DOCS
+const single_page_app = 
+html({lang: "en"},
     head(
-        meta({ charset: "UTF-8" }),
-        meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
-        link({ rel:"stylesheet", href:"/css/style.css" }),
-        script({ src:"/js/spa_router.js", type:"module" }),
-        zone('head')
+        meta({charset:"UTF-8"}),
+        meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
+        title("Single Page App | HT.JS"),
+        meta({name:"description", content:"Using HT.JS to create a Single Page Application with Routing"}),
+        link({rel:"apple-touch-icon", sizes:"180x180", href:"/apple-touch-icon.png"}),
+        link({rel:"icon", type:"image/png", sizes:"32x32", href:"/favicon-32x32.png"}),
+        link({rel:"icon", type:"image/png", sizes:"16x16", href:"/favicon-16x16.png"}),
+        link({rel:"manifest", href:"/site.webmanifest"}),
+        link({rel:"mask-icon", href:"/safari-pinned-tab.svg", color:"#5bbad5"}),
+        meta({name:"msapplication-TileColor", content:"#2d89ef"}),
+        meta({name:"theme-color", content:"#ffff00"}),
+        link({rel:"stylesheet", href:"/css/style.css"}),
     ),
-    body({ 
-            class: "page" 
-        },
-        zone('body', 'loading...'),
+    body(
+        h1({class:'big-text'}, "Single Page App | HT.JS"),
+
+        prism.html(
+`js
+├── router.js
+├── update.js
+├── pages
+│   ├── 404.js
+│   ├── home.js
+│   ├── about.js
+│   ├── contact.js
+│   └── services.js 
+└── components  
+    ├── header.js
+    └── footer.js
+`),
+
+        br(),
+
+        prism.js(
+`// state, entirely optional
+window.state = {
+    foo: "bar"
+};
+
+const router = async () => {
+    const path = window.location.pathname;
+    let pageFunction;
+    try {
+        const parsePath = \`/js/pages\${path}.js\`.replace("/.js", ".js");
+        pageFunction = (await import(parsePath)).default;
+    } catch {
+        try {
+            pageFunction = (await import('/js/pages/404.js')).default;            
+        } catch {}
+    }
+    pageFunction({ state: window.state })
+}
+
+// fire once on initial load
+document.addEventListener("DOMContentLoaded", () => router() );
+
+// fire on click
+document.addEventListener("click", (e) => {
+    if (!e.target.matches("a")) return;
+    e.preventDefault();
+    window.history.pushState({}, "", e.target.href);
+    router();
+});
+
+// fire on back/forward
+window.addEventListener("popstate", () => router());
+`
+        ),
+        script({src:"/js/prism.js"}),
     )
 )
+writeFileTo(minifyHTML(single_page_app), "docs/single-page-app.html")
 
-writeFileTo(minifyHTML(spa), "docs/spa.html")
-writeFileTo(minifyHTML(spa), "docs/spa/index.html")
-writeFileTo(minifyHTML(spa), "docs/spa/foo.html")
-writeFileTo(minifyHTML(spa), "docs/spa/bar.html")
-writeFileTo(minifyHTML(spa), "docs/spa/baz.html")
+
+
+
+
+// SINGLE PAGE DEMO APP
+const zone = (name, ...rest) => fragment(
+    `<!--${name}-->`,
+    ...rest,
+    `<!--/${name}-->`
+)
+
+const pageShell = preload => {
+    return fragment(        
+        '<!DOCTYPE html>',
+        html(
+            head(
+                meta({ charset: "UTF-8" }),
+                meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+                link({ rel:"stylesheet", href:"/css/style.css" }),
+                link({ as:"script", rel:"preload", href:preload, crossOrigin:true }),
+                script({ src:"/js/router.js", type:"module" }),
+                zone('head')
+            ),
+            body({ 
+                    class: "page" 
+                },
+                zone('body', 'loading...'),
+            )
+        )
+    )
+}
+
+const root = "src/js/pages"
+readdir(root, { 
+    recursive: true,
+    withFileTypes: true,
+}).then(async items => {
+    for (const item of items){
+        const {name, path} = item
+        if(item.isFile() && name === 'index.js'){
+            const fullPath = join(path, name)                                       // eg. src/js/pages/foo/index.js
+            const jsPreloadPath = fullPath.replace('src', '')                       // eg. src/js/pages/foo/index.js -> /js/pages/foo/index.js
+            let writePathHTML = fullPath.replace(root, 'docs')                      // eg. src/js/pages/foo/index.js -> public/foo/index.js
+            if(path === root){
+                writePathHTML = writePathHTML.replace('index.js', 'index.html')     // eg. public/index.js -> public/index.html
+            }else{
+                const lastDirectory = path.split('/').slice(-1)[0]
+                                                                                    // eg. public/foo/index.js -> public/foo.html
+                writePathHTML = writePathHTML.replace(`${lastDirectory}/index.js`, `${lastDirectory}.html`)
+            }
+            
+            await mkdir(dirname(writePathHTML), { recursive: true });
+            await writeFile(writePathHTML, pageShell(jsPreloadPath));
+
+        }
+    }
+})
+
+
