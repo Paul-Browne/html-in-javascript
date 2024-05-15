@@ -1,4 +1,4 @@
-import { cp, mkdir, writeFile, readdir } from "node:fs/promises";
+import { cp, mkdir, writeFile, readdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { minify } from 'html-minifier'
 import htjs from "./src/js/ht.js"
@@ -567,7 +567,6 @@ await esbuild.build({
     outdir: 'docs/js'
 })
 
-
 cp("src/CNAME", "docs/CNAME", { recursive: true })
 cp("src/fonts", "docs/fonts", { recursive: true })
 cp("src/favicons", "docs/", { recursive: true })
@@ -666,7 +665,21 @@ const zone = (name, ...rest) => fragment(
     `<!--/${name}-->`
 )
 
-const pageShell = preload => {
+
+const routerJS = await readFile('docs/js/router.inline.js', 'utf-8')
+
+const pageShell = async preload => {
+    
+    const inlined = await esbuild.build({
+        entryPoints: [`src${preload}`],
+        format: 'iife',
+        globalName: 'inlined',
+        minify: true,
+        bundle: true,
+        write: false,
+        splitting: false,
+      })
+
     return fragment(        
         '<!DOCTYPE html>',
         html(
@@ -674,14 +687,18 @@ const pageShell = preload => {
                 meta({ charset: "UTF-8" }),
                 meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
                 link({ rel:"stylesheet", href:"/css/style.css" }),
-                link({ as:"script", rel:"preload", href:preload, crossOrigin:true }),
-                script({ src:"/js/router.js", type:"module" }),
-                zone('head')
+                // link({ as:"script", rel:"preload", href:preload, crossOrigin:true }),
+                // script({ src:"/js/router.js", type:"module" }),
+                zone('head', 
+                    script(routerJS),
+                    script(inlined.outputFiles[0].text)
+                )
             ),
             body({ 
                     class: "page" 
                 },
                 zone('body', 'loading...'),
+                script('inlined.default({state:window.state})')
             )
         )
     )
@@ -707,7 +724,7 @@ readdir(root, {
             }
             
             await mkdir(dirname(writePathHTML), { recursive: true });
-            await writeFile(writePathHTML, pageShell(jsPreloadPath));
+            await writeFile(writePathHTML, await pageShell(jsPreloadPath));
 
         }
     }
