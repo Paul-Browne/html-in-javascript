@@ -18,4 +18,6 @@ export default async ({state}) => {
     
     updateZones('head', title("Foo | SPA"));
     updateZones('body', body);
+
+
 }
