@@ -1,7 +1,13 @@
 export default async ({state}) => {
-    const { default: updateZones } = await import('../../updateZones.js');
-    const { pageHeader, pageFooter } = await import('../../headerFooter.js');
-    const { default: { fragment, h1, title, p, script, link } } = await import('../../ht.js');
+    const [ updateZonesImport, headerFooter, htjs ] = [
+        '../../updateZones.js', 
+        '../../headerFooter.js', 
+        '../../ht.js'
+    ].map(importPath => import(importPath))
+
+    const { default: updateZones } = await updateZonesImport;
+    const { pageHeader, pageFooter } = await headerFooter;
+    const { default: { fragment, h1, title, p } } = await htjs;
 
     const body = fragment(
         await pageHeader(),

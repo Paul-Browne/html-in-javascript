@@ -1,2 +1,2 @@
-var p=async({state:t})=>{console.log("testing______________________");let{default:o}=await import("../../../updateZones.js"),{pageHeader:_,pageFooter:a}=await import("../../../headerFooter.js"),{default:{fragment:e,h1:i,title:d,p:l}}=await import("../../../ht.js"),n=e(await _(),i("Hello World! Foo page!"),l(t.foo),await a());o("head",d("Foo | SPA")),o("body",n)};export{p as default};
+var u=async({state:t})=>{let[a,e,d]=["../../../updateZones.js","../../../headerFooter.js","../../../ht.js"].map(h=>import(h)),{default:o}=await a,{pageHeader:s,pageFooter:p}=await e,{default:{fragment:r,h1:n,title:i,p:l}}=await d,c=r(await s(),n("Hello World! Foo page!"),l(t.foo),await p());o("head",i("Foo | SPA")),o("body",c)};export{u as default};
 //# sourceMappingURL=index.js.map

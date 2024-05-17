@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/js/prefetch.js"],
+  "sourcesContent": ["window.requestIdleCallback(() => {\n    if(window.top === window.self){\n        ['/spa', '/spa/foo', '/spa/bar', '/spa/baz'].forEach(async path => {\n            const iframe = document.createElement(\"IFRAME\")\n            iframe.src = path\n            iframe.style.display = \"none\"\n            document.body.appendChild(iframe)\n        })\n    }\n})"],
+  "mappings": "AAAA,OAAO,oBAAoB,IAAM,CAC1B,OAAO,MAAQ,OAAO,MACrB,CAAC,OAAQ,WAAY,WAAY,UAAU,EAAE,QAAQ,MAAMA,GAAQ,CAC/D,IAAMC,EAAS,SAAS,cAAc,QAAQ,EAC9CA,EAAO,IAAMD,EACbC,EAAO,MAAM,QAAU,OACvB,SAAS,KAAK,YAAYA,CAAM,CACpC,CAAC,CAET,CAAC",
+  "names": ["path", "iframe"]
+}

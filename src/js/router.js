@@ -11,7 +11,7 @@ const router = async () => {
     } catch {
         try {
             (await import('/js/pages/404/index.js')).default({ state: window.state })
-            window.location.replace(window.history.state.prev);
+            // window.location.replace(window.history.state.prev);
         } catch {}            
     }
 }
@@ -24,7 +24,8 @@ document.addEventListener("click", e => {
     if (href && new URL(href).origin === window.location.origin ){
         e.preventDefault();
         if(href !== window.location.href){
-            window.history.pushState({ prev: window.location.pathname }, "", href);
+            // window.history.pushState({ prev: window.location.pathname }, "", href);
+            window.history.pushState({}, "", href);
             router()
         }
     }
