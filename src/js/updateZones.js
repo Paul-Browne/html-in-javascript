@@ -8,7 +8,7 @@ export default (key, ...content) => {
                     const temp = document.createElement('i')    // doesn't matter what element
                     curNode.after(temp)
                     temp.outerHTML = content.join('');
-                    window.universal.refreshLinkObserver()
+                    window?.preloader.refreshLinkObserver()
                     return
                 }
                 curNode.nextSibling.remove()

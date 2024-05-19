@@ -15,7 +15,7 @@ export const pageHeader = async () => {
             a({href: '/spa/baz'}, "Baz"),
             // link({ rel: 'prefetch', href:'/js/pages/spa/baz/index.js' }),
             " | ",
-            a({href: '/spa/xyz'}, "404"),
+            a({class:'hidden', href: '/spa/xyz'}, "404"),
             // link({ rel: 'prefetch', href:'/js/pages/spa/xyz/index.js' }),
             " | ",
             a({href: 'https://google.com'}, "google.com"),            

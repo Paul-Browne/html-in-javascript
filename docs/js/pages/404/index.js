@@ -1,2 +1,2 @@
-var r=async()=>{let{default:t}=await import("../../updateZones.js"),{pageHeader:a,pageFooter:e}=await import("../../headerFooter.js"),{default:{fragment:o,h1:d,title:i,p}}=await import("../../ht.js"),n=o(await a(),d("404 page not found"),await e());t("head",i("404 | SPA")),t("body",n)};export{r as default};
+var g=async()=>{let[a,e,o,c]=["../../updateZones.js","../../headerFooter.js","../../ht.js"].map(u=>import(u)),{default:t}=await a,{pageHeader:s,pageFooter:d}=await e,{default:{fragment:n,h1:p,title:r,p:h,img:f}}=await o,i=n(await s(),p("404 page not found"),await d());t("head",r("404 | SPA")),t("body",i)};export{g as default};
 //# sourceMappingURL=index.js.map

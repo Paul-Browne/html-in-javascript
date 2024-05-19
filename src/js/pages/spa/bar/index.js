@@ -1,4 +1,4 @@
-export default async ({state}) => {
+export default async ({state, pageView}) => {
     const [ updateZonesImport, headerFooter, htjs, test ] = [
         '../../../updateZones.js', 
         '../../../headerFooter.js', 
@@ -14,7 +14,7 @@ export default async ({state}) => {
     const body = fragment(
         await pageHeader(),
         h1("Hello World! Bar page!"),
-        img({src: 'https://via.placeholder.com/200x200'}),
+        img({src: 'https://via.placeholder.com/200x200', loading:'lazy'}),
         img({src: 'https://via.placeholder.com/140x200'}),
         img({src: 'https://via.placeholder.com/500x200'}),
         img({src: 'https://via.placeholder.com/200x250'}),
@@ -27,6 +27,8 @@ export default async ({state}) => {
     updateZones('head', title("Bar | SPA"));
     updateZones('body', body);
     
-    LOG('hello', 'world', 44);
+    if(pageView){
+        LOG('hello', 'world', 44);
+    }
 
 }

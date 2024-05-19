@@ -1,4 +1,4 @@
 {
-    "watch": [ "src", "build.js", "homePage.js", "singlePageAppBuild.js", "spaPage.js" ],
+    "watch": [ "src/", "build.js", "homePage.js", "singlePageAppBuild.js", "spaPage.js" ],
     "ext": "*"
 }

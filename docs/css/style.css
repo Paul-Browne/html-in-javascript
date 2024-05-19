@@ -151,3 +151,16 @@ code[class*=language-],pre[class*=language-]{color:#f8f8f2;background:0 0;text-s
 pre[class*=language-]{
     margin: 0;
 }
+
+
+.hidden{
+    display: none;
+    animation-name: show;
+    animation-delay: 1s;
+    animation-duration: 1s;
+}
+
+@keyframes show {
+    from {display: none;}
+    to {display: block;}
+}

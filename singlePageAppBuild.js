@@ -38,7 +38,6 @@ const pageShell = async preload => {
                 // link({ as:"script", rel:"preload", href:preload, crossOrigin:true }),
                 // script({ src: '/js/router.js', type: 'module' }),
                 link({ rel: 'modulepreload', href:preload, crossOrigin:true }),
-                // script({type:'speculationrules'}, JSON.stringify({prerender: [{source: 'list',urls: ["next.html", "next2.html"]}]})),
                 script(routerJS),
                 // script(inlined.outputFiles[0].text),
                 zone('head'),

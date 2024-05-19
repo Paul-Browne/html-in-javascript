@@ -64,7 +64,6 @@ cp("src/fonts", "docs/fonts", { recursive: true })
 cp("src/favicons", "docs/", { recursive: true })
 cp("src/vendor/prism.js", "docs/js/prism.js", { recursive: true })
 cp("src/css/style.css", "docs/css/style.css", { recursive: true })
-// cp("src/js/ht.js", "docs/js/esm.js", { recursive: true })
 
 writeFileTo(minifyHTML(single_page_app), "docs/single-page-app.html")
 writeFileTo(minifyHTML(page), "docs/index.html")

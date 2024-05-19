@@ -5,13 +5,16 @@ window.state = {
 const router = async () => {
     // example.com/foo/bar(/)  ->  example.com/pages/foo/bar/index.js
     const path = window.location.pathname;
+    const props = { 
+        state: window.state,
+        pageView: window.top === window.self
+    }
     const resourcePath = `/js/pages${path.replace(/\/$/, '')}/index.js`;
     try {
-        (await import(resourcePath)).default({ state: window.state });
+        (await import(resourcePath)).default(props);
     } catch {
         try {
-            (await import('/js/pages/404/index.js')).default({ state: window.state })
-            // window.location.replace(window.history.state.prev);
+            (await import('/js/pages/404/index.js')).default(props)
         } catch {}            
     }
 }
@@ -24,7 +27,6 @@ document.addEventListener("click", e => {
     if (href && new URL(href).origin === window.location.origin ){
         e.preventDefault();
         if(href !== window.location.href){
-            // window.history.pushState({ prev: window.location.pathname }, "", href);
             window.history.pushState({}, "", href);
             router()
         }
