@@ -11,7 +11,7 @@ const router = async () => {
     } catch {
         try {
             (await import('/js/pages/404/index.js')).default({ state: window.state })
-            window.location.replace(window.history.state.prev);
+            // window.location.replace(window.history.state.prev);
         } catch {}            
     }
 }

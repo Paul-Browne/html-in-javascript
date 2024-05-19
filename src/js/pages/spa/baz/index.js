@@ -1,4 +1,4 @@
-export default async ({state}) => {
+export default async ({ state, pageView }) => {
     const [ updateZonesImport, headerFooter, htjs ] = [
         '../../../updateZones.js', 
         '../../../headerFooter.js', 

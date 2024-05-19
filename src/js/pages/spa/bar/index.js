@@ -1,9 +1,9 @@
-export default async ({state, pageView}) => {
+export default async ({ state, pageView }) => {
     const [ updateZonesImport, headerFooter, htjs, test ] = [
-        '../../../updateZones.js', 
+        '../../../updateZones.js',  
         '../../../headerFooter.js', 
-        '../../../ht.js', 
-        '../../../test.js'
+        '../../../ht.js',           
+        '../../../test.js'          
     ].map(importPath => import(importPath))
 
     const { default: updateZones } = await updateZonesImport;

@@ -2,17 +2,20 @@ window.state = {
     foo: "bar"
 };
 
-const router = async () => {
-    const routeJsResource = async path => {
-        (await import(`/js/pages${path.replace(/\/$/, '')}/index.js`)).default({ 
-            state: window.state,
-            pageView: window.top === window.self
-        })
+export default async () => {
+    // example.com/foo/bar(/)  ->  example.com/pages/foo/bar/index.js
+    const path = window.location.pathname;
+    const props = { 
+        state: window.state,
+        pageView: window.top === window.self
     }
+    const resourcePath = `/js/pages${path.replace(/\/$/, '')}/index.js`;
     try {
-        await routeJsResource(window.location.pathname);
+        (await import(resourcePath)).default(props);
     } catch {
-        await routeJsResource('/404')
+        try {
+            (await import('/js/pages/404/index.js')).default(props)
+        } catch {}            
     }
 }
 

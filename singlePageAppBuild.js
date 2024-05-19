@@ -2,32 +2,29 @@ import { mkdir, writeFile, readdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import * as esbuild from 'esbuild'
 import htjs from "./src/js/ht.js"
-// import quicklink from "quicklink"
 
-const { html, head, meta, link, script, body, fragment, iframe } = htjs;
+const { html, head, meta, link, script, body, fragment } = htjs;
 
 const zone = (name, ...rest) => fragment(
     `<!--${name}-->`,
     ...rest,
     `<!--/${name}-->`
 )
-
-const routerJSinline = await readFile('docs/js/router.inline.js', 'utf-8')
-const routerJS = await readFile('docs/js/router.js', 'utf-8')
-const prefetch = await readFile('docs/js/prefetch.js', 'utf-8')
+ 
+const { outputFiles: [ {text: inlinedRouter}, {text: aggresivePreload} ] } = await esbuild.build({
+    entryPoints: [
+        'src/js/router.js',
+        'src/js/aggresivePreload.js'
+    ],
+    format: 'iife',
+    minify: true,
+    bundle: true,
+    write: false,
+    outdir: 'false',
+    splitting: false,
+})
 
 const pageShell = async preload => {
-    
-    const inlined = await esbuild.build({
-        entryPoints: [`src${preload}`],
-        format: 'iife',
-        globalName: 'inlined',
-        minify: true,
-        bundle: true,
-        write: false,
-        splitting: false,
-    })
-
     return fragment(        
         '<!DOCTYPE html>',
         html(
@@ -35,19 +32,15 @@ const pageShell = async preload => {
                 meta({ charset: "UTF-8" }),
                 meta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
                 link({ rel:"stylesheet", href:"/css/style.css" }),
-                // link({ as:"script", rel:"preload", href:preload, crossOrigin:true }),
-                // script({ src: '/js/router.js', type: 'module' }),
                 link({ rel: 'modulepreload', href:preload, crossOrigin:true }),
-                script(routerJS),
-                // script(inlined.outputFiles[0].text),
+                script(inlinedRouter),
                 zone('head'),
             ),
             body({ 
                     class: "page" 
                 },
                 zone('body', 'loading...'),
-                // script('inlined.default({state:window.state})'),
-                script(prefetch)
+                script(aggresivePreload)
             )
         )
     )
