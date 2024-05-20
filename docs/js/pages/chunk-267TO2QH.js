@@ -1,2 +1,0 @@
-import{a}from"./chunk-HIP6RIZO.js";var h=async()=>{let{header:o,nav:r,a:e,link:s}=a;return o({class:"main-header"},r(e({href:"/spa"},"Home")," | ",e({href:"/spa/foo"},"Foo")," | ",e({href:"/spa/bar"},"Bar")," | ",e({href:"/spa/baz"},"Baz")," | ",e({class:"hidden",href:"/spa/xyz"},"404")," | ",e({href:"https://google.com"},"google.com")," | ",e("no href")))},n=async()=>{let{footer:o,p:r}=a;return o({class:"main-footer"},r("This is the footer"))};export{h as a,n as b};
-//# sourceMappingURL=chunk-267TO2QH.js.map

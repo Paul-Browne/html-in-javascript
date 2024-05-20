@@ -1,2 +1,0 @@
-var i=(n,...r)=>{for(var o=document.createNodeIterator(document.documentElement,NodeFilter.SHOW_COMMENT),e;e=o.nextNode();)if(!e.nodeValue.indexOf(n))for(;e.nextSibling;){if(e.nextSibling.nodeType===Node.COMMENT_NODE&&!e.nextSibling.nodeValue.indexOf(`/${n}`)){let t=document.createElement("i");e.after(t),t.outerHTML=r.join(""),window.preloader?.refreshLinkObserver();return}e.nextSibling.remove()}};export{i as a};
-//# sourceMappingURL=chunk-CQPFTMCI.js.map

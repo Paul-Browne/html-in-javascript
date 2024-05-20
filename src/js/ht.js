@@ -1,1 +1,0 @@
-export default async () => await import('html-in-javascript')
