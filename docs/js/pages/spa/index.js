@@ -1,2 +1,2 @@
-var m=async({state:a,pageView:h})=>{let[t,o,d]=["../../updateZones.js","../../headerFooter.js","../../ht.js"].map(g=>import(g)),{default:e}=await t,{pageHeader:p,pageFooter:s}=await o,{default:{fragment:r,h1:n,title:i,p:l}}=await d,c=r(await p(),n("Hello World! Home page!"),l(a.foo),await s());e("head",i("Home page | SPA")),e("body",c)};export{m as default};
+import{a as e,b as a,c as t,d as o}from"../chunk-URNQUABH.js";var H=async({state:p,pageView:g})=>{let{fragment:r,h1:m,title:d,p:i}=e,f=r(await a(),m("Hello World! Home page!"),i(p.foo),await t());o("head",d("Home page | SPA")),o("body",f)};export{H as default};
 //# sourceMappingURL=index.js.map

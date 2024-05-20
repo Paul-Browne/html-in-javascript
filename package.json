@@ -1,6 +1,6 @@
 {
   "name": "html-in-javascript",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "",
   "main": "esm.js",
   "type": "module",
@@ -18,6 +18,7 @@
   "devDependencies": {
     "esbuild": "^0.20.2",
     "express": "^4.19.2",
+    "html-in-javascript": "^1.1.2",
     "html-minifier": "^4.0.0",
     "nodemon": "^3.1.0"
   }

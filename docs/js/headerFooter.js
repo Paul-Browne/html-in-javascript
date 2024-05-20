@@ -1,2 +1,0 @@
-var t=async()=>{let{header:a,nav:o,a:e,link:r}=(await import("./ht.js")).default;return a({class:"main-header"},o(e({href:"/spa"},"Home")," | ",e({href:"/spa/foo"},"Foo")," | ",e({href:"/spa/bar"},"Bar")," | ",e({href:"/spa/baz"},"Baz")," | ",e({class:"hidden",href:"/spa/xyz"},"404")," | ",e({href:"https://google.com"},"google.com")," | ",e("no href")))},s=async()=>{let{footer:a,p:o}=(await import("./ht.js")).default;return a({class:"main-footer"},o("This is the footer"))};export{s as pageFooter,t as pageHeader};
-//# sourceMappingURL=headerFooter.js.map

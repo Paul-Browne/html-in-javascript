@@ -1,13 +1,10 @@
-export default async ({ state, pageView }) => {
-    const [ updateZonesImport, headerFooter, htjs ] = [
-        '../../../updateZones.js', 
-        '../../../headerFooter.js', 
-        '../../../ht.js'
-    ].map(importPath => import(importPath))
+import htjs from 'html-in-javascript'
+import { pageHeader, pageFooter } from '../../../headerFooter.js'
+import updateZones from '../../../updateZones.js'
 
-    const { default: updateZones } = await updateZonesImport;
-    const { pageHeader, pageFooter } = await headerFooter;
-    const { default: { fragment, h1, title, p } } = await htjs;
+export default async ({ state, pageView }) => {
+
+    const { fragment, h1, title, p } = htjs;
 
     const body = fragment(
         await pageHeader(),

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/js/ht.js"],
+  "sourcesContent": ["export default async () => await import('html-in-javascript')"],
+  "mappings": "AAAA,IAAOA,EAAQ,SAAY,KAAM,QAAO,mBAAoB",
+  "names": ["ht_default"]
+}

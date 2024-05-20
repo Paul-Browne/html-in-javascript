@@ -1,5 +1,7 @@
+import htjs from 'html-in-javascript'
+
 export const pageHeader = async () => {
-    const { header, nav, a, link } = (await import('./ht.js')).default;
+    const { header, nav, a, link } = htjs
     return header(
         {class: 'main-header'},
         nav(
@@ -26,7 +28,7 @@ export const pageHeader = async () => {
 }
 
 export const pageFooter = async () => {
-    const { footer, p } = (await import('./ht.js')).default;
+    const { footer, p } = htjs
     return footer(
         {class: 'main-footer'},
         p("This is the footer")

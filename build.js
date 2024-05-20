@@ -22,7 +22,7 @@ export const writeFileTo = async (content, path) => {
 }
 
 await esbuild.build({
-    entryPoints: ['src/js/ht.js'],
+    entryPoints: ['scripts/ht.js'],
     bundle: false,
     minify: true,
     sourcemap: false,
@@ -35,7 +35,7 @@ await esbuild.build({
 
 await esbuild.build({
     stdin: {
-        contents: 'import a from "./src/js/ht.js";module.exports = a;',
+        contents: 'import a from "./scripts/ht.js";module.exports = a;',
         resolveDir: '.'
     },
     bundle: true,
@@ -48,7 +48,7 @@ await esbuild.build({
 })
 
 await esbuild.build({
-    entryPoints: ['src/js/**/*.js'],
+    entryPoints: ['src/js/pages/**/*.js'],
     bundle: true,
     minify: true,
     sourcemap: true,
@@ -56,7 +56,7 @@ await esbuild.build({
     treeShaking: true,
     format: "esm",
     target: "esnext",
-    outdir: 'docs/js'
+    outdir: 'docs/js/pages'
 })
 
 cp("src/CNAME", "docs/CNAME", { recursive: true })

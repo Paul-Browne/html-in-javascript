@@ -1,7 +1,7 @@
 import { mkdir, writeFile, readdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import * as esbuild from 'esbuild'
-import htjs from "./src/js/ht.js"
+import htjs from "html-in-javascript"
 
 const { html, head, meta, link, script, body, fragment } = htjs;
 

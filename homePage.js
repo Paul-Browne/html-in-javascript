@@ -1,4 +1,4 @@
-import htjs from "./src/js/ht.js"
+import htjs from "html-in-javascript"
 
 const { html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, p, button, pre, code, br, fragment } = htjs;
 
