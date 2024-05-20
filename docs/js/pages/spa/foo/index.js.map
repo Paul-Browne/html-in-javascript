@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../../../src/js/pages/spa/foo/index.js"],
-  "sourcesContent": ["import htjs from 'html-in-javascript'\nimport { pageHeader, pageFooter } from '../../../headerFooter.js'\nimport updateZones from '../../../updateZones.js'\n\nexport default async ({ state, pageView }) => {\n\n    const { fragment, h1, title, p } = htjs;\n\n    const body = fragment(\n        await pageHeader(),\n        h1(\"Hello World! Foo page!\"),\n        p(state.foo),\n        await pageFooter()\n    )\n    \n    updateZones('head', title(\"Foo | SPA\"));\n    updateZones('body', body);\n\n\n}"],
-  "mappings": "iEAIA,IAAOA,EAAQ,MAAO,CAAE,MAAAC,EAAO,SAAAC,CAAS,IAAM,CAE1C,GAAM,CAAE,SAAAC,EAAU,GAAAC,EAAI,MAAAC,EAAO,EAAAC,CAAE,EAAIC,EAE7BC,EAAOL,EACT,MAAMM,EAAW,EACjBL,EAAG,wBAAwB,EAC3BE,EAAEL,EAAM,GAAG,EACX,MAAMS,EAAW,CACrB,EAEAC,EAAY,OAAQN,EAAM,WAAW,CAAC,EACtCM,EAAY,OAAQH,CAAI,CAG5B",
-  "names": ["foo_default", "state", "pageView", "fragment", "h1", "title", "p", "u", "body", "pageHeader", "pageFooter", "updateZones_default"]
+  "sourcesContent": ["import htjs from 'html-in-javascript'\nimport { pageHeader, pageFooter } from '../../../headerFooter.js'\nimport updateZones from '../../../updateZones.js'\n\nexport default async ({ state, pageView }) => {\n\n    const { fragment, h1, title, p, a } = htjs;\n\n    const body = fragment(\n        await pageHeader(),\n        h1(\"Hello World! Foo page!\"),\n        p(state.foo),\n        a({href: '/spa/foo/bar'}, 'spa/foo/bar'),\n        await pageFooter()\n    )\n    \n    updateZones('head', title(\"Foo | SPA\"));\n    updateZones('body', body);\n\n\n}"],
+  "mappings": "4DAIA,IAAOA,EAAQ,MAAO,CAAE,MAAAC,EAAO,SAAAC,CAAS,IAAM,CAE1C,GAAM,CAAE,SAAAC,EAAU,GAAAC,EAAI,MAAAC,EAAO,EAAAC,EAAG,EAAAC,CAAE,EAAIC,EAEhCC,EAAON,EACT,MAAMO,EAAW,EACjBN,EAAG,wBAAwB,EAC3BE,EAAEL,EAAM,GAAG,EACXM,EAAE,CAAC,KAAM,cAAc,EAAG,aAAa,EACvC,MAAMI,EAAW,CACrB,EAEAC,EAAY,OAAQP,EAAM,WAAW,CAAC,EACtCO,EAAY,OAAQH,CAAI,CAG5B",
+  "names": ["foo_default", "state", "pageView", "fragment", "h1", "title", "p", "a", "u", "body", "pageHeader", "pageFooter", "updateZones_default"]
 }
