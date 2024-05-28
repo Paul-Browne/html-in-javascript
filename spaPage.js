@@ -28,7 +28,9 @@ html({lang: "en"},
         h1({class:'big-text'}, "Single Page App | HT.JS"),
 
         prism.html(
-`js
+`
+build.js
+js
 ├── router.js
 ├── update.js
 ├── preload.js

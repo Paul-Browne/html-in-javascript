@@ -6,6 +6,7 @@ import * as esbuild from 'esbuild'
 import page from "./homePage.js"
 import single_page_app from "./spaPage.js"
 import spaBuild from "./singlePageAppBuild.js"
+import tester from "./tester.js"
 
 const minifyHTML = html => minify(html, {
     removeAttributeQuotes: false,
@@ -47,18 +48,6 @@ await esbuild.build({
     outfile: 'iife.js'
 })
 
-await esbuild.build({
-    entryPoints: ['src/js/pages/**/*.js'],
-    bundle: true,
-    minify: true,
-    sourcemap: true,
-    splitting: true,
-    treeShaking: true,
-    format: "esm",
-    target: "esnext",
-    outdir: 'docs/js/pages'
-})
-
 cp("src/CNAME", "docs/CNAME", { recursive: true })
 cp("src/fonts", "docs/fonts", { recursive: true })
 cp("src/favicons", "docs/", { recursive: true })
@@ -68,3 +57,9 @@ cp("src/css/style.css", "docs/css/style.css", { recursive: true })
 writeFileTo(minifyHTML(single_page_app), "docs/single-page-app.html")
 writeFileTo(minifyHTML(page), "docs/index.html")
 spaBuild("src/js/pages")
+
+
+
+
+
+writeFileTo(minifyHTML(tester), "docs/test.html")

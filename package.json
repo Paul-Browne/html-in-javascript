@@ -1,24 +1,25 @@
 {
   "name": "html-in-javascript",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "",
   "main": "esm.js",
   "type": "module",
   "files": [
     "esm.js",
-    "iife.js"
+    "iife.js",
+    "extended/**/*"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon build.js",
     "serve": "node serve.js"
   },
-  "author": "",
+  "author": "Paul Browne",
   "license": "ISC",
   "devDependencies": {
     "esbuild": "^0.20.2",
     "express": "^4.19.2",
-    "html-in-javascript": "^1.1.2",
+    "html-in-javascript": "^1.1.4",
     "html-minifier": "^4.0.0",
     "nodemon": "^3.1.0"
   }

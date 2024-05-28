@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/js/myModal.js"],
+  "sourcesContent": ["import htjs from 'html-in-javascript'\n\nconsole.log(\"will run once!!\")\n\nexport default _this => {\n    const {div, p, h1} = htjs\n    const content = div(\n        h1(\"Hello World\"),\n        p(\"This is a modal\"),\n        p(_this.dataset.foo)\n    )\n    // const container = document.createElement('SECTION')\n    // document.body.appendChild(container)\n    // container.outerHTML = content;\n\n    document.getElementById(_this.dataset.formodal).innerHTML = content\n\n}\n"],
+  "mappings": "wCAEA,QAAQ,IAAI,iBAAiB,EAE7B,IAAOA,EAAQC,GAAS,CACpB,GAAM,CAAC,IAAAC,EAAK,EAAAC,EAAG,GAAAC,CAAE,EAAIC,EACfC,EAAUJ,EACZE,EAAG,aAAa,EAChBD,EAAE,iBAAiB,EACnBA,EAAEF,EAAM,QAAQ,GAAG,CACvB,EAKA,SAAS,eAAeA,EAAM,QAAQ,QAAQ,EAAE,UAAYK,CAEhE",
+  "names": ["myModal_default", "_this", "div", "p", "h1", "u", "content"]
+}

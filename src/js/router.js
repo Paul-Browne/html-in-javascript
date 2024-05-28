@@ -12,13 +12,14 @@ const router = async () => {
     try {
         await routeJsResource(window.location.pathname);
     } catch {
-        await routeJsResource('/404')
+        // await routeJsResource('/404')
     }
 }
 
 // fire on click
 document.addEventListener("click", e => {
     const { href } = e.target;
+    
     // ignore clicks on anything that doesn't have a href
     // or if the href is an external link
     if (href && new URL(href).origin === window.location.origin ){

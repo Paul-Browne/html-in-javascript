@@ -11,7 +11,7 @@ const argumentative = (...args) => {
             }
         }else if(typeof args[i] === 'string'){
             content.push(args[i])
-        }else if(args[i].name){
+        }else if(typeof args[i] === 'function'){
             /* 
                 only works for function declarations
                 eg. function myFunction(){} 

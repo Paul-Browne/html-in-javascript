@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "sources": ["../../../src/js/test.js"],
+  "sources": ["../../src/js/test.js"],
   "sourcesContent": ["export const LOG = (...message) => console.log(message);"],
   "mappings": "AAAO,IAAMA,EAAM,IAAIC,IAAY,QAAQ,IAAIA,CAAO",
   "names": ["LOG", "message"]

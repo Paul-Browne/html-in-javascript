@@ -3,6 +3,27 @@ import { dirname, join } from "node:path";
 import * as esbuild from 'esbuild'
 import htjs from "html-in-javascript"
 
+// import builder from "./extended/utils/builder.js"
+// await builder({
+//     entryPoints: 'extended/modalContent/modal.js',
+//     outdir: 'docs/js'
+// })
+
+await esbuild.build({
+    // entryPoints: ['src/js/**/*.js', 'extended/**/*.js'],
+    entryPoints: ['src/js/**/*.js'],
+    // entryNames: '/[name].[hash]',
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    splitting: true,
+    treeShaking: true,
+    format: "esm",
+    target: "esnext",
+    outdir: 'docs/js',
+    // outbase: 'src/js'
+})
+
 const { html, head, meta, link, script, body, fragment } = htjs;
 
 const zone = (name, ...rest) => fragment(
@@ -10,6 +31,8 @@ const zone = (name, ...rest) => fragment(
     ...rest,
     `<!--/${name}-->`
 )
+
+
  
 const { outputFiles: [ {text: inlinedRouter}, {text: aggresivePreload} ] } = await esbuild.build({
     entryPoints: [

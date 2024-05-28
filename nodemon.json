@@ -1,10 +1,12 @@
 {
     "watch": [ 
         "src", 
+        "extended",
         "build.js", 
         "homePage.js", 
         "singlePageAppBuild.js", 
-        "spaPage.js" 
+        "spaPage.js",
+        "tester.js"
     ],
     "ext": "*"
 }
