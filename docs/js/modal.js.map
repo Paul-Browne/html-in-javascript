@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../extended/modalContent/modal.js", "../../src/js/modal.js"],
-  "sourcesContent": ["import htjs from 'html-in-javascript'\n// runs once\nconsole.log(\"hello world!!\")\n\nconst modalClickListener = (params) => {\n    console.log(params)\n\n    const { div, p } = htjs\n\n    return div(\n        p(\"hello world\"),\n        p(\"hello again\"),\n    )\n\n    // if (modalClickListener.attached) return;\n    // modalClickListener.attached = true;\n    // document.addEventListener('click', e => {\n    //     console.log(e.target)\n    // });\n}\n\nexport default modalClickListener", "import modal from '../../extended/modalContent/modal.js'\nexport default modal"],
-  "mappings": "wCAEA,QAAQ,IAAI,eAAe,EAE3B,IAAMA,EAAsBC,GAAW,CACnC,QAAQ,IAAIA,CAAM,EAElB,GAAM,CAAE,IAAAC,EAAK,EAAAC,CAAE,EAAIC,EAEnB,OAAOF,EACHC,EAAE,aAAa,EACfA,EAAE,aAAa,CACnB,CAOJ,EAEOE,EAAQL,ECpBf,IAAOM,EAAQA",
-  "names": ["modalClickListener", "params", "div", "p", "u", "modal_default", "modal_default"]
-}

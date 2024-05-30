@@ -3,11 +3,10 @@ import updateZones from '../../../updateZones.js'
 import { pageHeader, pageFooter } from '../../../headerFooter.js'
 // import modal from "../../../../../extended/modalContent/index.js";
 import modal from "../../../../../extended/modalTrigger/index.js";
+// import modal from "../../../../../extended/modalAll/index.js";
 
 export default async ({ state, pageView }) => {
-
     const { fragment, p, h1, title, a } = htjs
-
     const body = fragment(
         await pageHeader(),
         h1("Hello World! Buf page!"),
@@ -16,6 +15,7 @@ export default async ({ state, pageView }) => {
         modal({
             url: '/js/myModal.js'
         }, "Click me!!"),
+        // modal({}, p('modal content')),
         await pageFooter()
     )
     

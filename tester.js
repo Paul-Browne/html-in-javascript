@@ -1,8 +1,11 @@
 import htjs from "html-in-javascript"
 // import modal from './extended/modalContent/index.js'
 import modal from './extended/modalTrigger/index.js'
+// import modal from './extended/modalAll/index.js'
 
-const { html, head, meta, link, script, title, body, h1, pre, code, fragment, br } = htjs;
+// import './extended/modalContent/escapeClosesModal2.js'
+
+const { html, head, meta, link, script, title, body, h1, pre, code, fragment, br, p } = htjs;
 
 export default fragment(
     '<!DOCTYPE html>',
@@ -20,6 +23,7 @@ export default fragment(
             meta({name:"msapplication-TileColor", content:"#2d89ef"}),
             meta({name:"theme-color", content:"#ffff00"}),
             link({rel:"stylesheet", href:"/css/style.css"}),
+            // script({src:"/js/escapeKeyclosesModals.js", type:"module"}),
         ),
         body(
             h1({class:'big-text'}, "Single Page App | HT.JS"),
@@ -29,6 +33,7 @@ export default fragment(
             modal({
                 url: '/js/myModal.js'
             }, "Click me!!"),
+            // modal({}, p('modal content')),
         )
     )
 )

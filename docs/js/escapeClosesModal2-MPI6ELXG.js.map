@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../extended/modalContent/escapeClosesModal2.js"],
+  "sourcesContent": ["document.addEventListener(\"keydown\", e => {\n    if(e.key === \"Escape\") {\n        document.querySelectorAll('.modal').forEach(modal => {\n            // doesn't have an open modal inside\n            if(!modal.querySelector('.modal')){\n                modal.remove()\n            }\n        })\n    }\n});\n"],
+  "mappings": "AAAA,SAAS,iBAAiB,UAAWA,GAAK,CACnCA,EAAE,MAAQ,UACT,SAAS,iBAAiB,QAAQ,EAAE,QAAQC,GAAS,CAE7CA,EAAM,cAAc,QAAQ,GAC5BA,EAAM,OAAO,CAErB,CAAC,CAET,CAAC",
+  "names": ["e", "modal"]
+}

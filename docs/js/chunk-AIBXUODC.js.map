@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../extended/utils/uniqueId.js"],
+  "sourcesContent": ["const uid = ({\n    prefix = 'i', \n    length = 7\n} = {}) => {\n    prefix += Math.random().toString(36).substring(2);\n    if(prefix.length < length) return uid({prefix, length});\n    return prefix.slice(0, 7);\n}\n\nexport default uid"],
+  "mappings": "AAAA,IAAMA,EAAM,CAAC,CACT,OAAAC,EAAS,IACT,OAAAC,EAAS,CACb,EAAI,CAAC,KACDD,GAAU,KAAK,OAAO,EAAE,SAAS,EAAE,EAAE,UAAU,CAAC,EAC7CA,EAAO,OAASC,EAAeF,EAAI,CAAC,OAAAC,EAAQ,OAAAC,CAAM,CAAC,EAC/CD,EAAO,MAAM,EAAG,CAAC,GAGrBE,EAAQH",
+  "names": ["uid", "prefix", "length", "uniqueId_default"]
+}

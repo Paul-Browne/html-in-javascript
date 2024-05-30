@@ -1,2 +1,2 @@
-import{a as e}from"./chunk-ZMELE7IC.js";console.log("will run once!!");var r=o=>{let{div:l,p:t,h1:n}=e,d=l(n("Hello World"),t("This is a modal"),t(o.dataset.foo));document.getElementById(o.dataset.formodal).innerHTML=d};export{r as default};
+import{a as r}from"./chunk-5SDGHJS5.js";import{a as m}from"./chunk-QKW5THYR.js";import{a as t}from"./chunk-ZMELE7IC.js";document.addEventListener("keydown",o=>{o.key==="Escape"&&document.querySelectorAll(".modal").forEach(e=>{e.querySelector(".modal")||e.remove()})});var c=o=>{let{p:e,h1:l}=t;document.getElementById(o.dataset.formodal).innerHTML=m(l("Hello World"),e("This is a modal"),r({url:"/js/myModal.js"},"Click me!!"))};export{c as default};
 //# sourceMappingURL=myModal.js.map
