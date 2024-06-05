@@ -13,15 +13,20 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon build.js",
     "serve": "node serve.js"
-  },
+  }, 
   "author": "Paul Browne",
   "license": "ISC",
+  "dependencies": {
+    "lightningcss": "^1.25.1",
+    "html-in-javascript": "^1.1.4"
+  },
   "devDependencies": {
     "esbuild": "^0.20.2",
     "express": "^4.19.2",
     "html-in-javascript": "^1.1.4",
     "html-minifier": "^4.0.0",
     "lightningcss": "^1.25.1",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "parcel": "^2.12.0"
   }
 }

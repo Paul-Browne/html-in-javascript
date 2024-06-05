@@ -5,7 +5,7 @@ import modal from './extended/modalTrigger/index.js'
 // import modal from './extended/modalAll/index.js'
 // import './extended/modalContent/escapeClosesModal2.js'
 
-import fullViewportHero from "./extended/fullScreenHero/index.js";
+// import fullViewportHero from "./extended/fullScreenHero/index.js";
 
 import testNest from "./testNest.js";
 
@@ -41,9 +41,9 @@ export default fragment(
             modal({
                 url: '/js/myModal.js'
             }, "Click me!!"),
-            fullViewportHero({}, "hello full screen!!"),
-            fullViewportHero({}, "hello full 2!!"),
-            fullViewportHero({}, "hello full 3!!"),
+            // fullViewportHero({}, "hello full screen!!"),
+            // fullViewportHero({}, "hello full 2!!"),
+            // fullViewportHero({}, "hello full 3!!"),
             // testNest()
             // modal({}, p('modal content')),
         )
