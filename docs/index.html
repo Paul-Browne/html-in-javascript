@@ -132,7 +132,7 @@ document.documentElement.innerHTML = page;
   data-foo="bar">
     &lt;h2>hello world!&lt;/h2>
     &lt;p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML&lt;br>&lt;em>and can be nested exactly like html&lt;/em>&lt;/p>
-&lt;/div></code></pre><h5>Example</h5><div class="class names" id="some-id" data-test-id="123" onclick="(() => this.style.color = 'blue')()" style="color:red;padding:0 10px;border:1px solid #000" data-foo="bar"><h2>hello world!</h2><p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML<br><em>and can be nested exactly like html</em></p></div><h3><b>fragment</b></h3><p>similar to React's <b>&lt;>{content}&lt;/></b></p><p>Used when you can't, or don't want a container <b>&lt;div></b></p><h5>Code</h5><pre class="language-javascript"><code>const titleAndStyle = fragment(
+&lt;/div></code></pre><h5>Example</h5><div class="class names" id="some-id" data-test-id="123" onclick="(() => this.style.color = 'blue')()" style="color:red; padding:0 10px; border:1px solid black" data-foo="bar"><h2>hello world!</h2><p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML<br><em>and can be nested exactly like html</em></p></div><h3><b>fragment</b></h3><p>similar to React's <b>&lt;>{content}&lt;/></b></p><p>Used when you can't, or don't want a container <b>&lt;div></b></p><h5>Code</h5><pre class="language-javascript"><code>const titleAndStyle = fragment(
     title("HT.JS"),
     link({ rel:"stylesheet", href:"/css/style.css" })
 )

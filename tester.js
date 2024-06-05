@@ -1,11 +1,15 @@
 import htjs from "html-in-javascript"
-// import modal from './extended/modalContent/index.js'
 import modal from './extended/modalTrigger/index.js'
-// import modal from './extended/modalAll/index.js'
 
+// import modal from './extended/modalContent/index.js'
+// import modal from './extended/modalAll/index.js'
 // import './extended/modalContent/escapeClosesModal2.js'
 
-const { html, head, meta, link, script, title, body, h1, pre, code, fragment, br, p } = htjs;
+import fullViewportHero from "./extended/fullScreenHero/index.js";
+
+import testNest from "./testNest.js";
+
+const { html, head, meta, link, script, title, body, h1, pre, code, fragment, br, p, style } = htjs;
 
 export default fragment(
     '<!DOCTYPE html>',
@@ -21,6 +25,10 @@ export default fragment(
             link({rel:"manifest", href:"/site.webmanifest"}),
             link({rel:"mask-icon", href:"/safari-pinned-tab.svg", color:"#5bbad5"}),
             meta({name:"msapplication-TileColor", content:"#2d89ef"}),
+            style(".body{margin:0;}"),
+            style(".body{margin:0;}"),
+            style(".body{margin:0;}"),
+            style(".body{margin:0;}"),
             meta({name:"theme-color", content:"#ffff00"}),
             link({rel:"stylesheet", href:"/css/style.css"}),
             // script({src:"/js/escapeKeyclosesModals.js", type:"module"}),
@@ -33,6 +41,10 @@ export default fragment(
             modal({
                 url: '/js/myModal.js'
             }, "Click me!!"),
+            fullViewportHero({}, "hello full screen!!"),
+            fullViewportHero({}, "hello full 2!!"),
+            fullViewportHero({}, "hello full 3!!"),
+            // testNest()
             // modal({}, p('modal content')),
         )
     )

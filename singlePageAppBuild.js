@@ -31,8 +31,6 @@ const zone = (name, ...rest) => fragment(
     ...rest,
     `<!--/${name}-->`
 )
-
-
  
 const { outputFiles: [ {text: inlinedRouter}, {text: aggresivePreload} ] } = await esbuild.build({
     entryPoints: [
@@ -63,7 +61,7 @@ const pageShell = async preload => {
                     class: "page" 
                 },
                 zone('body', 'loading...'),
-                script(aggresivePreload)
+                //script(aggresivePreload)
             )
         )
     )

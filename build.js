@@ -8,14 +8,19 @@ import single_page_app from "./spaPage.js"
 import spaBuild from "./singlePageAppBuild.js"
 import tester from "./tester.js"
 
-const minifyHTML = html => minify(html, {
-    removeAttributeQuotes: false,
-    minifyJS: false,
-    collapseWhitespace: true,
-    minifyCSS: true,
-    removeComments: false,
-    decodeEntities: true
-})
+const minifyHTML = html => {    
+    const minified = minify(html, {
+        removeAttributeQuotes: false,
+        minifyJS: false,
+        collapseWhitespace: true,
+        minifyCSS: false,
+        removeComments: false,
+        decodeEntities: true
+    })
+
+    const removeDuplicateStylesAndLinksRegex = /(<style[\s\S]*?style>|<link[\s\S]*?>)(?=[\s\S]*\1)/g
+    return minified.replace(removeDuplicateStylesAndLinksRegex, "")
+}
 
 export const writeFileTo = async (content, path) => {
     await mkdir(dirname(path), { recursive: true });
@@ -52,14 +57,13 @@ cp("src/CNAME", "docs/CNAME", { recursive: true })
 cp("src/fonts", "docs/fonts", { recursive: true })
 cp("src/favicons", "docs/", { recursive: true })
 cp("src/vendor/prism.js", "docs/js/prism.js", { recursive: true })
+
 cp("src/css/style.css", "docs/css/style.css", { recursive: true })
+// cp("src/css/hero.css", "docs/css/hero.css", { recursive: true })
 
 writeFileTo(minifyHTML(single_page_app), "docs/single-page-app.html")
 writeFileTo(minifyHTML(page), "docs/index.html")
 spaBuild("src/js/pages")
-
-
-
 
 
 writeFileTo(minifyHTML(tester), "docs/test.html")
