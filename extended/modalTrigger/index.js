@@ -8,10 +8,11 @@ export default ({
     const { fragment, button, div, span } = htjs
     return fragment(
         button({
-            'data-formodal': id,
-            onclick: `import('${url}').then(_ => _.default(this))`
-        },
-        span(...content)),
+                'data-formodal': id,
+                onclick: `import('${url}').then(_ => _.default(this))`
+            },
+            span(...content)
+        ),
         div({
             class: "modal-outer",
             id

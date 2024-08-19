@@ -4,8 +4,7 @@ import updateZones from '../../updateZones.js'
 
 export default async ({ state, pageView }) => {
 
-
-    const { fragment, h1, title, p, img } = htjs;
+    const { fragment, h1, title } = htjs;
 
     const body = fragment(
         await pageHeader(),

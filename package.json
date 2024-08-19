@@ -1,6 +1,6 @@
 {
   "name": "html-in-javascript",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "",
   "main": "esm.js",
   "type": "module",
@@ -12,7 +12,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon build.js",
-    "serve": "node serve.js"
+    "serve": "node serve.js",
+    "ssg": "nodemon build-ssg.js",
+    "spa": "nodemon build-spa.js",
+    "ssg-serve": "node serve-ssg.js",
+    "spa-serve": "node serve-spa.js"    
   },
   "author": "Paul Browne",
   "license": "ISC",

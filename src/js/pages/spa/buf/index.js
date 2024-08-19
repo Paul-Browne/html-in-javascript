@@ -26,5 +26,4 @@ export default async ({ state, pageView }) => {
     
     updateZones('head', title('hi'));
     updateZones('body', body);
-
 }

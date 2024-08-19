@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/css/hero.css"],
+  "sourcesContent": [".fullscreen-hero{\n    width: 100%;\n    height: 100vh;\n}"],
+  "mappings": "AAAA,CAAC,gBACG,MAAO,KACP,OAAQ,KACZ",
+  "names": []
+}

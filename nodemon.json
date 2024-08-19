@@ -3,6 +3,8 @@
         "src", 
         "extended",
         "build.js", 
+        "build-spa.js",
+        "build-ssg.js",
         "homePage.js", 
         "singlePageAppBuild.js", 
         "spaPage.js",

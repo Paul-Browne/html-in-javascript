@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../extended/fullScreenHero/browser.js"],
+  "sourcesContent": ["import htjs from \"html-in-javascript\"\n\nconst { fragment, section } = htjs\n\nexport default ({\n    classes = \"fullscreen-hero\",\n} = {}, ...content) => {\n    return fragment(\n        section({\n            class: classes\n        }, ...content)\n    )\n}"],
+  "mappings": "wCAEA,GAAM,CAAE,SAAAA,EAAU,QAAAC,CAAQ,EAAIC,EAEvBC,EAAQ,CAAC,CACZ,QAAAC,EAAU,iBACd,EAAI,CAAC,KAAMC,IACAL,EACHC,EAAQ,CACJ,MAAOG,CACX,EAAG,GAAGC,CAAO,CACjB",
+  "names": ["fragment", "section", "u", "browser_default", "classes", "content"]
+}

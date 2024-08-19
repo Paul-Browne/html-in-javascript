@@ -12,7 +12,6 @@ import htjs from "html-in-javascript"
 await esbuild.build({
     // entryPoints: ['src/js/**/*.js', 'extended/**/*.js'],
     entryPoints: ['src/js/**/*.js'],
-    // entryNames: '/[name].[hash]',
     bundle: true,
     minify: true,
     sourcemap: true,
@@ -23,6 +22,21 @@ await esbuild.build({
     outdir: 'docs/js',
     // outbase: 'src/js'
 })
+
+// await esbuild.build({
+//     // entryPoints: ['src/js/**/*.js', 'extended/**/*.js'],
+//     entryPoints: ['src/js/pages/**/index.js'],
+//     // entryNames: '/[name].[hash]',
+//     bundle: true,
+//     minify: true,
+//     sourcemap: true,
+//     splitting: true,
+//     treeShaking: true,
+//     format: "esm",
+//     target: "esnext",
+//     outdir: 'docs/js/pages',
+//     // outbase: 'src/js'
+// })
 
 const { html, head, meta, link, script, body, fragment } = htjs;
 
@@ -41,6 +55,7 @@ const { outputFiles: [ {text: inlinedRouter}, {text: aggresivePreload} ] } = awa
     minify: true,
     bundle: true,
     write: false,
+    treeShaking: true,
     outdir: 'false',
     splitting: false,
 })

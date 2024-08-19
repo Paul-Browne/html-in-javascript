@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/js/pages/404/index.js"],
+  "sourcesContent": ["import htjs from 'html-in-javascript'\nimport { pageHeader, pageFooter } from '../../headerFooter.js'\nimport updateZones from '../../updateZones.js'\n\nexport default async ({ state, pageView }) => {\n\n    const { fragment, h1, title } = htjs;\n\n    const body = fragment(\n        await pageHeader(),\n        h1(\"404 page not found\"),\n        await pageFooter()\n    )\n    \n    updateZones('head', title(\"404 | SPA\"));\n    updateZones('body', body);\n}"],
+  "mappings": "+HAIA,IAAOA,EAAQ,MAAO,CAAE,MAAAC,EAAO,SAAAC,CAAS,IAAM,CAE1C,GAAM,CAAE,SAAAC,EAAU,GAAAC,EAAI,MAAAC,CAAM,EAAIC,EAE1BC,EAAOJ,EACT,MAAMK,EAAW,EACjBJ,EAAG,oBAAoB,EACvB,MAAMK,EAAW,CACrB,EAEAC,EAAY,OAAQL,EAAM,WAAW,CAAC,EACtCK,EAAY,OAAQH,CAAI,CAC5B",
+  "names": ["__default", "state", "pageView", "fragment", "h1", "title", "u", "body", "pageHeader", "pageFooter", "updateZones_default"]
+}

@@ -1,5 +1,6 @@
 // contents of the modal
 import htjs from 'html-in-javascript'
+
 import modalContent from "../../extended/modalContent/index.js";
 import modal from '../../extended/modalTrigger/index.js';
 

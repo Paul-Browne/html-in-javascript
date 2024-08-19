@@ -1,0 +1,2 @@
+window.state={foo:"bar"};var n=async()=>{let e=async t=>{(await import(`/js/pages${t.replace(/\/$/,"")}/index.js`)).default({state:window.state,pageView:window.top===window.self})};try{await e(window.location.pathname)}catch{}};document.addEventListener("click",e=>{let{href:t}=e.target;t&&new URL(t).origin===window.location.origin&&(e.preventDefault(),t!==window.location.href&&(window.history.pushState({},"",t),n()))});window.addEventListener("popstate",n);document.addEventListener("DOMContentLoaded",n);
+//# sourceMappingURL=router.js.map

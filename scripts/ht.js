@@ -9,24 +9,13 @@ const argumentative = (...args) => {
                 ...attributes,
                 ...args[i]
             }
-        }else if(typeof args[i] === 'string'){
+        }else{
             content.push(args[i])
-        }else if(typeof args[i] === 'function'){
-            /* 
-                only works for function declarations
-                eg. function myFunction(){} 
-            */
-            content.push(`${args[i]}`)
-        }            
+        }
     }
     return {
         content: content.join(''),
-        attributes: Object.keys(attributes).map(key => {
-            if(typeof attributes[key] === 'function'){
-                return ` ${key}="(${attributes[key]})()"`;
-            }
-            return ` ${key}="${attributes[key]}"`;
-        }).join('')
+        attributes: Object.keys(attributes).map(key => ` ${key}="${attributes[key]}"`).join('')
     }
 }
 

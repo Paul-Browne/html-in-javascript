@@ -6,6 +6,7 @@ import * as esbuild from 'esbuild'
 import page from "./homePage.js"
 import single_page_app from "./spaPage.js"
 import spaBuild from "./singlePageAppBuild.js"
+
 import tester from "./tester.js"
 
 const minifyHTML = html => {    
@@ -53,12 +54,33 @@ await esbuild.build({
     outfile: 'iife.js'
 })
 
+let exampleOnResolvePlugin = {
+    name: 'example',
+    setup(build) {  
+      // Mark all paths starting with "http://" or "https://" as external
+      build.onResolve({ filter: /fonts\// }, args => {
+        return { path: args.path, external: true }
+      })
+    },
+  }
+
+await esbuild.build({
+    entryPoints: ['src/css/**/*.css'],
+    // entryNames: '/[name].[hash]',
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    plugins: [exampleOnResolvePlugin],
+    outdir: 'docs/css',
+    // outbase: 'src/js'
+})
+
 cp("src/CNAME", "docs/CNAME", { recursive: true })
 cp("src/fonts", "docs/fonts", { recursive: true })
 cp("src/favicons", "docs/", { recursive: true })
 cp("src/vendor/prism.js", "docs/js/prism.js", { recursive: true })
 
-cp("src/css/style.css", "docs/css/style.css", { recursive: true })
+// cp("src/css/style.css", "docs/css/style.css", { recursive: true })
 // cp("src/css/hero.css", "docs/css/hero.css", { recursive: true })
 
 writeFileTo(minifyHTML(single_page_app), "docs/single-page-app.html")

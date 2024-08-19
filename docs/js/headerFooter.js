@@ -1,2 +1,2 @@
-import{a,b}from"./chunk-OU3YXWIS.js";import"./chunk-ZMELE7IC.js";export{b as pageFooter,a as pageHeader};
+import{a,b,c}from"./chunk-STWWLOPH.js";import"./chunk-ZMELE7IC.js";export{a as head,c as pageFooter,b as pageHeader};
 //# sourceMappingURL=headerFooter.js.map

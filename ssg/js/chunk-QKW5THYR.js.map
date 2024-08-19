@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../extended/modalContent/index.js"],
+  "sourcesContent": ["import htjs from 'html-in-javascript'\n\n// import attachEscapeKeyListener from './escapeClosesModal.js'\n// attachEscapeKeyListener()\n\nexport default (...content) => {\n    const { div, button } = htjs\n    return div(\n        {\n            class: 'modal',\n            'data-visible': true,\n        },\n        button({\n            class: 'close',\n            onclick: 'this.parentElement.remove()'\n        }, 'X'),\n        ...content\n    )\n}"],
+  "mappings": "wCAKA,IAAOA,EAAQ,IAAIC,IAAY,CAC3B,GAAM,CAAE,IAAAC,EAAK,OAAAC,CAAO,EAAIC,EACxB,OAAOF,EACH,CACI,MAAO,QACP,eAAgB,EACpB,EACAC,EAAO,CACH,MAAO,QACP,QAAS,6BACb,EAAG,GAAG,EACN,GAAGF,CACP,CACJ",
+  "names": ["modalContent_default", "content", "div", "button", "u"]
+}

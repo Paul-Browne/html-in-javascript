@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../extended/html5/index.js"],
+  "sourcesContent": ["import htjs from \"html-in-javascript\"\n\nconst { html, head:headEl, meta, body:bodyEl, fragment } = htjs;\n\nexport default ({\n    htmlAttributes = {\n        lang: \"en\"\n    },\n    head = \"\"\n} = {}, ...body) => fragment(\n    '<!DOCTYPE html>',\n    html(htmlAttributes,\n        headEl(\n            meta({charset:\"UTF-8\"}),\n            meta({name:\"viewport\", content:\"width=device-width, initial-scale=1.0\"}),\n            head\n        ),\n        bodyEl(...body)\n    )\n)\n"],
+  "mappings": "wCAEA,GAAM,CAAE,KAAAA,EAAM,KAAKC,EAAQ,KAAAC,EAAM,KAAKC,EAAQ,SAAAC,CAAS,EAAIC,EAEpDC,EAAQ,CAAC,CACZ,eAAAC,EAAiB,CACb,KAAM,IACV,EACA,KAAAC,EAAO,EACX,EAAI,CAAC,KAAMC,IAASL,EAChB,kBACAJ,EAAKO,EACDN,EACIC,EAAK,CAAC,QAAQ,OAAO,CAAC,EACtBA,EAAK,CAAC,KAAK,WAAY,QAAQ,uCAAuC,CAAC,EACvEM,CACJ,EACAL,EAAO,GAAGM,CAAI,CAClB,CACJ",
+  "names": ["html", "headEl", "meta", "bodyEl", "fragment", "u", "html5_default", "htmlAttributes", "head", "body"]
+}
