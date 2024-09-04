@@ -1,2 +1,2 @@
-import{a as r}from"../../../chunk-7ZXWGZ64.js";import{b as e,c as o}from"../../../chunk-STWWLOPH.js";import{a as t}from"../../../chunk-ZMELE7IC.js";var{fragment:i,h1:p,title:f}=t,g=async({path:a,lang:m="en"})=>{let n=i(await e(),p("404 page not found"),await o());return r({htmlAttributes:{lang:m},head:f(a)},n)};export{g as default};
+import{a as m}from"../../../chunk-XFC7APIN.js";import{b as r,c as a}from"../../../chunk-L5KZY6XR.js";import{i as t,q as e,r as o}from"../../../chunk-P4DYVLGY.js";var h=async({path:i,lang:n="en"})=>{let p=o(await r(),t("404 page not found"),await a());return m({htmlAttributes:{lang:n},head:e(i)},p)};export{h as default};
 //# sourceMappingURL=index.js.map

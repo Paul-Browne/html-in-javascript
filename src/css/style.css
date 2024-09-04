@@ -92,9 +92,11 @@ h5{
 .cell-inner.active{
     overflow: auto;
     position: fixed;
-    height: 300;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
     z-index: 10;
-    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
     animation: zoom 0.5s ease-in-out forwards;
 }
 
@@ -102,7 +104,6 @@ h5{
     position: fixed;
     height: 300;
     z-index: 10;
-    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
     animation: unzoom 0.5s ease-in-out forwards;
 }
 

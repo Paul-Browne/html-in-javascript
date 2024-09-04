@@ -1,4 +1,3 @@
-import htjs from 'html-in-javascript'
 import { cp, mkdir, writeFile, readdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { minify } from 'html-minifier'

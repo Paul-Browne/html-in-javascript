@@ -1,11 +1,9 @@
-import htjs from 'html-in-javascript'
+import { fragment, h1, title, p, img } from 'html-in-javascript'
 import { pageHeader, pageFooter } from '../../../../headerFooter.js'
 import updateZones from '../../../../updateZones.js'
 import { LOG }  from '../../../../test.js'
 
 export default async ({ state, pageView }) => {
-
-    const { fragment, h1, title, p, img } = htjs;
 
     const body = fragment(
         await pageHeader(),

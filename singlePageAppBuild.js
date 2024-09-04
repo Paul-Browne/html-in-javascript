@@ -1,7 +1,7 @@
 import { mkdir, writeFile, readdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import * as esbuild from 'esbuild'
-import htjs from "html-in-javascript"
+import { html, head, meta, link, script, body, fragment } from "html-in-javascript"
 
 // import builder from "./extended/utils/builder.js"
 // await builder({
@@ -37,8 +37,6 @@ await esbuild.build({
 //     outdir: 'docs/js/pages',
 //     // outbase: 'src/js'
 // })
-
-const { html, head, meta, link, script, body, fragment } = htjs;
 
 const zone = (name, ...rest) => fragment(
     `<!--${name}-->`,

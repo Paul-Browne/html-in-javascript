@@ -28,31 +28,33 @@ export const writeFileTo = async (content, path) => {
     await writeFile(path, content);
 }
 
-await esbuild.build({
-    entryPoints: ['scripts/ht.js'],
-    bundle: false,
-    minify: true,
-    sourcemap: false,
-    splitting: false,
-    treeShaking: false,
-    format: "esm",
-    target: "esnext",
-    outfile: 'esm.js'
-})
+// manually minify from https://minify-js.com/
 
-await esbuild.build({
-    stdin: {
-        contents: 'import a from "./scripts/ht.js";module.exports = a;',
-        resolveDir: '.'
-    },
-    bundle: true,
-    minify: true,
-    sourcemap: false,
-    format: "iife",
-    target: "esnext",
-    globalName: "htjs",
-    outfile: 'iife.js'
-})
+// await esbuild.build({
+//     entryPoints: ['scripts/ht.js'],
+//     bundle: false,
+//     minify: true,
+//     sourcemap: false,
+//     splitting: false,
+//     treeShaking: false,
+//     format: "esm",
+//     target: "esnext",
+//     outfile: 'esm.js'
+// })
+
+// await esbuild.build({
+//     stdin: {
+//         contents: 'import a from "./scripts/ht.js";module.exports = a;',
+//         resolveDir: '.'
+//     },
+//     bundle: true,
+//     minify: true,
+//     sourcemap: false,
+//     format: "iife",
+//     target: "esnext",
+//     globalName: "htjs",
+//     outfile: 'iife.js'
+// })
 
 let exampleOnResolvePlugin = {
     name: 'example',

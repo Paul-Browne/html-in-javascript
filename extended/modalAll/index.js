@@ -1,11 +1,10 @@
-import htjs from 'html-in-javascript'
+import { fragment, div, button } from 'html-in-javascript'
 import uid from '../utils/uniqueId.js'
 
 export default ({
     id = uid(),
     openText = 'Open Modal',
 } = {}, ...content) => {
-    const { fragment, div, button } = htjs
     return fragment(
         button({
             onclick: `${id}.dataset.visible = true`

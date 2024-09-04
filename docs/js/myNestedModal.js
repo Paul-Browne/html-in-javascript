@@ -1,2 +1,2 @@
-import{a as o}from"./chunk-QKW5THYR.js";import{a as t}from"./chunk-ZMELE7IC.js";var m=a=>{let{p:e,h1:s}=t;document.getElementById(a.dataset.formodal).innerHTML=o(s("Hello again!"),e("This is a nested modal!!"),e("This is a nested modal!!"),e("This is a nested modal!!"),e("This is a nested modal!!"))};export{m as default};
+import{a as o}from"./chunk-QDZ44AUQ.js";import{i as a,n as e}from"./chunk-P4DYVLGY.js";var i=t=>{document.getElementById(t.dataset.formodal).innerHTML=o(a("Hello again!"),e("This is a nested modal!!"),e("This is a nested modal!!"),e("This is a nested modal!!"),e("This is a nested modal!!"))};export{i as default};
 //# sourceMappingURL=myNestedModal.js.map

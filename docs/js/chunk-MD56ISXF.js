@@ -1,0 +1,2 @@
+import{f as r,g as n,p as a,r as s}from"./chunk-P4DYVLGY.js";var i=({prefix:t="i",length:o=7}={})=>(t+=Math.random().toString(36).substring(2),t.length<o?i({prefix:t,length:o}):t.slice(0,7)),u=i;var c=({url:t="/js/missing-content.js",id:o=u()}={},...e)=>s(r({"data-formodal":o,onclick:`import('${t}').then(_ => _.default(this))`},a(...e)),n({class:"modal-outer",id:o}));export{c as a};
+//# sourceMappingURL=chunk-MD56ISXF.js.map

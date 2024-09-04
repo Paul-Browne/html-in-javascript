@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../src/js/myNestedModal.js"],
-  "sourcesContent": ["// contents of the modal\nimport htjs from 'html-in-javascript'\nimport modalContent from \"../../extended/modalContent/index.js\";\n\nexport default el => {\n    const { p, h1 } = htjs\n    document.getElementById(el.dataset.formodal).innerHTML = modalContent(\n        h1(\"Hello again!\"),\n        p(\"This is a nested modal!!\"),\n        p(\"This is a nested modal!!\"),\n        p(\"This is a nested modal!!\"),\n        p(\"This is a nested modal!!\"),\n    )\n}\n"],
-  "mappings": "gFAIA,IAAOA,EAAQC,GAAM,CACjB,GAAM,CAAE,EAAAC,EAAG,GAAAC,CAAG,EAAIC,EAClB,SAAS,eAAeH,EAAG,QAAQ,QAAQ,EAAE,UAAYI,EACrDF,EAAG,cAAc,EACjBD,EAAE,0BAA0B,EAC5BA,EAAE,0BAA0B,EAC5BA,EAAE,0BAA0B,EAC5BA,EAAE,0BAA0B,CAChC,CACJ",
-  "names": ["myNestedModal_default", "el", "p", "h1", "u", "modalContent_default"]
+  "sourcesContent": ["// contents of the modal\nimport { p, h1 } from 'html-in-javascript'\nimport modalContent from \"../../extended/modalContent/index.js\";\n\nexport default el => {\n    document.getElementById(el.dataset.formodal).innerHTML = modalContent(\n        h1(\"Hello again!\"),\n        p(\"This is a nested modal!!\"),\n        p(\"This is a nested modal!!\"),\n        p(\"This is a nested modal!!\"),\n        p(\"This is a nested modal!!\"),\n    )\n}\n"],
+  "mappings": "uFAIA,IAAOA,EAAQC,GAAM,CACjB,SAAS,eAAeA,EAAG,QAAQ,QAAQ,EAAE,UAAYC,EACrDC,EAAG,cAAc,EACjBC,EAAE,0BAA0B,EAC5BA,EAAE,0BAA0B,EAC5BA,EAAE,0BAA0B,EAC5BA,EAAE,0BAA0B,CAChC,CACJ",
+  "names": ["myNestedModal_default", "el", "modalContent_default", "h1", "p"]
 }

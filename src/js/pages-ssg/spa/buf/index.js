@@ -1,9 +1,7 @@
-import htjs from 'html-in-javascript'
+import { fragment, h1, title } from 'html-in-javascript'
 import { head, pageHeader, pageFooter } from '../../../headerFooter.js'
 import html5 from '../../../../../extended/html5/index.js'
 import modal from '../../../../../extended/modalTrigger/index.js';
-
-const { fragment, h1, title } = htjs;
 
 export default async ({
     path, 

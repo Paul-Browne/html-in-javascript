@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../../../src/js/pages-ssg/spa/foo/index.js"],
-  "sourcesContent": ["import htjs from 'html-in-javascript'\nimport { pageHeader, pageFooter } from '../../../headerFooter.js'\nimport html5 from '../../../../../extended/html5/index.js'\n\nconst { fragment, h1, title } = htjs;\n\nexport default async ({\n    path, \n    lang = \"en\"\n}) => {\n\n\n    const body = fragment(\n        await pageHeader(),\n        h1(\"404 page not found\"),\n        await pageFooter()\n    )\n\n    return html5({\n        htmlAttributes: {\n            lang\n        },\n        head: title(path)\n    }, body)\n\n}"],
-  "mappings": "oJAIA,GAAM,CAAE,SAAAA,EAAU,GAAAC,EAAI,MAAAC,CAAM,EAAIC,EAEzBC,EAAQ,MAAO,CAClB,KAAAC,EACA,KAAAC,EAAO,IACX,IAAM,CAGF,IAAMC,EAAOP,EACT,MAAMQ,EAAW,EACjBP,EAAG,oBAAoB,EACvB,MAAMQ,EAAW,CACrB,EAEA,OAAOC,EAAM,CACT,eAAgB,CACZ,KAAAJ,CACJ,EACA,KAAMJ,EAAMG,CAAI,CACpB,EAAGE,CAAI,CAEX",
-  "names": ["fragment", "h1", "title", "u", "foo_default", "path", "lang", "body", "pageHeader", "pageFooter", "html5_default"]
+  "sourcesContent": ["import { fragment, h1, title } from 'html-in-javascript'\nimport { pageHeader, pageFooter } from '../../../headerFooter.js'\nimport html5 from '../../../../../extended/html5/index.js'\n\nexport default async ({\n    path, \n    lang = \"en\"\n}) => {\n\n\n    const body = fragment(\n        await pageHeader(),\n        h1(\"404 page not found\"),\n        await pageFooter()\n    )\n\n    return html5({\n        htmlAttributes: {\n            lang\n        },\n        head: title(path)\n    }, body)\n\n}"],
+  "mappings": "kKAIA,IAAOA,EAAQ,MAAO,CAClB,KAAAC,EACA,KAAAC,EAAO,IACX,IAAM,CAGF,IAAMC,EAAOC,EACT,MAAMC,EAAW,EACjBC,EAAG,oBAAoB,EACvB,MAAMC,EAAW,CACrB,EAEA,OAAOC,EAAM,CACT,eAAgB,CACZ,KAAAN,CACJ,EACA,KAAMO,EAAMR,CAAI,CACpB,EAAGE,CAAI,CAEX",
+  "names": ["foo_default", "path", "lang", "body", "fragment", "pageHeader", "h1", "pageFooter", "html5_default", "title"]
 }

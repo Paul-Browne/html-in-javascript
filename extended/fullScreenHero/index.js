@@ -1,8 +1,6 @@
-import htjs from "html-in-javascript"
+import { fragment, section } from "html-in-javascript"
 // import { inlineStyle, linkStylesheet } from "../utils/stylify.js"
 // const inline = inlineStyle("extended/fullScreenHero/style.css")
-
-const { fragment, section } = htjs
 
 export default ({
     classes = "fullscreen-hero",

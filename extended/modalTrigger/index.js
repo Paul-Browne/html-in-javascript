@@ -1,11 +1,10 @@
-import htjs from 'html-in-javascript'
+import { fragment, button, div, span } from 'html-in-javascript'
 import uid from '../utils/uniqueId.js'
 
 export default ({
     url = "/js/missing-content.js",
     id = uid(),
 } = {}, ...content) => {
-    const { fragment, button, div, span } = htjs
     return fragment(
         button({
                 'data-formodal': id,

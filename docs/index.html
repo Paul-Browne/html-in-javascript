@@ -1,7 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HT.JS - HTML in JavaScript</title><meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="stylesheet" href="/css/style.css"></head><body><h1 class="big-text">HT.JS</h1><h3>html-in-javascript, made simple, done right.</h3><div class="container"><div class="cell"><div class="cell-inner" onclick="(() => zoom(this))()"><h2>Static Site Generator</h2><pre class="language-javascript"><code>import { writeFile } from "node:fs/promises";
-import htjs from "html-in-javascript";
-
-const { html, head, body, meta, title, link, h1 } = htjs
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HT.JS - HTML in JavaScript</title><meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="stylesheet" href="/css/style.css"></head><body><h1 class="big-text">HT.JS</h1><h3>html-in-javascript, made simple, done right.</h3><div class="container"><div class="cell"><div class="cell-inner" onclick="import('/js/zoom.js').then(M => M.default(this))"><h2>Static Site Generator</h2><pre class="language-javascript"><code>import { writeFile } from "node:fs/promises";
+import { html, head, body, meta, title, link, h1 } from "html-in-javascript";
 
 const page = 
 html({ lang: "en" },
@@ -17,10 +15,8 @@ html({ lang: "en" },
 )
 
 await writeFile("public/index.html", page);
-</code></pre></div></div><div class="cell"><div class="cell-inner" onclick="(() => zoom(this))()"><h2>Server Side Rendered</h2><pre class="language-javascript"><code>import express from 'express';
-import htjs from "html-in-javascript";
-
-const { html, head, body, meta, title, link, h1 } = htjs
+</code></pre></div></div><div class="cell"><div class="cell-inner" onclick="import('/js/zoom.js').then(M => M.default(this))"><h2>Server Side Rendered</h2><pre class="language-javascript"><code>import express from 'express';
+import { html, head, body, meta, title, link, h1 } from "html-in-javascript";
 
 const page = 
 html({ lang: "en" },
@@ -42,7 +38,7 @@ app.get('/', (req, res) => {
 })
 
 app.listen(3000, () => console.log("http://localhost:3000"));
-</code></pre></div></div><div class="cell"><div class="cell-inner" onclick="(() => zoom(this))()"><h2>Bundled for Browser</h2><pre class="language-javascript"><code>// bundle.js
+</code></pre></div></div><div class="cell"><div class="cell-inner" onclick="import('/js/zoom.js').then(M => M.default(this))"><h2>Bundled for Browser</h2><pre class="language-javascript"><code>// bundle.js
 import * as esbuild from 'esbuild'
 
 await esbuild.build({
@@ -56,9 +52,7 @@ await esbuild.build({
     outdir: 'dist/js'
 })
     </code></pre><br><pre class="language-javascript"><code>// foo.js
-import htjs from "html-in-javascript";
-
-const { fragment, head, body, meta, title, link, h1 } = htjs
+import { fragment, head, body, meta, title, link, h1 } from "html-in-javascript";
 
 const page = 
 fragment(
@@ -78,10 +72,8 @@ document.documentElement.innerHTML = page;
 &lt;html lang="en">
     &lt;script src="/js/bundle.js" type="module">&lt;/script>
 &lt;/html>
-</code></pre></div></div><div class="cell"><div class="cell-inner" onclick="(() => zoom(this))()"><h2>Directly in Browser</h2><pre class="language-javascript"><code>// foo.js
-import htjs from "https://cdn.jsdelivr.net/npm/html-in-javascript/esm.js";
-
-const { fragment, head, body, meta, title, link, h1 } = htjs
+</code></pre></div></div><div class="cell"><div class="cell-inner" onclick="import('/js/zoom.js').then(M => M.default(this))"><h2>Directly in Browser</h2><pre class="language-javascript"><code>// foo.js
+import { fragment, head, body, meta, title, link, h1 } from "https://cdn.jsdelivr.net/npm/html-in-javascript/esm.js";
 
 const page = 
 fragment(
@@ -108,7 +100,7 @@ document.documentElement.innerHTML = page;
         // becomes: class="class names" 
         id: "some-id",
         "data-test-id": 123,
-        onclick: () => this.style.color = 'blue',
+        onclick: "this.style.color = 'blue'",
         style: "color:red; padding:10px; border:1px solid black"
     },
     h2("hello world!"),
@@ -127,12 +119,12 @@ document.documentElement.innerHTML = page;
   class="class names"
   id="some-id" 
   data-test-id="123" 
-  onclick="(() => this.style.color = 'blue')()" 
+  onclick="this.style.color = 'blue'" 
   style="color:red; padding:10px; border:1px solid black"
   data-foo="bar">
     &lt;h2>hello world!&lt;/h2>
     &lt;p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML&lt;br>&lt;em>and can be nested exactly like html&lt;/em>&lt;/p>
-&lt;/div></code></pre><h5>Example</h5><div class="class names" id="some-id" data-test-id="123" onclick="(() => this.style.color = 'blue')()" style="color:red; padding:0 10px; border:1px solid black" data-foo="bar"><h2>hello world!</h2><p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML<br><em>and can be nested exactly like html</em></p></div><h3><b>fragment</b></h3><p>similar to React's <b>&lt;>{content}&lt;/></b></p><p>Used when you can't, or don't want a container <b>&lt;div></b></p><h5>Code</h5><pre class="language-javascript"><code>const titleAndStyle = fragment(
+&lt;/div></code></pre><h5>Example</h5><div class="class names" id="some-id" data-test-id="123" onclick="this.style.color = 'blue'" style="color:red; padding:0 10px; border:1px solid black" data-foo="bar"><h2>hello world!</h2><p>All of these 'element functions' eg. h2(), p(), strong() etc. return strings of HTML<br><em>and can be nested exactly like html</em></p></div><h3><b>fragment</b></h3><p>similar to React's <b>&lt;>{content}&lt;/></b></p><p>Used when you can't, or don't want a container <b>&lt;div></b></p><h5>Code</h5><pre class="language-javascript"><code>const titleAndStyle = fragment(
     title("HT.JS"),
     link({ rel:"stylesheet", href:"/css/style.css" })
 )
@@ -146,27 +138,17 @@ head(
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
     &lt;title>HT.JS&lt;/title>
     &lt;link rel="stylesheet" href="/css/style.css">
-&lt;/head></code></pre><h3><b>Scripts</b></h3><p>It's possible to include scripts in your html.<br>Of course, it's better to keep your scripts separate, but sometimes it's just easier to include them in the html.</p><p>Function declerations are treated as content and will be converted to strings</p><h5>Code</h5><pre class="language-javascript"><code>function increaseTextSize(el){
+&lt;/head></code></pre><h3><b>Inline scripts</b></h3><h3><b>event, import, then default</b></h3><p>It's 2024! javascript modules are very well supported, and you can import them directly in the browser.</p><p>So instead of including a script in the head and exposing a function globally, you can import the script directly in the element's onclick event.</p><h5>Code</h5><pre class="language-javascript"><code>// increaseTextSize.js
+export default (el) => {
     const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);
     el.style.fontSize = (computedFontSize * 1.1) + "px"
 }
-
-script(increaseTextSize),
+</code></pre><br><pre class="language-javascript"><code>// index.js
 button({
-    onclick: () => increaseTextSize(this),
+    onclick: "import('/js/increaseTextSize.js').then(M => M.default(this))"
 }, "Increase Text Size")
-</code></pre><h5>Example</h5><script>function increaseTextSize(el){
-    const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);
-    el.style.fontSize = (computedFontSize * 1.1) + "px"
-}</script><button onclick="(() => increaseTextSize(this))()">Increase Text Size</button><h3><b>non-destructured</b></h3><p>If you don't want to destructure the functions, you can use them directly from the module.</p><h5>Code</h5><pre class="language-javascript"><code>import $ from "html-in-javascript";
-
-$.div(
-    $.h1("hello world!")
-)</code></pre><h5>HTML</h5><pre class="language-html"><code>&lt;div>
-    &lt;h1>hello world!&lt;/h1>
-&lt;/div></code></pre><h2>Extensible</h2><p>At it's core HT.JS is just a collection of functions, so you can easily add your own to create reusable components.</p><pre class="language-javascript"><code>// pageHead.js
-import htjs from "html-in-javascript";
-const { head, meta, link, title, fragment } = htjs;
+</code></pre><h5>Example</h5><button onclick="import('/js/increaseTextSize.js').then(M => M.default(this))">Increase Text Size</button><h2>Extensible</h2><p>At it's core HT.JS is just a collection of functions, so you can easily add your own to create reusable components.</p><pre class="language-javascript"><code>// pageHead.js
+import { head, meta, link, title, fragment } from "html-in-javascript";
 
 const deviceMeta = fragment(
     meta({
@@ -235,10 +217,8 @@ head(
     }),
     ...rest
 )</code></pre><pre class="language-javascript"><code>// index.js
-import htjs from "html-in-javascript";
+import { html, body, h1, p, script } from "html-in-javascript";
 import pageHead from "./pageHead.js";
-
-const { html, body, h1, p, script } = htjs
 
 const page =
 html({ lang: "en" },
@@ -272,21 +252,4 @@ html({ lang: "en" },
     &lt;h1>My Page&lt;/h1>
     &lt;p>This is my page&lt;/p>
 &lt;/body>
-&lt;/html></code></pre><script src="/js/prism.js"></script><script>function zoom(el){
-    if(el.classList.contains("active")){
-        el.classList.add("deactive")
-        setTimeout(() => {
-            el.classList.remove("deactive")
-            el.style.removeProperty("left");
-            el.style.removeProperty("top");
-            el.style.removeProperty("width");
-        }, 500)
-    }else{
-        const dims = el.getBoundingClientRect()
-        el.style.left = dims.x;
-        el.style.top = dims.y;
-        el.style.width = dims.width;        
-
-    }
-    el.classList.toggle("active")
-}</script></body></html>
+&lt;/html></code></pre><script src="/js/prism.js"></script></body></html>

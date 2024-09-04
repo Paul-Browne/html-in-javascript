@@ -1,34 +1,8 @@
-import htjs from "html-in-javascript"
-
-const { html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, p, button, pre, code, br, fragment } = htjs;
+import { html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, h4, p, button, pre, code, br, fragment } from "html-in-javascript"
 
 const prism = {
     js: content => pre({class:"language-javascript"}, code(content)),
     html: content => pre({class:"language-html"}, code(content))
-}
-
-function increaseTextSize(el){
-    const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);
-    el.style.fontSize = (computedFontSize * 1.1) + "px"
-}
-
-function zoom(el){
-    if(el.classList.contains("active")){
-        el.classList.add("deactive")
-        setTimeout(() => {
-            el.classList.remove("deactive")
-            el.style.removeProperty("left");
-            el.style.removeProperty("top");
-            el.style.removeProperty("width");
-        }, 500)
-    }else{
-        const dims = el.getBoundingClientRect()
-        el.style.left = dims.x;
-        el.style.top = dims.y;
-        el.style.width = dims.width;        
-
-    }
-    el.classList.toggle("active")
 }
 
 export default fragment(
@@ -56,14 +30,12 @@ html({lang: "en"},
             div({class: "cell"}, 
                 div({
                         class:"cell-inner",
-                        onclick: () => zoom(this),
+                        onclick: "import('/js/zoom.js').then(M => M.default(this))",
                     },
                     h2("Static Site Generator"),
                     prism.js( 
 `import { writeFile } from "node:fs/promises";
-import htjs from "html-in-javascript";
-
-const { html, head, body, meta, title, link, h1 } = htjs
+import { html, head, body, meta, title, link, h1 } from "html-in-javascript";
 
 const page = 
 html({ lang: "en" },
@@ -86,14 +58,12 @@ await writeFile("public/index.html", page);
             div({class: "cell"}, 
                 div({
                         class:"cell-inner",
-                        onclick: () => zoom(this),
+                        onclick: "import('/js/zoom.js').then(M => M.default(this))",
                     },
                     h2("Server Side Rendered"),
                     prism.js( 
 `import express from 'express';
-import htjs from "html-in-javascript";
-
-const { html, head, body, meta, title, link, h1 } = htjs
+import { html, head, body, meta, title, link, h1 } from "html-in-javascript";
 
 const page = 
 html({ lang: "en" },
@@ -122,7 +92,7 @@ app.listen(3000, () => console.log("http://localhost:3000"));
             div({class: "cell"}, 
                 div({
                         class:"cell-inner",
-                        onclick: () => zoom(this),
+                        onclick: "import('/js/zoom.js').then(M => M.default(this))",
                     },
                     h2("Bundled for Browser"),
                     prism.js( 
@@ -143,9 +113,7 @@ await esbuild.build({
                     br(),
                     prism.js( 
 `// foo.js
-import htjs from "html-in-javascript";
-
-const { fragment, head, body, meta, title, link, h1 } = htjs
+import { fragment, head, body, meta, title, link, h1 } from "html-in-javascript";
 
 const page = 
 fragment(
@@ -175,14 +143,12 @@ document.documentElement.innerHTML = page;
             div({class: "cell"}, 
                 div({
                         class:"cell-inner",
-                        onclick: () => zoom(this),
+                        onclick: "import('/js/zoom.js').then(M => M.default(this))",
                     },
                     h2("Directly in Browser"),
                     prism.js( 
 `// foo.js
-import htjs from "https://cdn.jsdelivr.net/npm/html-in-javascript/esm.js";
-
-const { fragment, head, body, meta, title, link, h1 } = htjs
+import { fragment, head, body, meta, title, link, h1 } from "https://cdn.jsdelivr.net/npm/html-in-javascript/esm.js";
 
 const page = 
 fragment(
@@ -221,7 +187,7 @@ document.documentElement.innerHTML = page;
         // becomes: class="class names" 
         id: "some-id",
         "data-test-id": 123,
-        onclick: () => this.style.color = 'blue',
+        onclick: "this.style.color = 'blue'",
         style: "color:red; padding:10px; border:1px solid black"
     },
     h2("hello world!"),
@@ -244,7 +210,7 @@ document.documentElement.innerHTML = page;
   class="class names"
   id="some-id" 
   data-test-id="123" 
-  onclick="(() => this.style.color = 'blue')()" 
+  onclick="this.style.color = 'blue'" 
   style="color:red; padding:10px; border:1px solid black"
   data-foo="bar"&gt;
     &lt;h2&gt;hello world!&lt;/h2&gt;
@@ -260,7 +226,7 @@ document.documentElement.innerHTML = page;
             id: "some-id",
             "data-test-id": 123,
             // onclick: () => console.log(this),
-            onclick: () => this.style.color = 'blue',
+            onclick: "this.style.color = 'blue'",
             style: "color:red; padding:0 10px; border:1px solid black"
         },
             h2("hello world!"),
@@ -302,51 +268,36 @@ head(
 &lt;/head&gt;`
         ),                    
 
-        h3(b("Scripts")),
-        p("It's possible to include scripts in your html.", br(), "Of course, it's better to keep your scripts separate, but sometimes it's just easier to include them in the html."),
-        p("Function declerations are treated as content and will be converted to strings"),
+        h3(b("Inline scripts")),
+        h3(b("event, import, then default")),
+        p("It's 2024! javascript modules are very well supported, and you can import them directly in the browser."),
+        p("So instead of including a script in the head and exposing a function globally, you can import the script directly in the element's onclick event."),
         h5("Code"),
         prism.js(
-`function increaseTextSize(el){
+`// increaseTextSize.js
+export default (el) => {
     const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);
     el.style.fontSize = (computedFontSize * 1.1) + "px"
 }
-
-script(increaseTextSize),
+`
+        ),
+        br(),
+        prism.js(
+`// index.js
 button({
-    onclick: () => increaseTextSize(this),
+    onclick: "import('/js/increaseTextSize.js').then(M => M.default(this))"
 }, "Increase Text Size")
 `
         ),
         h5("Example"),
-        script(increaseTextSize),
         button({
-            onclick: () => increaseTextSize(this),
+            onclick: "import('/js/increaseTextSize.js').then(M => M.default(this))"
         }, "Increase Text Size"),
-
-        h3(b("non-destructured")),
-        p("If you don't want to destructure the functions, you can use them directly from the module."),
-        h5("Code"),
-        prism.js(
-`import $ from "html-in-javascript";
-
-$.div(
-    $.h1("hello world!")
-)`
-        ),
-        h5("HTML"),
-        prism.html(
-`&lt;div&gt;
-    &lt;h1&gt;hello world!&lt;/h1&gt;
-&lt;/div&gt;`
-),
-
         h2("Extensible"),
         p("At it's core HT.JS is just a collection of functions, so you can easily add your own to create reusable components."),
         prism.js(
 `// pageHead.js
-import htjs from "html-in-javascript";
-const { head, meta, link, title, fragment } = htjs;
+import { head, meta, link, title, fragment } from "html-in-javascript";
 
 const deviceMeta = fragment(
     meta({
@@ -418,10 +369,8 @@ head(
         ),
         prism.js(
 `// index.js
-import htjs from "html-in-javascript";
+import { html, body, h1, p, script } from "html-in-javascript";
 import pageHead from "./pageHead.js";
-
-const { html, body, h1, p, script } = htjs
 
 const page =
 html({ lang: "en" },
@@ -462,6 +411,5 @@ html({ lang: "en" },
 &lt;/html&gt;`
         ),
         script({src:"/js/prism.js"}),
-        script(zoom),
     )
 ))

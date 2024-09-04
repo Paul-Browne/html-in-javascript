@@ -1,6 +1,4 @@
-import htjs from 'html-in-javascript'
-
-const { header, nav, a, footer, p, fragment, link, meta } = htjs
+import { header, nav, a, footer, p, fragment, link, meta } from 'html-in-javascript'
 
 export const head = fragment(
     link({rel:"apple-touch-icon", sizes:"180x180", href:"/apple-touch-icon.png"}),

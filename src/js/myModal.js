@@ -1,5 +1,5 @@
 // contents of the modal
-import htjs from 'html-in-javascript'
+import { p, h1 } from 'html-in-javascript'
 
 import modalContent from "../../extended/modalContent/index.js";
 import modal from '../../extended/modalTrigger/index.js';
@@ -11,7 +11,6 @@ import attachEscapeKeyListener from '../../extended/modalContent/escapeClosesMod
 attachEscapeKeyListener()
 
 export default async el => {
-    const { p, h1 } = htjs
     document.getElementById(el.dataset.formodal).innerHTML = modalContent(
         h1("Hello World"),
         p("This is a modal"),

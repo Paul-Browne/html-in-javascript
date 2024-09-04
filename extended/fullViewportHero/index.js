@@ -1,7 +1,5 @@
-import htjs from "html-in-javascript"
+import { fragment, section, link, style, script } from "html-in-javascript"
 // import injectStyle from "../utils/injectStyle.js"
-
-const { fragment, section, link, style, script } = htjs
 
 export default ({
     classes = "fullscreen-hero",

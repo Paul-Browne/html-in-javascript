@@ -1,6 +1,4 @@
-import htjs from "html-in-javascript"
-
-const { fragment, section } = htjs
+import { fragment, section } from "html-in-javascript"
 
 export default ({
     classes = "fullscreen-hero",

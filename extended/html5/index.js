@@ -1,6 +1,4 @@
-import htjs from "html-in-javascript"
-
-const { html, head:headEl, meta, body:bodyEl, fragment } = htjs;
+import { html, head as headEl, meta, body as bodyEl, fragment } from "html-in-javascript"
 
 export default ({
     htmlAttributes = {

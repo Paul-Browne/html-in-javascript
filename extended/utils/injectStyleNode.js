@@ -1,6 +1,4 @@
-import htjs from 'html-in-javascript';
-
-const { style, link } = htjs;
+import { style, link } from 'html-in-javascript';
 
 const qwe = ({ cssString = null, cssUrl = null }) => {
     if(qwe[cssString || cssUrl]) return "";

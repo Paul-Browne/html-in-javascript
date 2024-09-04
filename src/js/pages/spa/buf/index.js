@@ -1,4 +1,4 @@
-import htjs from 'html-in-javascript'
+import { fragment, p, h1, title, a } from 'html-in-javascript'
 import updateZones from '../../../updateZones.js'
 import { pageHeader, pageFooter } from '../../../headerFooter.js'
 
@@ -9,7 +9,6 @@ import modal from "../../../../../extended/modalTrigger/index.js";
 import fullViewportHero from '../../../../../extended/fullScreenHero/browser.js';
 
 export default async ({ state, pageView }) => {
-    const { fragment, p, h1, title, a } = htjs
     const body = fragment(
         await pageHeader(),
         h1("Hello World! Buf page!"),

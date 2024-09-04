@@ -1,8 +1,6 @@
-import htjs from "html-in-javascript"
+import { fragment } from "html-in-javascript"
 
 import fullViewportHero from "./extended/fullViewportHero/index.js";
-
-const { fragment } = htjs;
 
 export default () => fragment(
     fullViewportHero({}, "hello Test NEST!!! screen!!"),

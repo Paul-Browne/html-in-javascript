@@ -1,6 +1,6 @@
 {
   "name": "html-in-javascript",
-  "version": "1.2.0",
+  "version": "2.0.2",
   "description": "",
   "main": "esm.js",
   "type": "module",
@@ -19,11 +19,11 @@
     "spa-serve": "node serve-spa.js"    
   },
   "author": "Paul Browne",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "esbuild": "^0.20.2",
     "express": "^4.19.2",
-    "html-in-javascript": "^1.1.4",
+    "html-in-javascript": "^2.0.2",
     "html-minifier": "^4.0.0",
     "lightningcss": "^1.25.1",
     "nodemon": "^3.1.0"

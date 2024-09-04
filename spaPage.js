@@ -1,6 +1,4 @@
-import htjs from "html-in-javascript"
-
-const { html, head, meta, link, script, title, body, h1, pre, code, fragment, br } = htjs;
+import { html, head, meta, link, script, title, body, h1, pre, code, fragment, br } from "html-in-javascript"
 
 const prism = {
     js: content => pre({class:"language-javascript"}, code(content)),
