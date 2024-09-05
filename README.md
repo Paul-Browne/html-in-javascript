@@ -3,9 +3,8 @@
 HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend.
 
 ```js
-import htjs from "html-in-javascript"
 
-const { html, head, meta, link, title, body, h1, p, a, img, button } = htjs;
+import { html, head, meta, link, title, body, h1, p, a, img, button } from "html-in-javascript"
 
 const page = 
 html({ lang: "en" },
@@ -24,7 +23,7 @@ html({ lang: "en" },
             src: "https://via.placeholder.com/150",
             alt: "Placeholder Image"
         }),
-        button({ onClick: () => console.log("you clicked me!")},
+        button({ onClick: console.log("you clicked me!")},
             "click me!!"
         )
     )
