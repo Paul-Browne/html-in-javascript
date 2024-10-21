@@ -15,7 +15,10 @@ const argumentative = (...args) => {
     }
     return {
         content: content.join(''),
-        attributes: Object.keys(attributes).map(key => ` ${key}="${attributes[key]}"`).join('')
+        attributes: Object.keys(attributes).map(key => {
+            const quoteType = /"/g.test(attributes[key]) ? "'" : '"';
+            return ` ${key}=${quoteType}${attributes[key]}${quoteType}`
+        }).join('')
     }
 }
 
