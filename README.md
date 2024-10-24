@@ -23,7 +23,9 @@ html({ lang: "en" },
             src: "https://via.placeholder.com/150",
             alt: "Placeholder Image"
         }),
-        button({ onClick: console.log("you clicked me!")},
+        button({ 
+                onClick: "console.log('you clicked me!')"
+            },
             "click me!!"
         )
     )

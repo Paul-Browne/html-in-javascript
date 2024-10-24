@@ -1,14 +1,18 @@
 {
   "name": "html-in-javascript",
-  "version": "2.0.6",
+  "version": "2.0.9",
   "description": "",
   "main": "esm.js",
   "type": "module",
   "files": [
     "esm.js",
-    "iife.js",
+    "esm.d.ts",
     "extended/**/*"
   ],
+  "exports": {
+		"types": "./esm.d.ts",
+		"default": "./esm.js"
+	},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon build.js",
