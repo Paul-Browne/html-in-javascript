@@ -4,7 +4,7 @@ const argumentative = (...args) => {
     let content = [];
     let attributes = {};
     for (let i = 0; i < args.length; i++) {
-        if(typeof args[i] === 'object'){
+        if(typeof args[i] == 'object'){
             attributes = {
                 ...attributes,
                 ...args[i]
@@ -17,7 +17,7 @@ const argumentative = (...args) => {
         content: content.join(''),
         attributes: Object.keys(attributes).map(key => {
             const value = attributes[key];
-            if(value === true) return ` ${key}`
+            if(typeof value == 'boolean') return value ? ` ${key}` : "";
             const quoteType = /"/.test(value) ? "'" : '"';
             return ` ${key}=${quoteType}${value}${quoteType}`
         }).join('')
