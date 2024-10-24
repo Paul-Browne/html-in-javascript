@@ -1,6 +1,6 @@
 {
   "name": "html-in-javascript",
-  "version": "2.0.9",
+  "version": "2.1.1",
   "description": "",
   "main": "esm.js",
   "type": "module",

@@ -1,4 +1,4 @@
-import { html, head, meta, link, script, title, body, h1, pre, code, fragment, br, p, style } from "html-in-javascript"
+import { html, head, meta, link, script, title, body, h1, pre, code, fragment, br, p, style, input, i } from ".";
 import modal from './extended/modalTrigger/index.js'
 
 // import modal from './extended/modalContent/index.js'
