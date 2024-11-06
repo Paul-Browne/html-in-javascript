@@ -46,7 +46,7 @@ console.log(page)
         <h1>Hello World</h1>
         <p>This is a paragraph <a href="https://google.com">Google</a></p>
         <img src="https://via.placeholder.com/150" alt="Placeholder Image">
-        <button onClick="(() => console.log('you clicked me!'))()">click me!!</button>
+        <button onClick="console.log('you clicked me!')">click me!!</button>
     </body>
 </html>
 ```
