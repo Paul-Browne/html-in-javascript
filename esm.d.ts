@@ -367,8 +367,8 @@ type Attributes = {
     });
     ```
 */
-    span?: string,      
-    [key: string]: string | boolean
+    span?: string, 
+    [key: string]: string | boolean | undefined
 };
 
 /**
