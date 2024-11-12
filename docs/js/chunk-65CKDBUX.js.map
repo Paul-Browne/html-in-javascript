@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../src/js/updateZones.js"],
-  "sourcesContent": ["export default (key, ...content) => {\n    var iterator = document.createNodeIterator(document.documentElement, NodeFilter.SHOW_COMMENT);\n    var currentNode;\n    while (currentNode = iterator.nextNode()) {\n        if(!currentNode.nodeValue.indexOf(key)){\n            while(currentNode.nextSibling){\n                if(currentNode.nextSibling.nodeType === Node.COMMENT_NODE && !currentNode.nextSibling.nodeValue.indexOf(`/${key}`)){\n                    const tempNode = document.createElement('i')    // doesn't matter what element\n                    currentNode.after(tempNode)\n                    tempNode.outerHTML = content.join('');\n                    window.preloader?.refreshLinkObserver()\n                    return\n                }\n                currentNode.nextSibling.remove()\n            }\n        }     \n    }\n}"],
-  "mappings": "AAAA,IAAOA,EAAQ,CAACC,KAAQC,IAAY,CAGhC,QAFIC,EAAW,SAAS,mBAAmB,SAAS,gBAAiB,WAAW,YAAY,EACxFC,EACGA,EAAcD,EAAS,SAAS,GACnC,GAAG,CAACC,EAAY,UAAU,QAAQH,CAAG,EACjC,KAAMG,EAAY,aAAY,CAC1B,GAAGA,EAAY,YAAY,WAAa,KAAK,cAAgB,CAACA,EAAY,YAAY,UAAU,QAAQ,IAAIH,CAAG,EAAE,EAAE,CAC/G,IAAMI,EAAW,SAAS,cAAc,GAAG,EAC3CD,EAAY,MAAMC,CAAQ,EAC1BA,EAAS,UAAYH,EAAQ,KAAK,EAAE,EACpC,OAAO,WAAW,oBAAoB,EACtC,MACJ,CACAE,EAAY,YAAY,OAAO,CACnC,CAGZ",
-  "names": ["updateZones_default", "key", "content", "iterator", "currentNode", "tempNode"]
-}

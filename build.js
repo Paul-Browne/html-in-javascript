@@ -88,6 +88,4 @@ cp("src/vendor/prism.js", "docs/js/prism.js", { recursive: true })
 writeFileTo(minifyHTML(single_page_app), "docs/single-page-app.html")
 writeFileTo(minifyHTML(page), "docs/index.html")
 spaBuild("src/js/pages")
-
-
 writeFileTo(minifyHTML(tester), "docs/test.html")

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../src/js/pages/spa/foo/index.js"],
-  "sourcesContent": ["import { fragment, h1, title, p, a }  from 'html-in-javascript'\nimport { pageHeader, pageFooter } from '../../../headerFooter.js'\nimport updateZones from '../../../updateZones.js'\n\nexport default async ({ state, pageView }) => {\n\n    const body = fragment(\n        await pageHeader(),\n        h1(\"Hello World! Foo page!\"),\n        p(state.foo),\n        a({href: '/spa/foo/bar'}, 'spa/foo/bar'),\n        await pageFooter()\n    )\n    \n    updateZones('head', title(\"Foo | SPA\"));\n    updateZones('body', body);\n\n\n}"],
-  "mappings": "gLAIA,IAAOA,EAAQ,MAAO,CAAE,MAAAC,EAAO,SAAAC,CAAS,IAAM,CAE1C,IAAMC,EAAOC,EACT,MAAMC,EAAW,EACjBC,EAAG,wBAAwB,EAC3BC,EAAEN,EAAM,GAAG,EACX,EAAE,CAAC,KAAM,cAAc,EAAG,aAAa,EACvC,MAAMO,EAAW,CACrB,EAEAC,EAAY,OAAQC,EAAM,WAAW,CAAC,EACtCD,EAAY,OAAQN,CAAI,CAG5B",
-  "names": ["foo_default", "state", "pageView", "body", "fragment", "pageHeader", "h1", "p", "pageFooter", "updateZones_default", "title"]
-}

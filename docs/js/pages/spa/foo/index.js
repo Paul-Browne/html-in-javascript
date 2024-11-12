@@ -1,2 +1,0 @@
-import{a as o}from"../../../chunk-65CKDBUX.js";import{b as f,c as d}from"../../../chunk-L5KZY6XR.js";import{d as a,i as e,n as r,q as t,r as p}from"../../../chunk-P4DYVLGY.js";var n=async({state:i,pageView:g})=>{let m=p(await f(),e("Hello World! Foo page!"),r(i.foo),a({href:"/spa/foo/bar"},"spa/foo/bar"),await d());o("head",t("Foo | SPA")),o("body",m)};export{n as default};
-//# sourceMappingURL=index.js.map

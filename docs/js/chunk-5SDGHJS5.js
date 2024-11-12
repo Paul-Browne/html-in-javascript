@@ -1,2 +1,0 @@
-import{a as n}from"./chunk-ZMELE7IC.js";var r=({prefix:t="i",length:o=7}={})=>(t+=Math.random().toString(36).substring(2),t.length<o?r({prefix:t,length:o}):t.slice(0,7)),s=r;var f=({url:t="/js/missing-content.js",id:o=s()}={},...a)=>{let{fragment:i,button:u,div:e,span:m}=n;return i(u({"data-formodal":o,onclick:`import('${t}').then(_ => _.default(this))`},m(...a)),e({class:"modal-outer",id:o}))};export{f as a};
-//# sourceMappingURL=chunk-5SDGHJS5.js.map

@@ -1,6 +1,6 @@
 {
   "name": "html-in-javascript",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "",
   "main": "esm.js",
   "type": "module",
@@ -11,7 +11,8 @@
   ],
   "exports": {
 		"types": "./esm.d.ts",
-		"default": "./esm.js"
+		"default": "./esm.js",
+    "extended": "./extended"
 	},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

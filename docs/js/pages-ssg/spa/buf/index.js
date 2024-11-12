@@ -1,2 +1,0 @@
-import{a as i}from"../../../chunk-MD56ISXF.js";import{a as l}from"../../../chunk-XFC7APIN.js";import{a,b as m,c as o}from"../../../chunk-L5KZY6XR.js";import{i as t,q as e,r}from"../../../chunk-P4DYVLGY.js";var s=async({path:p,lang:c="en"})=>l({htmlAttributes:{lang:c},head:r(a,e(p))},await m(),t("some page content etc etc etc"),i({url:"/js/myModal.js"},"Click me!!"),await o());export{s as default};
-//# sourceMappingURL=index.js.map

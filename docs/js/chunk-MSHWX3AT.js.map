@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../src/js/pages/spa/buf/index.js"],
-  "sourcesContent": ["import { spa } from './spa.js'\n\nexport default Z => spa(Z)"],
-  "mappings": "wCAEA,IAAOA,EAAQC,GAAKC,EAAID,CAAC",
-  "names": ["buf_default", "Z", "spa"]
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../src/js/pages/spa/index.js"],
-  "sourcesContent": ["import { fragment, h1, title, p } from 'html-in-javascript'\nimport { pageHeader, pageFooter } from '../../headerFooter.js'\nimport updateZones from '../../updateZones.js'\n\nexport default async ({ state, pageView }) => {\n\n    const body = fragment(\n        await pageHeader(),\n        h1(\"Hello World! Home page!\"),\n        p(state.foo),\n        await pageFooter()\n    )\n    updateZones('head', title(\"Home page | SPA\"));\n    updateZones('body', body);\n}\n"],
-  "mappings": "gKAIA,IAAOA,EAAQ,MAAO,CAAE,MAAAC,EAAO,SAAAC,CAAS,IAAM,CAE1C,IAAMC,EAAOC,EACT,MAAMC,EAAW,EACjBC,EAAG,yBAAyB,EAC5BC,EAAEN,EAAM,GAAG,EACX,MAAMO,EAAW,CACrB,EACAC,EAAY,OAAQC,EAAM,iBAAiB,CAAC,EAC5CD,EAAY,OAAQN,CAAI,CAC5B",
-  "names": ["spa_default", "state", "pageView", "body", "fragment", "pageHeader", "h1", "p", "pageFooter", "updateZones_default", "title"]
-}
