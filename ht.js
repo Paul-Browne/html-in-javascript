@@ -1,4 +1,6 @@
 // manually minify from https://minify-js.com/
+// then still need to minify some variable names like argumentative, content and attributes
+// then paste to esm.js
 
 const argumentative = (...args) => {
     let content = [];

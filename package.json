@@ -16,12 +16,8 @@
 	},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon build.js",
-    "serve": "node serve.js",
-    "ssg": "nodemon build-ssg.js",
-    "spa": "nodemon build-spa.js",
-    "ssg-serve": "node serve-ssg.js",
-    "spa-serve": "node serve-spa.js"    
+    "build:docs": "node scripts/docs-build.js",
+    "serve:docs": "node scripts/docs-serve.js"
   },
   "author": "Paul Browne",
   "license": "MIT",
