@@ -1,14 +1,9 @@
 {
     "watch": [ 
-        "src", 
+        "docs-src", 
         "extended",
-        "build.js", 
-        "build-spa.js",
-        "build-ssg.js",
-        "homePage.js", 
-        "singlePageAppBuild.js", 
-        "spaPage.js",
-        "tester.js"
+        "hooks",
+        "scripts"
     ],
     "ext": "*"
 }

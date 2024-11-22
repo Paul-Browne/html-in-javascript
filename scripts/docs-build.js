@@ -4,6 +4,8 @@ import { minify } from 'html-minifier'
 import * as esbuild from 'esbuild'
 
 import index from "../docs-src/index.js"
+import extended from "../docs-src/extended.js"
+import tester from "../docs-src/tester.js"
 
 const minifyHTML = html => {    
     const minified = minify(html, {
@@ -44,10 +46,24 @@ await esbuild.build({
     outdir: 'docs/css',
 })
 
+await esbuild.build({
+    entryPoints: ['docs-src/js/*.js'],
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    splitting: true,
+    treeShaking: true,
+    format: "esm",
+    target: "esnext",
+    outdir: `docs/js`,
+})
+
 cp("docs-src/CNAME", "docs/CNAME", { recursive: true })
 cp("docs-src/fonts", "docs/fonts", { recursive: true })
 cp("docs-src/favicons", "docs/", { recursive: true })
-cp("docs-src/js", "docs/js", { recursive: true })
+// cp("docs-src/js", "docs/js", { recursive: true })
 cp("docs-src/vendor/prism.js", "docs/js/prism.js", { recursive: true })
 
 writeFileTo(minifyHTML(index), "docs/index.html")
+writeFileTo(minifyHTML(extended), "docs/extended.html")
+writeFileTo(minifyHTML(tester), "docs/test.html")

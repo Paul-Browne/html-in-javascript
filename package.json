@@ -7,16 +7,19 @@
   "files": [
     "esm.js",
     "esm.d.ts",
-    "extended/**/*"
+    "extended/**/*",
+    "hooks/**/*"
   ],
   "exports": {
 		"types": "./esm.d.ts",
 		"default": "./esm.js",
-    "extended": "./extended"
+    "extended": "./extended",
+    "hooks": "./hooks"
 	},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:docs": "node scripts/docs-build.js",
+    "build:dev:docs": "nodemon scripts/docs-build.js",
     "serve:docs": "node scripts/docs-serve.js"
   },
   "author": "Paul Browne",

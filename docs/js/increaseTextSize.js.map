@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../docs-src/js/increaseTextSize.js"],
+  "sourcesContent": ["export default el => {\n    const computedFontSize = parseFloat(window.getComputedStyle(el).fontSize);\n    el.style.fontSize = (computedFontSize * 1.1) + \"px\"\n}"],
+  "mappings": "AAAA,IAAOA,EAAQC,GAAM,CACjB,IAAMC,EAAmB,WAAW,OAAO,iBAAiBD,CAAE,EAAE,QAAQ,EACxEA,EAAG,MAAM,SAAYC,EAAmB,IAAO,IACnD",
+  "names": ["increaseTextSize_default", "el", "computedFontSize"]
+}
