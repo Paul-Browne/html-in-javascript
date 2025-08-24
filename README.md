@@ -4,10 +4,9 @@ HT.JS is a library for easily creating HTML in JavaScript, for both the backend 
 
 ```js
 
-import { html, head, meta, link, title, body, h1, p, a, img, button } from "html-in-javascript"
+import { html, head, meta, link, title, body, h1, p, a, img, button } from "javascript-to-html"
 
-const page = 
-html({ lang: "en" },
+const page = html({ lang: "en" },
     head(
         meta({ charset:"UTF-8" }),
         meta({ name:"viewport", content:"width=device-width, initial-scale=1.0" }),
