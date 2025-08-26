@@ -5,6 +5,7 @@ import * as esbuild from 'esbuild'
 
 import index from "../docs-src/index.js"
 import extended from "../docs-src/extended.js"
+import staticSite from "../docs-src/static-site.js"
 import tester from "../docs-src/tester.js"
 
 const minifyHTML = html => {    
@@ -18,8 +19,10 @@ const minifyHTML = html => {
     })
 
     // hopefully unnecessary...
-    const removeDuplicateStylesAndLinksRegex = /(<style[\s\S]*?style>|<link[\s\S]*?>)(?=[\s\S]*\1)/g
-    return minified.replace(removeDuplicateStylesAndLinksRegex, "")
+    // const removeDuplicateStylesAndLinksRegex = /(<style[\s\S]*?style>|<link[\s\S]*?>)(?=[\s\S]*\1)/g
+    // return minified.replace(removeDuplicateStylesAndLinksRegex, "")
+
+    return minified
 }
 
 export const writeFileTo = async (content, path) => {
@@ -66,4 +69,5 @@ cp("docs-src/vendor/prism.js", "docs/js/prism.js", { recursive: true })
 
 writeFileTo(minifyHTML(index), "docs/index.html")
 writeFileTo(minifyHTML(extended), "docs/extended.html")
+writeFileTo(minifyHTML(staticSite), "docs/static-site.html")
 writeFileTo(minifyHTML(tester), "docs/test.html")

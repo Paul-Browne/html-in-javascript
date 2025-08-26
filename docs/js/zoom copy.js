@@ -1,0 +1,2 @@
+var s=t=>{if(t.classList.contains("active"))t.classList.add("deactive"),setTimeout(()=>{t.classList.remove("deactive"),t.style.removeProperty("left"),t.style.removeProperty("top"),t.style.removeProperty("width")},500);else{let e=t.getBoundingClientRect();t.style.left=e.x+"px",t.style.top=e.y+"px",t.style.width=e.width+"px"}t.classList.toggle("active")};export{s as default};
+//# sourceMappingURL=zoom copy.js.map

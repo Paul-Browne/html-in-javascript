@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../docs-src/js/lazyloadScript copy.js"],
+  "sourcesContent": ["import { img } from 'javascript-to-html';\n\nconst hashCode = str => {\n    let hash = 0;\n    for (let i = 0, len = str.length; i < len; i++) {\n        let chr = str.charCodeAt(i);\n        hash = (hash << 5) - hash + chr;\n        hash |= 0; // Convert to 32bit integer\n    }\n    return hash.toString(32);\n}\n\nexport default (cmd, {\n    dataId = hashCode(cmd),\n} = {}) => {\n    return img({\n        loading: \"lazy\",\n        style: \"opacity:0\",\n        src: `data:,${dataId}`,\n        onerror: cmd\n    })\n}"],
+  "mappings": "wCAEA,IAAMA,EAAWC,GAAO,CACpB,IAAIC,EAAO,EACX,QAASC,EAAI,EAAGC,EAAMH,EAAI,OAAQE,EAAIC,EAAKD,IAAK,CAC5C,IAAIE,EAAMJ,EAAI,WAAWE,CAAC,EAC1BD,GAAQA,GAAQ,GAAKA,EAAOG,EAC5BH,GAAQ,CACZ,CACA,OAAOA,EAAK,SAAS,EAAE,CAC3B,EAEOI,EAAQ,CAACC,EAAK,CACjB,OAAAC,EAASR,EAASO,CAAG,CACzB,EAAI,CAAC,IACME,EAAI,CACP,QAAS,OACT,MAAO,YACP,IAAK,SAASD,CAAM,GACpB,QAASD,CACb,CAAC",
+  "names": ["hashCode", "str", "hash", "i", "len", "chr", "lazyloadScript_copy_default", "cmd", "dataId", "img"]
+}

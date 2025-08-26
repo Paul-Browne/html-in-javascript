@@ -1,34 +1,20 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HT.JS - HTML in JavaScript</title><meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="stylesheet" href="/css/style.css"></head><body><h1 class="big-text">HT.JS/extended</h1><h3>ready-made components.</h3><h2>html5</h2><h5>Description</h5><p>Create a full HTML5 document with optional attributes, head and body content.</p><h5>Code</h5><pre class="language-javascript"><code>import html5 from "html-in-javascript/extended/html5"
-import { h1, p, meta, title } from "html-in-javascript"
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HT.JS:Extended - HTML in JavaScript</title><meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="stylesheet" href="/css/style.css"></head><body><h1 class="big-text">HT.JS: Extended</h1><h3><ins>LazyloadContent</ins></h3><pre class="language-javascript"><code>// lazy.js
+import { fragment, p } from "javascript-to-html"
 
-html5({
-    htmlAttributes: {   // optional, object of attributes
-        lang: "en"      // default
-    },
-    head: [             // optional, array or string
-        meta({
-            name: "description",
-            content: "HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."
-        }),
-        title("HT.JS - HTML in JavaScript")
-    ],
-    body: [             // optional, array or string
-        {
-            class: "home-page"
-        },
-        h1("Hello World!"),
-        p("foo bar buff quux.")
-    ]
-})</code></pre><h5>HTML</h5><pre class="language-html"><code>&lt;!DOCTYPE html>
-&lt;html lang="en">
-    &lt;head>
-        &lt;meta charset="UTF-8">
-        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
-        &lt;meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend.">
-        &lt;title>HT.JS - HTML in JavaScript&lt;/title>
-    &lt;/head>
-    &lt;body class="home-page">
-        &lt;h1>Hello World!&lt;/h1>
-        &lt;p>foo bar buff quux.&lt;/p>
-    &lt;/body>
-&lt;/html></code></pre><h2>modal</h2><h2>tabs</h2><h2>accordion</h2><h2>carousel</h2><h2>dropdown</h2><h2>tooltip</h2><h2>popover</h2><h2>toast</h2><h2>spinner</h2><h2>progress</h2><h2>pagination</h2><h2>rating</h2><h2>alert</h2><h2>badge</h2><h2>breadcrumb</h2><h2>navbar</h2><script src="/js/prism.js"></script></body></html>
+export default ({color}) => fragment(
+    p({
+        style: `color: ${color};`
+    }, "This content is lazyloaded")
+)</code></pre><br><pre class="language-javascript"><code>import { div, h1 } from "javascript-to-html"
+import lazyloadContent from "./js/lazyloadContent.js";
+
+div({ class: "home-page" },
+    h1("Hello World!"),
+    lazyloadContent("/js/lazy.js", { color: 'green' }),
+);</code></pre><p>compiles to</p><pre class="language-html"><code>&lt;div class="home-page">
+    &lt;h1>Hello World!&lt;/h1>
+    &lt;img loading="lazy" style="opacity:0" src="data:,jh1h5c" onerror='import("/js/lazy.js").then(_=>{this.outerHTML=_.default({"color":"green"})})'>
+&lt;/div></code></pre><p>Then when the user scrolls to the content, the &lt;img> is replaced</p><pre class="language-html"><code>&lt;div class="home-page">
+    &lt;h1>Hello World!&lt;/h1>
+    &lt;p style="color: green;">This content is lazyloaded&lt;/p>
+&lt;/div></code></pre><p>WTF is that src="data:,jh1h5c" onerror=...??</p><p>The only elements that can currently be lazyloaded are &lt;img> and &lt;iframe>. Which is great for images and iframes, but not great for anything else.</p><p>However, one feature of the image element is that it has an onerror attribute that can be used to run JavaScript when the image fails to load.</p><p>By purposefully setting the src attribute to a data URL that will error (A hash of the url), we can use the onerror attribute to dynamically import the compontent, then replace the &lt;img> with the rendered content.</p><script src="/js/prism.js"></script></body></html>

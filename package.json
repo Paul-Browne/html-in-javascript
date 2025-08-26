@@ -11,11 +11,11 @@
     "hooks/**/*"
   ],
   "exports": {
-		"types": "./esm.d.ts",
-		"default": "./esm.js",
+    "types": "./esm.d.ts",
+    "default": "./esm.js",
     "extended": "./extended",
     "hooks": "./hooks"
-	},
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:docs": "node scripts/docs-build.js",
@@ -29,6 +29,7 @@
     "express": "^4.19.2",
     "html-in-javascript": "^2.0.2",
     "html-minifier": "^4.0.0",
+    "javascript-to-html": "^1.0.1",
     "lightningcss": "^1.25.1",
     "nodemon": "^3.1.0"
   }

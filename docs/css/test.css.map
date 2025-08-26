@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../docs-src/css/test.css"],
+  "sourcesContent": ["body{\n    color: red;\n}"],
+  "mappings": "AAAA,KACI,MAAO,GACX",
+  "names": []
+}

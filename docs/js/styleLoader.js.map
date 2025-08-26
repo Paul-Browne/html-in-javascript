@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../docs-src/js/styleLoader.js"],
+  "sourcesContent": ["export default (dataId, pathToCSS) => {\n    if(document.getElementById(`style${dataId}`)) return;\n    const link = document.createElement('link');\n    link.id = `style${dataId}`;\n    link.rel = 'stylesheet';\n    link.href = pathToCSS;\n    document.head.appendChild(link);\n}\n"],
+  "mappings": "AAAA,IAAOA,EAAQ,CAACC,EAAQC,IAAc,CAClC,GAAG,SAAS,eAAe,QAAQD,CAAM,EAAE,EAAG,OAC9C,IAAME,EAAO,SAAS,cAAc,MAAM,EAC1CA,EAAK,GAAK,QAAQF,CAAM,GACxBE,EAAK,IAAM,aACXA,EAAK,KAAOD,EACZ,SAAS,KAAK,YAAYC,CAAI,CAClC",
+  "names": ["styleLoader_default", "dataId", "pathToCSS", "link"]
+}

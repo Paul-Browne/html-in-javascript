@@ -1,0 +1,2 @@
+import{a as l}from"./chunk-33X2KS2X.js";var i=e=>{let t=0;for(let r=0,o=e.length;r<o;r++){let n=e.charCodeAt(r);t=(t<<5)-t+n,t|=0}return t.toString(32)},h=(e,{dataId:t=i(e),exportName:r="default",...o}={})=>l({loading:"lazy",style:"opacity:0",src:`data:,${t}`,onerror:`import("${e}")${r?`.then(_ => _.${r}(this, ${JSON.stringify(o)}))`:""}`});export{h as default};
+//# sourceMappingURL=lazyload.js.map

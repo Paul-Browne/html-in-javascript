@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../docs-src/js/lazyMoFo.js"],
+  "sourcesContent": ["export default (el, ...rest) => {\n    console.log(el, rest);\n}"],
+  "mappings": "AAAA,IAAOA,EAAQ,CAACC,KAAOC,IAAS,CAC5B,QAAQ,IAAID,EAAIC,CAAI,CACxB",
+  "names": ["lazyMoFo_default", "el", "rest"]
+}

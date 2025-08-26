@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../docs-src/js/tester.js"],
+  "sourcesContent": ["import { fragment, p, h1 } from \"javascript-to-html\"\n\nexport default ({color}) => fragment(\n    h1('life is good'),\n    p({\n        style: `font-size: 20px; color: ${color};`\n    }, \"hello world\")\n)"],
+  "mappings": "sDAEA,IAAOA,EAAQ,CAAC,CAAC,MAAAC,CAAK,IAAMC,EACxBC,EAAG,cAAc,EACjBC,EAAE,CACE,MAAO,2BAA2BH,CAAK,GAC3C,EAAG,aAAa,CACpB",
+  "names": ["tester_default", "color", "fragment", "h1", "p"]
+}

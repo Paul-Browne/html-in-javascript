@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../docs-src/js/zoom copy.js"],
+  "sourcesContent": ["// needs to be redone...\n\nexport default el => {\n    if(el.classList.contains(\"active\")){\n        el.classList.add(\"deactive\")\n        setTimeout(() => {\n            el.classList.remove(\"deactive\")\n            el.style.removeProperty(\"left\");\n            el.style.removeProperty(\"top\");\n            el.style.removeProperty(\"width\");\n        }, 500)\n    }else{\n        const dims = el.getBoundingClientRect()\n        el.style.left = dims.x + \"px\";\n        el.style.top = dims.y + \"px\";\n        el.style.width = dims.width + \"px\";\n    }\n    el.classList.toggle(\"active\")\n}"],
+  "mappings": "AAEA,IAAOA,EAAQC,GAAM,CACjB,GAAGA,EAAG,UAAU,SAAS,QAAQ,EAC7BA,EAAG,UAAU,IAAI,UAAU,EAC3B,WAAW,IAAM,CACbA,EAAG,UAAU,OAAO,UAAU,EAC9BA,EAAG,MAAM,eAAe,MAAM,EAC9BA,EAAG,MAAM,eAAe,KAAK,EAC7BA,EAAG,MAAM,eAAe,OAAO,CACnC,EAAG,GAAG,MACL,CACD,IAAMC,EAAOD,EAAG,sBAAsB,EACtCA,EAAG,MAAM,KAAOC,EAAK,EAAI,KACzBD,EAAG,MAAM,IAAMC,EAAK,EAAI,KACxBD,EAAG,MAAM,MAAQC,EAAK,MAAQ,IAClC,CACAD,EAAG,UAAU,OAAO,QAAQ,CAChC",
+  "names": ["zoom_copy_default", "el", "dims"]
+}

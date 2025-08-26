@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="HT.JS is a library for easily creating HTML in JavaScript, for both the backend and the frontend."><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="stylesheet" href="/css/style.css"><title>HT.JS - HTML in JavaScript</title></head><body><h1 class="big-text">HT.JS: Static-site</h1><p>Using just node.js and the built-in modules, we can create a static site generator.</p><pre class="language-javascript"><code>// src/pages/index.js
+import { fragment, html, head, body, meta, title, h1 } from "javascript-to-html";
+
+export default fragment(
+'&lt;!DOCTYPE html>',
+html({lang: "en"},
+    head(
+        meta({charset:"UTF-8"}),
+        meta({name:"viewport", content:"width=device-width, initial-scale=1.0"}),
+        title("example.com - Home page")
+    ),
+    body(
+        h1("Hello World!")
+    )
+)</code></pre><br><pre class="language-javascript"><code>// scripts/build.js
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname } from "node:path";
+import homepage from "../src/pages/index.js";
+
+const writeFileRecursively = async (path, content) => {
+    await mkdir(dirname(path), { recursive: true });
+    await writeFile(path, content);
+}
+
+writeFileRecursively("dist/index.html", homepage);</code></pre><p>compiles to</p><pre class="language-html"><code>&lt;!-- /dist/index.html -->
+&lt;!DOCTYPE html>
+&lt;html lang="en">
+    &lt;head>
+        &lt;meta charset="UTF-8">
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+        &lt;title>example.com - Home page&lt;/title>
+    &lt;/head>
+    &lt;body>
+        &lt;h1>Hello World!&lt;/h1>
+    &lt;/body>
+&lt;/html>
+</code></pre><script src="/js/prism.js"></script></body></html>
