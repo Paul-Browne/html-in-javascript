@@ -7,6 +7,7 @@ import index from "../docs-src/index.js"
 import extended from "../docs-src/extended.js"
 import staticSite from "../docs-src/static-site.js"
 import tester from "../docs-src/tester.js"
+import staticSiteExtended from "../docs-src/static-site-extended.js";
 
 const minifyHTML = html => {    
     const minified = minify(html, {
@@ -70,4 +71,5 @@ cp("docs-src/vendor/prism.js", "docs/js/prism.js", { recursive: true })
 writeFileTo(minifyHTML(index), "docs/index.html")
 writeFileTo(minifyHTML(extended), "docs/extended.html")
 writeFileTo(minifyHTML(staticSite), "docs/static-site.html")
+writeFileTo(minifyHTML(staticSiteExtended), "docs/static-site-extended.html")
 writeFileTo(minifyHTML(tester), "docs/test.html")

@@ -3,7 +3,7 @@ import express from 'express';
 const app = express();
 
 app.use("/", express.static("docs/", {
-    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days for js
+    maxAge: 0,
     extensions: ["html"],
     redirect: false
 }));
