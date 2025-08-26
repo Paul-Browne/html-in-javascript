@@ -135,11 +135,11 @@ section({ class: "hero-section" },
         p("compiles to"),
 
         prism.html(
-`<section class="hero-section">
-    <div class="hero" style="background-image: url('/images/hero.jpg')">
-        <h1>Welcome to HT.JS</h1>
-    </div>
-</section>`
+`&lt;section class="hero-section"&gt;
+    &lt;div class="hero" style="background-image: url('/images/hero.jpg')"&gt;
+        &lt;h1&gt;Welcome to HT.JS&lt;/h1&gt;
+    &lt;/div&gt;
+&lt;/section&gt;`
         ),
 
         h3(ins("Motivation")),
