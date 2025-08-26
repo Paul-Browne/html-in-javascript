@@ -44,7 +44,7 @@ div({ class: "home-page" },
 &lt;/div&gt;`
         ),
 
-        p("That's it... Congratulations! you are now an expert in ht.js. Add it to your CV."),
+        p("That's it... Congratulations! you are now an expert in HT.JS. Add it to your CV."),
 
         h3(ins("Another example")),
 
