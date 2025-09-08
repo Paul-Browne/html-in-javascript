@@ -20,7 +20,9 @@ const argumentative = (...args) => {
         attributes: Object.keys(attributes).map(key => {
             const value = attributes[key];
             if(typeof value == 'boolean') return value ? ` ${key}` : "";
-            return ` ${key}="${value.replace(/"/g,'&#34;')}"`;
+            // escape double quotes in attribute values
+            // '' + value to convert non-strings (like numbers) to strings
+            return ` ${key}="${('' + value).replace(/"/g,'&#34;')}"`;
         }).join('')
     }
 }
