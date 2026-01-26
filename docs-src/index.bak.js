@@ -1,4 +1,4 @@
-import { html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, h4, p, button, pre, code, br, fragment } from "html-in-javascript"
+import { html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, h4, p, button, pre, code, br, fragment } from "javascript-to-html"
 
 const prism = {
     js: content => pre({class:"language-javascript"}, code(content)),
@@ -24,7 +24,7 @@ html({lang: "en"},
     ),
     body(
         h1({class:'big-text'}, "HT.JS"),
-        h3("html-in-javascript, made simple, done right."),
+        h3("javascript-to-html, made simple, done right."),
 
         div({class:"container"},
             div({class: "cell"}, 
@@ -35,7 +35,7 @@ html({lang: "en"},
                     h2("Static Site Generator"),
                     prism.js( 
 `import { writeFile } from "node:fs/promises";
-import { html, head, body, meta, title, link, h1 } from "html-in-javascript";
+import { html, head, body, meta, title, link, h1 } from "javascript-to-html";
 
 const page = 
 html({ lang: "en" },
@@ -63,7 +63,7 @@ await writeFile("public/index.html", page);
                     h2("Server Side Rendered"),
                     prism.js( 
 `import express from 'express';
-import { html, head, body, meta, title, link, h1 } from "html-in-javascript";
+import { html, head, body, meta, title, link, h1 } from "javascript-to-html";
 
 const page = 
 html({ lang: "en" },
@@ -113,7 +113,7 @@ await esbuild.build({
                     br(),
                     prism.js( 
 `// foo.js
-import { fragment, head, body, meta, title, link, h1 } from "html-in-javascript";
+import { fragment, head, body, meta, title, link, h1 } from "javascript-to-html";
 
 const page = 
 fragment(
@@ -148,7 +148,7 @@ document.documentElement.innerHTML = page;
                     h2("Directly in Browser"),
                     prism.js( 
 `// foo.js
-import { fragment, head, body, meta, title, link, h1 } from "https://cdn.jsdelivr.net/npm/html-in-javascript/esm.js";
+import { fragment, head, body, meta, title, link, h1 } from "https://cdn.jsdelivr.net/npm/javascript-to-html/esm.js";
 
 const page = 
 fragment(
@@ -297,7 +297,7 @@ button({
         p("At it's core HT.JS is just a collection of functions, so you can easily add your own to create reusable components."),
         prism.js(
 `// pageHead.js
-import { head, meta, link, title, fragment } from "html-in-javascript";
+import { head, meta, link, title, fragment } from "javascript-to-html";
 
 const deviceMeta = fragment(
     meta({
@@ -369,7 +369,7 @@ head(
         ),
         prism.js(
 `// index.js
-import { html, body, h1, p, script } from "html-in-javascript";
+import { html, body, h1, p, script } from "javascript-to-html";
 import pageHead from "./pageHead.js";
 
 const page =

@@ -1,4 +1,4 @@
-import { section } from "html-in-javascript"
+import { section } from "javascript-to-html"
 
 export default (...content) => {
     content.forEach(element => {

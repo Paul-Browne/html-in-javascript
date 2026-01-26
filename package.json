@@ -1,12 +1,13 @@
 {
   "name": "javascript-to-html",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "",
   "main": "esm.js",
   "type": "module",
   "files": [
     "esm.js",
     "esm.d.ts",
+    "signal.js",
     "extended/**/*",
     "hooks/**/*"
   ],
@@ -27,9 +28,8 @@
   "devDependencies": {
     "esbuild": "^0.20.2",
     "express": "^4.19.2",
-    "html-in-javascript": "^2.0.2",
     "html-minifier": "^4.0.0",
-    "javascript-to-html": "^1.0.1",
+    "javascript-to-html": "^1.1.0",
     "lightningcss": "^1.25.1",
     "nodemon": "^3.1.0"
   }

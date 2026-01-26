@@ -1,4 +1,4 @@
-import { style, link } from 'html-in-javascript';
+import { style, link } from 'javascript-to-html';
 
 const qwe = ({ cssString = null, cssUrl = null }) => {
     if(qwe[cssString || cssUrl]) return "";

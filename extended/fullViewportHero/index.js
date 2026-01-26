@@ -1,4 +1,4 @@
-import { fragment, section, link, style, script } from "html-in-javascript"
+import { fragment, section, link, style, script } from "javascript-to-html"
 // import injectStyle from "../utils/injectStyle.js"
 
 export default ({

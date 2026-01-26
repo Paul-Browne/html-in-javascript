@@ -1,4 +1,4 @@
-import { html, head as headEl, meta, body as bodyEl, fragment } from "html-in-javascript"
+import { html, head as headEl, meta, body as bodyEl, fragment } from "javascript-to-html"
 
 export default ({
     htmlAttributes = {

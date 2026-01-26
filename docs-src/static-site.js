@@ -1,4 +1,4 @@
-import { a, html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, h4, p, button, pre, code, br, fragment, strong, ins } from "html-in-javascript"
+import { a, html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, h4, p, button, pre, code, br, fragment, strong, ins } from "javascript-to-html"
 
 const prism = {
     js: content => pre({class:"language-javascript"}, code(content)),

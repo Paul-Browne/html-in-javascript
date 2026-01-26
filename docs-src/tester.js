@@ -1,4 +1,4 @@
-import { html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, h4, p, button, pre, code, br, fragment } from "html-in-javascript"
+import { html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, h4, p, button, pre, code, br, fragment } from "javascript-to-html"
 
 export default fragment(
 '<!DOCTYPE html>',

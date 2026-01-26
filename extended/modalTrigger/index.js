@@ -1,4 +1,4 @@
-import { fragment, button, div, span } from 'html-in-javascript'
+import { fragment, button, div, span } from 'javascript-to-html'
 import uid from '../utils/uniqueId.js'
 
 export default ({

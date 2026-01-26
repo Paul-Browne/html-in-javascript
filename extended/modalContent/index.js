@@ -1,4 +1,4 @@
-import { div, button } from 'html-in-javascript'
+import { div, button } from 'javascript-to-html'
 
 // import attachEscapeKeyListener from './escapeClosesModal.js'
 // attachEscapeKeyListener()

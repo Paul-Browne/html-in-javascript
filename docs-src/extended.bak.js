@@ -1,4 +1,4 @@
-import { html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, h4, p, button, pre, code, br, fragment } from "html-in-javascript"
+import { html, head, meta, link, script, div, b, h5, em, title, body, h1, h2, h3, h4, p, button, pre, code, br, fragment } from "javascript-to-html"
 
 const prism = {
     js: content => pre({class:"language-javascript"}, code(content)),
@@ -33,8 +33,8 @@ html({lang: "en"},
 
         h5("Code"),
         prism.js( 
-`import html5 from "html-in-javascript/extended/html5"
-import { h1, p, meta, title } from "html-in-javascript"
+`import html5 from "javascript-to-html/extended/html5"
+import { h1, p, meta, title } from "javascript-to-html"
 
 html5({
     htmlAttributes: {   // optional, object of attributes

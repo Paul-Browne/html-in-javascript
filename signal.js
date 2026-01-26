@@ -1,0 +1,1 @@
+export default e=>{const t=new Set;return{get:()=>e,set:r=>{Object.is(r,e)||(e=r,t.forEach((e=>e(r))))},subscribe:r=>(t.add(r),r(e),()=>t.delete(r))}};

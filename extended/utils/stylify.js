@@ -1,6 +1,6 @@
 import { cp, mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { link, style } from 'html-in-javascript';
+import { link, style } from 'javascript-to-html';
 import { bundle } from 'lightningcss';
 
 const writeFileTo = async (content, path) => {
