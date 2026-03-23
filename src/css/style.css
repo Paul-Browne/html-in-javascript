@@ -18,7 +18,15 @@
 *::before{
     box-sizing: border-box;
 }
-
+ul li{
+  &:first-child{
+    list-style: none;
+  }
+  strong{
+    list-style: none;
+    font-weight: 700;
+  }
+}
 body{
     font-family: "JetBrains Mono";
     font-weight: 165;
