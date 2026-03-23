@@ -1,9 +1,0 @@
-{
-    "watch": [ 
-        "docs-src", 
-        "extended",
-        "hooks",
-        "scripts"
-    ],
-    "ext": "*"
-}

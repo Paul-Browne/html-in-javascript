@@ -1,2 +1,1 @@
-var l=(o,...e)=>{console.log(o,e)};export{l as default};
-//# sourceMappingURL=test.js.map
+var e=()=>{console.log("test")};export{e as default};

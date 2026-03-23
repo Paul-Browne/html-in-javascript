@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HT.JS - Vite plugin</title><meta name="description" content="HT.JS Vite plugin vite-plugin-html-pages"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><meta name="msapplication-TileColor" content="#2d89ef"><meta name="theme-color" content="#ffff00"><link rel="stylesheet" href="/css/style.css"></head><body><div class="container"><h1 class="big-text"><a href="/">HT.JS</a></h1><a href="/vite-plugin">Vite plugin</a></div><h2>HT.JS has its very own full-featured Vite plugin</h2><p>vite-plugin-html-pages is a Vite plugin that allows you to easily create HTML pages from JavaScript files.</p><pre class="language-html"><code>npm install vite vite-plugin-html-pages javascript-to-html</code></pre><h3>Installation</h3><pre class="language-javascript"><code>import { defineConfig } from 'vite';
+import htmlPages from 'vite-plugin-html-pages';
+
+export default defineConfig({
+    base: '',
+    plugins: [
+        htmlPages({
+            pagesDir: 'src',
+            cleanUrls: true,
+            debug: true
+        }),
+    ],
+    build: {
+    emptyOutDir: true,
+    outDir: 'build',
+    },
+    server: {
+    port: 3000,
+    host: 'localhost',
+    },
+});</code></pre><script src="/js/prism.js"></script></body></html>
